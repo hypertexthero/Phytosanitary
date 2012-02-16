@@ -1,0 +1,19 @@
+{% extends "registration/registration_base.html" %}
+{% block title %}Register for an account{% endblock %}
+{% block content %}
+{# <table> #}
+{#     <form method='post' action=''>{% csrf_token %} #}
+{#         {{ form }} #}
+{#         <tr><td></td><td><input type="submit" value="Send activation email" /></td> #}
+{#     </form> #}
+{# </table> #}
+
+<h1>Register for a Phytosanitary.info account</h1>
+<div class="clearfloatsinside">
+<form method='post' action='' class="textalignright floatleft">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="submit" type="submit" value="Send activation email" />
+</form>
+</div>
+{% endblock %}

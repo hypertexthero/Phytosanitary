@@ -1,0 +1,40 @@
+{# =this should really be called the category listing or category list... =TODO: clean up category URL/Model the hacks on coltrane =TODO: modify so it looks like homepage #}
+
+
+{% extends "coltrane/base_categories.html" %}
+{% block bodyid %}{{ category.title }}{% endblock %}
+{% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1 class="first">{{ category.title }}</h1>
+    <p>{{ category.description }}</p>
+    
+    <div class="dashbox">
+            <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
+                {# <caption>My Latest Changes</caption> #}
+                <thead>
+                    <tr>
+                        {# <th>Tags</th> #}
+                        <th>Title <span class="small normal quiet">click titles to go to the resource</span></th>
+                        <th>Date <span class="small normal"><acronym title="ISO Date Format: YEAR-MONTH-DAY">Y-M-D</acronym></span></th>    
+                    </tr>
+                </thead>
+                <tbody>
+    
+    {% for object in object_list %}
+       <tr>
+           {# <td class="typetd">{{ entry.tag }}</td> #}
+           <td><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+               
+               {% if user.is_authenticated %} 
+                   <a class="edit" href="/admin/coltrane/entry/{{ object.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+               {% endif %}
+               
+               </td>
+           <td class="datetd">{{ entry.pub_date|date:"Y-m-j" }}</td>
+       </tr>
+       {% endfor %}
+    </tbody>
+    </table>
+    </div>
+{% endblock %}
