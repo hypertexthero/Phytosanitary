@@ -4,16 +4,16 @@ Hacking django-coltrane to create a generic resources website CMS for my place o
 
 ## Todo
 
-1. Rename 'Coltrane' to 'Phytosanitary'
-2. Rename 'Entry' to 'Resource'
+1. Rename 'Coltrane' to 'Phytosanitary' and…
+2. Rename 'Entry' to 'Resource' and…
 3. Add relevant fields to 'Resource' and migrate
     - files
     - images
     - modified_date
     - etc
 4. User Registration (done?)
-    - Non-secretariat users who register can only submit resources for approval, not publish directly to the site, unless their permissions are changed.
-    - Email notification to moderators/staff when new resources are submitted
+    - Non-staff users who register can only submit resources for approval, not publish directly to the site
+    - Email notification to moderators/staff when new resources are submitted for approval
 5. Editable user profiles for all user types
 6. Permissions groups for contributors, moderators, staff
 7. Resource publication moderation
