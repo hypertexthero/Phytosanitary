@@ -6,18 +6,22 @@ Hacking django-coltrane to create a generic resources website CMS for my place o
 Todo
 ---
 
-1. Rename 'coltrane' to 'phytosanitary'
-2. Rename 'entry' to 'resource'
-3. User Registration (done?)
-    - Non-secretariat users who register can only submit resources for approval, not publish directly to the site, unless their permissions are changed.
-    - Email notification to moderators/staff when new resources are submitted
-4. Editable user profiles
-5. Permissions Groups for contributors, moderators, secretariat staff
-6. Default resource form fields
+1. Rename 'Coltrane' to 'Phytosanitary'
+1. Rename 'Entry' to 'Resource'
+1. Add relevant fields to 'Resource' and migrate
     - files
     - images
-7. Resource publication moderation
-8. Search
-9. Currently selected tag should be highlighted in Browse Tags menu
-10. Set up authentication on existing user database backed
-11. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
+    - modified_date
+    - etc
+1. User Registration (done?)
+    - Non-secretariat users who register can only submit resources for approval, not publish directly to the site, unless their permissions are changed.
+    - Email notification to moderators/staff when new resources are submitted
+1. Editable user profiles for all user types
+1. Permissions groups for contributors, moderators, staff
+1. Resource publication moderation
+1. Implement search of title, body and tag fields at least
+1. Currently selected tag and categories should be highlighted in tag and category menus
+1. Set up authentication on existing user database backend
+1. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
+1. Implement Markdown preview with WMD
+1. Write deployment documentation
