@@ -1,3 +1,4 @@
+{% load i18n %} {# https://docs.djangoproject.com/en/dev/topics/i18n/translation/#internationalization-in-template-code #}
 <!DOCTYPE HTML>
 <html lang=en>
 <head>
@@ -24,16 +25,24 @@
             {% block nav %}
                 {% if user.is_authenticated %}
                         {# Hello, {{ user.first_name }} {{ user.last_name }}! <a href="{% url django.contrib.auth.views.logout %}?next={% firstof request.path '/notes/' %}">Log out</a> or <strong><a class="edit" href="{% url notes_create %}">add a note</a></strong> #}
-                        Hello, {{ user.first_name }} {{ user.last_name }}! <a href="{% url django.contrib.auth.views.logout %}?next={% firstof request.path '/' %}">Log out</a> or <a href="/profiles/{{ user.username }}">see your profile</a>
+                        <p>
+                            Hello, 
+                                {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+                                {# {% if user.username == profile.user.username %} #}
+                                    <a href="{% url userena_profile_detail user.username %}" title="{% trans "View, edit your profile" %}">{{ user.first_name }} {{ user.last_name }}</a>!
+                                {# {% endif %} #}
+                            
+                            <a href="{% url userena_signout %}?next={% firstof request.path '/' %}">Log out</a> {# or <a href="/profiles/{{ user.username }}">see your profile</a> #}
                         
-                        {% if user.is_staff %}
-                            <strong><a class="edit" href="/admin/">Admin</a></strong>
-                        {% endif %}
-                    
+                            {% if user.is_staff %}
+                                <strong><a class="edit" href="/admin/">Admin</a></strong>
+                            {% endif %}
+                        </p>
                 {% else %}
                     {# http://stackoverflow.com/a/1711592/412329 #}
                     {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
-                    <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Log in</a>
+                    {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Log in</a> #}
+                    <a href="{% url userena_signin %}?next={% firstof request.path '/' %}">Log in</a> or <a href="{% url userena_signup %}">Register</a>
                 {% endif %}
             {% endblock %}
             {# {% block navsearch %} #}
@@ -42,28 +51,21 @@
         </div> {# / #nav #}
             
             {# Categories of content, or 'sections' of the site - the table of contents of a book #}
+            {% block globalnav %}
             {% load coltrane_tags %}
             {% get_latest_content coltrane.category 5 as latest_categories %}
             <ul class="globalnav">
                 <li>
-                    <a href="{% url coltrane_entry_archive_index %}">Home</a>
+                    <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url coltrane_entry_archive_index %}">Home</a>
                 </li>
-            {% for category in latest_categories %}
+                {% for category in latest_categories %}
                 <li>
-                    <a class="{% block current %}{% endblock %}" href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                    <a class="{{ category.slug }}-nav" href="{{ category.get_absolute_url }}">{{ category.title }}</a>
                 </li>
-            {% endfor %}
+                {% endfor %}
             </ul>
+            {% endblock %}
 
-            {# TODO: find a way to give a specific order to categories in the global navigation. The above code works for alphabetical sorting. Hardcoding the categories for now: #}
-            {# <ul class="globalnav"> #}
-            {#     <li><a class="{% block current %}{% endblock %}" href="/">Home</a></li> #}
-            {#     <li><a class="{% block current %}{% endblock %}" href="/categories/dbtools/">Databases &amp; Tools</a></li> #}
-            {#     <li><a class="{% block current %}{% endblock %}" href="/categories/advocacy/">Advocacy</a></li> #}
-            {#     <li><a class="{% block current %}{% endblock %}" href="/categories/media/">Media Library</a></li> #}
-            {#     <li><a class="{% block current %}{% endblock %}" href="/categories/training/">Training Materials</a></li> #}
-            {#     <li><a class="{% block current %}{% endblock %}" href="/categories/misc/">Miscellaneous</a></li> #}
-            {# </ul> #}
     </div> {# / #header #}
     
     <p class="breadcrumbs">
@@ -72,9 +74,29 @@
     
     <div id="content">
         <div class="contentbox">
+
+
+                
+
+
+            
             {% block whatis %} {# entry_archive, etc #}
             {% endblock %}
-            {% block content %}{% endblock %}
+
+            {% block content %}
+
+                
+                {% block editingtoolbar %}
+                {% if user.is_authenticated %}
+                <div class="editingtoolbar floatright">
+                    <a href="/admin/coltrane/entry/add/">Add an entry</a>{# TODO: this URL is hackish - make it better #}
+                    {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}                        
+                </div>
+                {% endif %}
+                {% endblock %}
+
+            
+            {% endblock %}
         </div>
     </div> {# / #content #}
     
@@ -89,13 +111,12 @@
                 <h2>Browse</h2>
 
                 <p>Browse resources using the categories above (think of categories as the table of contents) or the tags below (think of tags as the keyword index):</p>
+
                 {# Tags, or 'keywords' - the index of a book #}
+                {# =todo: we should display all tags here regardless of whether they are the 'latest' or not. change this. #}
                 {% load coltrane_tags %}
                 {% get_latest_content tagging.tag 50 as latest_tags %}
                 <ul>
-                    {# <li> #}
-                    {#     <a href="{% url coltrane_entry_archive_index %}">Home</a> #}
-                    {# </li> #}
                 {% for tag in latest_tags %}
                     <li class="titlecase">
                         <a href="/tags/{{ tag.name }}/">{{ tag.name }}</a>
@@ -113,8 +134,21 @@
                 {#             </li> #}
                 {#             {% endfor %} #}
                 {#         </ul> #}
+            
+            
+                
+            
             </div>
             
+            <div class="docs">     
+                    <h2>Contribute</h2>
+
+                    <p>To contribute materials please <strong><a href="{% url userena_signup %}">register</a></strong>. Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically here if approved.</p>
+
+                    {# <p><strong><a href="{% url userena_signup %}">Register to upload technical resources</a>.</strong></p> #}
+
+                  
+                    </div> <!-- end docs -->
             
             {% endblock %}
         </div>

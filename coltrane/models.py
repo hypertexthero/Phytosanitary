@@ -1,34 +1,52 @@
 import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _ 
+# from django.db.models.signals import post_save # http://stackoverflow.com/a/965883/412329
 from django.db import models
 from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
-from django.db.models.signals import post_save
 
 # http://www.djangobook.com/en/1.0/chapter12/
-class UserProfile(models.Model):
-    # This is the only required field
-    user = models.OneToOneField(User)
-    # The rest is completely up to you...
-    # favorite_band = models.CharField(maxlength=100, blank=True)
-    # favorite_cheese = models.CharField(maxlength=100, blank=True)
-    # lucky_number = models.IntegerField()
+# =todo: 
+    # - http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django
+    # - http://stackoverflow.com/questions/3301285/django-profiles-custom-create-edit-modelform-not-saving-properly
+# class UserProfile(models.Model):
+#     # This is the only required field
+#     user = models.OneToOneField(User)
+#     # The rest is completely up to you...
+#     # favorite_band = models.CharField(maxlength=100, blank=True)
+#     # favorite_cheese = models.CharField(maxlength=100, blank=True)
+#     # lucky_number = models.IntegerField()
+#     url = models.URLField()
+#     # address = models.TextField()
+#     # phone = models.PhoneNumberField()
+#     # fax = models.PhoneNumberField()
+#     
+#     def __str__(self):  
+#         return "%s's profile" % self.user
+#         
+#     def get_absolute_url(self):
+#         return ('profiles_profile_detail', (), { 'username': self.user.username })
+#         get_absolute_url = models.permalink(get_absolute_url)
+# 
+# # Extending the User model with custom fields in Django - http://stackoverflow.com/a/965883/412329
+# def create_user_profile(sender, instance, created, **kwargs):  
+#     if created:  
+#        profile, created = UserProfile.objects.get_or_create(user=instance)  
+# 
+# post_save.connect(create_user_profile, sender=User)
+
+from userena.models import UserenaBaseProfile
+
+class MyProfile(UserenaBaseProfile):
+    user = models.OneToOneField(User,
+                                unique=True,
+                                verbose_name=_('user'),
+                                related_name='my_profile')
     url = models.URLField()
-    # address = models.TextField()
-    # phone = models.PhoneNumberField()
-    # fax = models.PhoneNumberField()
-        
-    def get_absolute_url(self):
-        return ('profiles_profile_detail', (), { 'username': self.user.username })
-        get_absolute_url = models.permalink(get_absolute_url)
 
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
-
-    post_save.connect(create_user_profile, sender=User)
     
 class Category(models.Model):
     title = models.CharField(max_length=250, help_text='Maximum 250 characters.')

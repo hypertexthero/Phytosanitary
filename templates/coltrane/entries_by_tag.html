@@ -2,6 +2,10 @@
 
 {% block title %}{{ tag.name }} - Tags - {% endblock %}
 
+{% block breadcrumbs %}
+    &rarr; <a href="/tags">Tag</a> &rarr; {{ tag.name }}
+{% endblock %}
+
 
 {% block content %}
     <h2>Entries tagged with '{{ tag.name }}'</h2>
@@ -52,6 +56,6 @@
 {% endblock %}
 
 {% block sidebar %}
-<p>This is a list of the latest entries with the <strong>{{ tag.name }}</strong> tag.</p>
+{# <p>This is a list of the latest entries with the <strong>{{ tag.name }}</strong> tag.</p> #}
 {{ block.super }}
 {% endblock %}

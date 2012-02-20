@@ -11,15 +11,16 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'phytosanitary.views.home', name='home'),
     # url(r'^coltrane/', include('coltrane.urls')),
-    url(r'^categories/', include('coltrane.urls.categories')), 
+    # url(r'^categories/', include('coltrane.urls.categories')), 
+
     url(r'^links/', include('coltrane.urls.links')), 
     url(r'^tags/', include('coltrane.urls.tags')), 
     url(r'^comments/', include('django.contrib.comments.urls')),
 
-    url(r'^accounts/', include('registration.backends.default.urls')), # provided by django-registration
-    # http://stackoverflow.com/a/1491087/412329
-    # url(r'^profiles/edit', 'profiles.views.edit_profile', {'form_class': UserProfileForm,}),
-    url(r'^profiles/', include('profiles.urls')), # provided by django-profiles
+    # url(r'^accounts/', include('registration.backends.default.urls')), # provided by django-registration
+    # url(r'^profiles/', include('profiles.urls')), # provided by django-profiles
+
+    url(r'^accounts/', include('userena.urls')),
 
     url(r'^', include('coltrane.urls.entries')),
 
@@ -32,6 +33,9 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    
+    # moving the category slug url here from contrane/urls/categories.py
+    url(r'^(?P<slug>[-\w]+)/$', 'coltrane.views.category_detail', {}, 'coltrane_category_detail'),
 )
 
 

@@ -16,12 +16,15 @@ markdown
 
 django-tagging
 
-# PIL
+PIL
 # Fabric (won't successfully install in shared accelerator?)
 
 # django-registration 0.8:
-hg+https://bitbucket.org/ubernostrum/django-registration#egg=django-registation
-django-profiles
+# hg+https://bitbucket.org/ubernostrum/django-registration#egg=django-registation
+# django-profiles
+
+django-userena
+
 # django-allauth
 
 # docutils

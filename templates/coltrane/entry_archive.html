@@ -4,17 +4,17 @@
 
 {# {% block title %}{{ block.super }}{% endblock %} #}
 
-{% block whatis %}
+{% block content %}
+
+{% block editingtoolbar %}{{ block.super }}{% endblock %}
+
 {# <p>This is a list of the latest {{ latest.count }} entries published in the blog.</p> #}
 <h1 class="first">About Phytosanitary.info</h1>
 
-<p>Welcome to the IPPC Phytosanitary Resources homepage, where you can find resources contributed by the world’s plant protection community including <a href="/categories/dbtools/">databases &amp; tools</a>, <a href="/categories/advocacy/">advocacy</a> and <a href="/categories/training/">training materials</a>, a <a href="/categories/media/">media library</a> and <a href="/categories/misc/">more</a>.</p>
-
-{% endblock %}
-
-{% block content %}
+<p>Welcome to the IPPC Phytosanitary Resources homepage, where you can find resources contributed by the world’s plant protection community including <a href="dbtools/">databases &amp; tools</a>, <a href="advocacy/">advocacy</a> and <a href="training/">training materials</a>, a <a href="media/">media library</a> and <a href="misc/">more</a>.</p>
 
 <h2>Latest Updates</h2>
+
 <div class="dashbox">
         <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
             {# <caption>My Latest Changes</caption> #}

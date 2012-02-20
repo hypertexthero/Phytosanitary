@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-from coltrane.models import Entry
+from coltrane.models import Entry, Category
 
 entry_info_dict = {
     'queryset': Entry.live.all(),

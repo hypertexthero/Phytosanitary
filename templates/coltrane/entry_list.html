@@ -1,11 +1,31 @@
 {# =this should really be called the category listing or category list... =TODO: clean up category URL/Model the hacks on coltrane =TODO: modify so it looks like homepage #}
 
 
-{% extends "coltrane/base_categories.html" %}
-{% block bodyid %}{{ category.title }}{% endblock %}
+{# {% extends "coltrane/base_categories.html" %} #}
+
+{% extends "base.html" %}
+
+{# {% block title %}Categories - {% endblock %} #}
+
+{# {% block bodyid %}{{ slug }}{% endblock %} #}
+
+{% block extrahead %}
+    <style type="text/css" media="screen">
+        body#{{ category.slug }} ul.globalnav li a.{{ category.slug }}-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;}
+    </style>
+{% endblock %}
+
+{% block bodyid %}{{ category.slug }}{% endblock %}
 {% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
 
+{% block breadcrumbs %}
+    &rarr; {{ category.title }}
+{% endblock %}
+
 {% block content %}
+
+    {% block editingtoolbar %}{{ block.super }}{% endblock %}
+    
     <h1 class="first">{{ category.title }}</h1>
     <p>{{ category.description }}</p>
     

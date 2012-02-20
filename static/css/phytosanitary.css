@@ -5,7 +5,7 @@ Author: Simon Griffee
 Last update: Tuesday, 14 February 2012 at 14:56:18
 */
 
-body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:25px 15px; background: #fff url(/static/img/website-bar-3.0.gif) repeat-x; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/
+body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:25px 15px; background:#fff url(/static/img/website-bar-3.0.gif) repeat-x; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/
 
 /* =Layout ------- */
 #container {/*max-width:98% !important; width:98% !important;*/ /*width:970px;*/}
@@ -14,17 +14,18 @@ div#header {/*overflow:auto;*/ width:100%;} /* clear the floats inside the heade
 div.logo {float:left;}
 div#nav {float:right; width:30%; text-align:right;}
 
-ul.globalnav {list-style:none outside; padding:1em 0 1em !important; margin:0 !important; clear:both;}
+ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both;}
 ul.globalnav li {display:inline; padding:0; margin:0;}
-ul.globalnav li a {background:none !important; color:#063 !important; font-weight:bold; text-decoration:none !important; padding:1em; font-size:1.2em;}
+ul.globalnav li a {background:none !important; color:#063 !important; font-weight:bold; text-decoration:none !important; padding:1.2em;}
 ul.globalnav li a:hover {color:#111 !important; background:#cff url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important;}
-ul.globalnav li a.current {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;}
+
+ul.globalnav li a.home-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;} /* highlight homepage tab - see first li of ul class="globalnav" in base.html */
 
 p.breadcrumbs {background:#063; color:#fff; margin:0; padding:0.5em; clear:both;}
 p.breadcrumbs a {color:#cff !important; text-decoration:none; font-weight:normal !important;}
 
-div#content {width:64%; float:left; clear:none; margin:0; text-align:left; background:#fff; padding:0;}
-div.contentbox {background:#fff; margin:0; padding:0 1.25em 1em 1em; border:1px solid #eee; border-left:none; border-top:none;}
+div#content {width:64%; float:left; clear:none; margin:0; padding:0; text-align:left;}
+div.contentbox {background:#fff; margin:0; padding:0 1.25em 1em 1em; border:1px solid #eee; border-top:none;}
 #sidebar {width:36%; float:left; text-align:left; background:#F1F7EB;} /*background:#F1F7EB;*/
 .sidebarbox {padding:0 1.25em 1em;}
 div.docs {border-bottom:1px solid #eee;}
@@ -39,7 +40,7 @@ div#content p, div#content li, div#content dd {max-width:46em;}
 /* =Headings ------- */
 h1,h2,h3,h4,h5,h6 {color:#000; margin:1em 0 0.5em;}
 h1 {font-size:2em;}
-h1.first {margin-top:0.75em;}
+h1.first {margin-top:0; padding-top:1em;}
 h2 {font-size:1.7em;}
 h3 {font-size:1.5em;}
 h4 {font-size:1.3em;}
@@ -52,9 +53,8 @@ a:visited {color:#360;}
 a:hover, .treeview .hover {color:#000 !important; background:#cff !important; text-decoration:none;}
 a.imglink:hover {background:none !important;}
 a:active {color:#f90; border:none; text-decoration:none !important;}
-/*#sidebar a {font-weight:normal !important;}*/
 #sidebar ul, #sidebar ol {line-height:1.5em; margin-left:0; padding-left:1.5em;}
-#sidebar a {font-weight:normal !important;}
+/*#sidebar a {font-weight:normal !important;}*/
 #sidebar a:hover {text-decoration:none !important;}
 
 div.featured {padding:0 2em 2em 0;}
@@ -84,7 +84,6 @@ form#search input, form#searchfooter input {border-left:1px solid #063; border-t
 li.loginbutton a {text-transform:uppercase !important; font-size:1em !important; letter-spacing:0.1em; padding:0.5em 0.75em; font-weight:normal !important; background:#369;}
 li.loginbutton a:hover {background:#063 !important; color:#fff !important;}
 
-div.sidebarbox a {font-weight:bold !important;}
 .treeview li {color:#063; font-weight:bold;}
 
 table.tablesorter .header {background-image: url(/static/img/tablesorter-resources-bg.gif) !important;}
@@ -107,7 +106,6 @@ caption.noreports {background:#ddd; color:#aaa;}
 td {padding:4px 5px; text-align:left; vertical-align: middle; font-size:0.95em; line-height:1.35em; border:1px solid #def0e1;}
 td.typetd {font-size:0.8em !important; width:10em;}
 td a {font-weight:normal; text-decoration:none !important;}
-td strong a {font-weight:bold;}
 th {padding:4px 5px; font-weight:bold; text-align:left; font-size:0.9em; line-height:1.4em;}
 thead th {color:#000;background:#dee3d4 !important;}
 /* =Sortable Tables ------- */
@@ -126,7 +124,6 @@ table.tablesorter th {cursor:pointer !important;}
 /* =Metainfotable ------- */
 table.metainfotable {background:#f2f5ed; border-collapse:separate; border:1px solid #d0dfce; border-bottom:0;}
 table.metainfotable td {text-align:left; border:none; border-bottom:1px solid #d0dfce;} 
-table.metainfotable td a {font-weight:bold;}
 table.metainfotable th {text-align:right; width:35%; vertical-align:top !important; border:0; border-bottom:1px solid #d0dfce;}
 td ul, td ol {list-style:inside !important; margin:1em !important;}
 /* =Pagenav and multiple files =download ------- */
@@ -139,20 +136,25 @@ p.pagenav span { padding:1px 3px;  margin:0; font-weight:normal; border: none; b
 
 /*=forms -------------------*/
 
+form {margin:1em 0;}
+legend {font-weight:bold; font-size:2em;}
 /*label {display:block;}*/
-input {width:20em;}
+input.text {width:20em;}
 input.submit {width:auto;}
 div#commentform p label {display:block;}
+fieldset {border:1px solid #ccc;}
+
+/*ul#box-nav {float:right;}*/
 
 
 /* =Editing toolbar ----------------- */
 
-div.editingtoolbar {border:1px dotted #0FF !important; background:#cff; margin:1em 0; padding:1em 0.5em;}
+div.editingtoolbar {background:#cff; margin:1em 0; padding:1em 0.5em;}
 div.editingtoolbar form, div.editingtoolbar select {margin:0 !important; padding:0 !important; vertical-align:middle;}
 div.editingtoolbar ul {margin:0; padding:6px;}
 div.editingtoolbar li {display:inline; padding:0 12px 0 0; margin:0;}
 div.editingtoolbar a {color:#066; font-weight:bold !important; padding:1em 0.5em;}
-.edit {border:1px dotted #0FF !important; background:#cff; padding:0.05em 0.25em;}
+.edit {background:#cff; padding:0.05em 0.25em;}
 
 /*=misc ------ */
 

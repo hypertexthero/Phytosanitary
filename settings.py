@@ -36,9 +36,9 @@ USE_I18N = True
 USE_L10N = True
 
 MEDIA_ROOT = os.path.join(DIRNAME, 'uploads')
-MEDIA_URL = 'http://127.0.0.1/media/'
+MEDIA_URL = 'http://127.0.0.1:8000/uploads/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
-STATIC_URL = 'http://127.0.0.1/static/'
+STATIC_URL = 'http://127.0.0.1:8000/static/'
 
 # ln -s ~/django_projects/phytosanitary-env/lib/python2.6/site-packages/django/contrib/admin/media/ ~/django_projects/phytosanitary-env/phytosanitary/static/admin
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -92,6 +92,22 @@ TEMPLATE_DIRS = (
     os.path.join(DIRNAME, 'templates')
 )
 
+# django-userena - http://docs.django-userena.org/en/latest/settings.html#userena-settings
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+AUTH_PROFILE_MODULE = 'coltrane.MyProfile'
+ANONYMOUS_USER_ID = '-1'
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+USERENA_ACTIVATION_DAYS = 7
+USERENA_MUGSHOT_PATH = 'user/photos/%Y/%m/'
+USERENA_WITHOUT_USERNAMES = False
+
 ROOT_URLCONF = 'phytosanitary.urls'
 
 INSTALLED_APPS = (
@@ -110,8 +126,11 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'coltrane',
     'tagging',
-    'registration',
-    'profiles',
+    # 'registration',
+    # 'profiles',
+    'userena',
+    'guardian',
+    'easy_thumbnails',
     'south',
 )
 
