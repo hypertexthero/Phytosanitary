@@ -5,7 +5,7 @@
 {% block breadcrumbs %} &rarr; <a href="/{{ month|date:"Y" }}/">{{ month|date:"Y" }}</a> &rarr; {{ month|date:"F" }}{% endblock %}
 
 {% block whatis %}
-<h1 class="first">Month Archive for {{ month|date:"F, Y" }}</h1>
+ <h1 class="first"><span class="normal">Month Archive for</span> {{ month|date:"F, Y" }}</h1>
 {# <p>This is a list of entries published in {{ month|date:"F, Y" }}.</p> #}
 {% endblock %}
 

@@ -3,6 +3,12 @@
 
 {% block title %}{% trans "Register" %}{% endblock %}
 
+{% block nav %}
+{% endblock %}
+
+{% block globalnav %}
+{% endblock %}
+
 {% block breadcrumbs %}
     &rarr; Register
 {% endblock %}
@@ -12,7 +18,7 @@
             <h2>Registration Process</h2>
             
             <ol>
-                <li>Choose a username and enter your email address in the form on this page.</li> 
+                <li>Complete the form on this page (all fields are required).</li> 
                 <li>Click on the confirmation link in the email you receive to validate your account and access the resources upload area.</li> 
             </ol>
                             <p>Note that uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and only appear publically on the site if approved.</p>
@@ -22,7 +28,7 @@
 {% block content %}
 <form action="" method="post">
   {% csrf_token %}
-  <fieldset>
+  <fieldset class="textalignright floatleft">
     <legend>Register</legend>
     {% for field in form %}
     {{ field.errors }}
@@ -39,7 +45,9 @@
     {% endif %}
     {% endfor %}
   </fieldset>
-  <input type="submit" value="{% trans "Signup"%}" />
+  <br class="clearboth" />
+  <input type="submit" value="{% trans "Register" %}" />
 </form>
 {% endblock %}
+
 

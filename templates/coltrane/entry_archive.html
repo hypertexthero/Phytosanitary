@@ -32,7 +32,7 @@
                     {# <td class="typetd">{{ entry.tag }}</td> #}
                     <td><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
                         
-                        {% if user.is_authenticated %} 
+                        {% if user.is_staff %} 
                             <a class="edit" href="/admin/coltrane/entry/{{ entry.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
                         {% endif %}
                         

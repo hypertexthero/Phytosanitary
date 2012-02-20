@@ -5,7 +5,7 @@
 {% block breadcrumbs %} &rarr; <a href="/{{ day|date:"Y" }}/">{{ day|date:"Y" }}</a> &rarr; <a href="/{{ day|date:"Y" }}/{{ day|date:"b" }}/">{{ day|date:"F" }}</a> &rarr; {{ day|date:"j" }}{% endblock %}
 
 {% block whatis %}
-<h1 class="first">Day Archive: {{ day|date:"F j, Y" }}</h1>
+ <h1 class="first"><span class="normal">Day Archive for</span> {{ day|date:"F j, Y" }}</h1>
 {% endblock %}
 
 {% block content %}

@@ -4,22 +4,18 @@ Hacking [django-coltrane](http://www.gyford.com/phil/writing/2010/01/14/django.p
 
 ## Todo
 
-1. Rename 'Coltrane' to 'Phytosanitary' and…
-2. Rename 'Entry' to 'Resource' and…
-3. Add relevant fields to 'Resource' and migrate
+1. Rename 'coltrane' to 'phytosanitary'
+2. Rename 'entry' to 'resource'
+3. -User Registration-
+4. -Editable user profiles-
+5. Resource publication moderation - permissions Groups for contributors, moderators, secretariat staff
+    - Non-secretariat users who register can only submit resources for approval, not publish directly to the site, unless their permissions are changed.
+    - Email notification to moderators/staff when new resources are submitted
+6. Default resource form fields
     - files
     - images
-    - modified_date
-    - etc
-4. User Registration (done?)
-    - Non-staff users who register can only submit resources for approval, not publish directly to the site
-    - Email notification to moderators/staff when new resources are submitted for approval
-5. Editable user profiles for all user types
-6. Permissions groups for contributors, moderators, staff
-7. Resource publication moderation
-8. Implement search of title, body and tag fields at least
-9. Currently selected tag and categories should be highlighted in tag and category menus
-10. Set up authentication on existing user database backend
-11. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
-12. Implement Markdown preview with WMD
-13. Write deployment documentation
+7. Search
+8. Currently selected tag should be highlighted in Browse Tags menu
+9. Set up authentication on existing user database backend
+10. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
+11. Custom application page pulling data from an external source using something like the [infochimps apis](http://www.infochimps.com/datasets/plant-pest-risk-analyses-pra-documents#overview_tab) (thanks B.B.King of *x sysadmin)

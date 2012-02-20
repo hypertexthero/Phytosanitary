@@ -7,7 +7,7 @@
 {% block content %}
     
     
-    {% if user.is_authenticated %} 
+    {% if user.is_staff %} 
     <div class="editingtoolbar floatright">
         <a href="/admin/coltrane/entry/{{ object.id }}">Edit this entry</a>{# TODO: this URL is hackish - make it better #}
         {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}
@@ -19,23 +19,22 @@
     <p><i>By {{ user.first_name }} {{ user.last_name }} on {{ object.pub_date|date:"l, d F Y" }}</i></p>
     {{ object.body_html|safe }}
     
-    <h2>Comments</h2>
-    {% load comments %}
-    {% load markup %}
-    {% get_comment_list for object as comment_list %}
-    
-    {% for comment in comment_list %}
-        <p><strong>On {{ comment.submit_date|date:"F j, Y" }}, {{ comment.name }} said:</strong></p>
-    
-        {{ comment.comment|markdown:"safe" }}
-    {% endfor %}
-    
-    <h3>Post a comment</h3>
-        
-        {# todo:  #}
-        <div id="commentform">
-    {% render_comment_form for object %}
-        </div>
+    {# <h2>Comments</h2> #}
+    {# {% load comments %} #}
+    {# {% load markup %} #}
+    {# {% get_comment_list for object as comment_list %} #}
+    {#  #}
+    {# {% for comment in comment_list %} #}
+    {#     <p><strong>On {{ comment.submit_date|date:"F j, Y" }}, {{ comment.name }} said:</strong></p> #}
+    {#  #}
+    {#     {{ comment.comment|markdown:"safe" }} #}
+    {# {% endfor %} #}
+    {#  #}
+    {# <h3>Post a comment</h3> #}
+    {#      #}
+    {#     <div id="commentform"> #}
+    {# {% render_comment_form for object %} #}
+    {#     </div> #}
 {% endblock %}
 
 {% block sidebar %}

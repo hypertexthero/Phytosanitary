@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
-# for profiles
-# from phytosanitary.coltrane.forms import UserProfileForm
+# for custom registration userena form with first name and last name
+from phytosanitary.coltrane.forms import SignupFormExtra
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     # url(r'^accounts/', include('registration.backends.default.urls')), # provided by django-registration
     # url(r'^profiles/', include('profiles.urls')), # provided by django-profiles
 
+    # http://docs.django-userena.org/en/latest/faq.html#how-do-i-add-extra-fields-to-forms
+    url(r'^accounts/signup/$', 'userena.views.signup', {'signup_form': SignupFormExtra}),
     url(r'^accounts/', include('userena.urls')),
 
     url(r'^', include('coltrane.urls.entries')),
