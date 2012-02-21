@@ -3,7 +3,7 @@ from django.contrib import admin
 import settings # Needed for PROJECT_ROOT.
 admin.autodiscover()
 
-from coltrane.feeds import CategoryFeed, LatestEntriesFeed
+from phytosanitary.feeds import CategoryFeed, LatestEntriesFeed
 
 feeds = { 'entries': LatestEntriesFeed,
           'categories': CategoryFeed }
@@ -19,10 +19,10 @@ urlpatterns = patterns('',
     
     (r'^comments/', include('django.contrib.comments.urls')),
     
-    (r'^weblog/categories/', include('coltrane.urls.categories')),
-    (r'^weblog/links/', include('coltrane.urls.links')),
-    (r'^weblog/tags/', include('coltrane.urls.tags')),
-    (r'^weblog/', include('coltrane.urls.entries')),
+    (r'^weblog/categories/', include('phytosanitary.urls.categories')),
+    (r'^weblog/links/', include('phytosanitary.urls.links')),
+    (r'^weblog/tags/', include('phytosanitary.urls.tags')),
+    (r'^weblog/', include('phytosanitary.urls.entries')),
     
     (r'^weblog/feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', { 'feed_dict': feeds }),
      

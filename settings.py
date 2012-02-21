@@ -99,7 +99,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-AUTH_PROFILE_MODULE = 'coltrane.MyProfile'
+AUTH_PROFILE_MODULE = 'phytosanitary.MyProfile'
 ANONYMOUS_USER_ID = '-1'
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'coltrane',
+    'phytosanitary',
     'tagging',
     # 'registration',
     # 'profiles',

@@ -1,4 +1,4 @@
-{% extends "coltrane/base_tags.html" %}
+{% extends "phytosanitary/base_tags.html" %}
 
 {% block title %}{{ block.super }} - Tags{% endblock %}
 
@@ -11,7 +11,7 @@
     <li><a href="/tags/{{ tag.name }}">{{ tag.name }}</a>
         
              {% if user.is_authenticated %} 
-                    <a class="edit" href="/admin/coltrane/tag/{{ object.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+                    <a class="edit" href="/admin/phytosanitary/tag/{{ object.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
                 {% endif %}
         </li>
     {% endfor %}

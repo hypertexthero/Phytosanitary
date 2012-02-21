@@ -25,9 +25,9 @@ class Category(models.Model):
     # description_html = models.TextField(editable=False, blank=True) =todo: markdown for description (see below)
     order = models.IntegerField()
     
-    def live_entry_set(self):
-        from coltrane.models import Entry
-        return self.entry_set.filter(status=Entry.LIVE_STATUS)
+    def live_resource_set(self):
+        from phytosanitary.models import Resource
+        return self.resource_set.filter(status=Resource.LIVE_STATUS)
         
     class Meta: 
         ordering = ['order']
@@ -43,15 +43,15 @@ class Category(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('coltrane_category_detail', (), { 'slug': self.slug })
+        return ('phytosanitary_category_detail', (), { 'slug': self.slug })
 
 
-class LiveEntryManager(models.Manager):
+class LiveResourceManager(models.Manager):
     def get_query_set(self):
-        return super(LiveEntryManager, self).get_query_set().filter(status=self.model.LIVE_STATUS)
+        return super(LiveResourceManager, self).get_query_set().filter(status=self.model.LIVE_STATUS)
 
 
-class Entry(models.Model):
+class Resource(models.Model):
     LIVE_STATUS = 1
     DRAFT_STATUS = 2
     HIDDEN_STATUS = 3
@@ -84,7 +84,7 @@ class Entry(models.Model):
     
     # Need to be this way around so that non-live entries will show up in Admin, which uses the default (first) manager.
     objects = models.Manager()
-    live = LiveEntryManager()
+    live = LiveResourceManager()
     
     class Meta:
         ordering = ['-pub_date']
@@ -97,18 +97,18 @@ class Entry(models.Model):
         self.body_html = markdown(self.body)
         if self.excerpt:
             self.excerpt_html = markdown(self.excerpt)
-        super(Entry, self).save(force_insert, force_update)
+        super(Resource, self).save(force_insert, force_update)
     
     
     @models.permalink
     def get_absolute_url(self):
-        return ('coltrane_entry_detail', (), {  'year': self.pub_date.strftime("%Y"),
+        return ('phytosanitary_resource_detail', (), {  'year': self.pub_date.strftime("%Y"),
                                                 'month': self.pub_date.strftime("%b").lower(),
                                                 'day': self.pub_date.strftime("%d"),
                                                 'slug': self.slug })
 
 # See http://blog.sveri.de/index.php?/categories/2-Django
-tagging.register(Entry, tag_descriptor_attr='etags')
+tagging.register(Resource, tag_descriptor_attr='etags')
 
 
 class Link(models.Model):
@@ -149,7 +149,7 @@ class Link(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('coltrane_link_detail', (), {   'year': self.pub_date.strftime('%Y'),
+        return ('phytosanitary_link_detail', (), {   'year': self.pub_date.strftime('%Y'),
                                                 'month': self.pub_date.strftime('%b').lower(),
                                                 'day': self.pub_date.strftime('%d'),
                                                 'slug': self.slug })
@@ -169,8 +169,8 @@ tagging.register(Link, tag_descriptor_attr='etags')
 # 
 # def moderate_comment(sender, comment, request, **kwargs):
 #     if not comment.id:
-#         entry = comment.content_object
-#         delta = datetime.datetime.now() - entry.pub_date
+#         resource = comment.content_object
+#         delta = datetime.datetime.now() - resource.pub_date
 #         if delta.days > 30:
 #             comment.is_public = False
 #         else:
@@ -184,7 +184,7 @@ tagging.register(Link, tag_descriptor_attr='etags')
 #                                             akismet_data,
 #                                             build_data=True):
 #                     comment.is_public = False
-#         email_body = "%s posted a new comment on the entry '%s'."
+#         email_body = "%s posted a new comment on the resource '%s'."
 #         mail_managers("New comment posted", email_body % (comment.name, comment.content_object))
 #                     
 # comment_will_be_posted.connect(moderate_comment, sender=Comment)
@@ -198,13 +198,13 @@ from django.contrib.comments.moderation import CommentModerator, moderator
 from django.contrib.sites.models import Site
 from django.utils.encoding import smart_str
 
-class EntryModerator(CommentModerator):
+class ResourceModerator(CommentModerator):
     auto_moderate_field = 'pub_date'
     moderate_after = 30
     email_notification = True
     
     def moderate (self, comment, content_object, request):
-        already_moderated = super(EntryModerator, self).moderate(comment, content_object, request)
+        already_moderated = super(ResourceModerator, self).moderate(comment, content_object, request)
         if already_moderated:
             return True
         akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url="http:/%s/" %Site.objects.get_current().domain)
@@ -218,4 +218,4 @@ class EntryModerator(CommentModerator):
                                 build_data=True)
         return False
         
-moderator.register(Entry, EntryModerator)
+moderator.register(Resource, ResourceModerator)

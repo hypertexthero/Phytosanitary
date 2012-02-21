@@ -1,0 +1,23 @@
+{% extends "phytosanitary/base_resources.html" %}
+
+{% block title %}{{ month|date:"F, Y" }} - {{ block.super }}{% endblock %}
+
+{% block breadcrumbs %} &rarr; <a href="/{{ month|date:"Y" }}/">{{ month|date:"Y" }}</a> &rarr; {{ month|date:"F" }}{% endblock %}
+
+{% block whatis %}
+ <h1 class="first"><span class="normal">Month Archive for</span> {{ month|date:"F, Y" }}</h1>
+{# <p>This is a list of resources published in {{ month|date:"F, Y" }}.</p> #}
+{% endblock %}
+
+{% block content %}
+    {% for resource in object_list %}
+       <h2>{{ resource.title }}</h2>
+       <p>Published on {{ resource.pub_date|date:"F j, Y" }}</p>
+       {% if resource.excerpt_html %}
+        {{ resource.excerpt_html|safe }}
+       {% else %}
+         {{ resource.body_html|truncatewords_html:"50"|safe }}
+       {% endif %}
+       <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p>
+     {% endfor %}
+{% endblock %}

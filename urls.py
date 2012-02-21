@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 # for custom registration userena form with first name and last name
-from phytosanitary.coltrane.forms import SignupFormExtra
+from phytosanitary.phytosanitary.forms import SignupFormExtra
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -10,11 +10,11 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'phytosanitary.views.home', name='home'),
-    # url(r'^coltrane/', include('coltrane.urls')),
-    # url(r'^categories/', include('coltrane.urls.categories')), 
+    # url(r'^phytosanitary/', include('phytosanitary.urls')),
+    # url(r'^categories/', include('phytosanitary.urls.categories')), 
 
-    url(r'^links/', include('coltrane.urls.links')), 
-    url(r'^tags/', include('coltrane.urls.tags')), 
+    url(r'^links/', include('phytosanitary.urls.links')), 
+    url(r'^tags/', include('phytosanitary.urls.tags')), 
     url(r'^comments/', include('django.contrib.comments.urls')),
 
     # url(r'^accounts/', include('registration.backends.default.urls')), # provided by django-registration
@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^accounts/signup/$', 'userena.views.signup', {'signup_form': SignupFormExtra}),
     url(r'^accounts/', include('userena.urls')),
 
-    url(r'^', include('coltrane.urls.entries')),
+    url(r'^', include('phytosanitary.urls.resources')),
 
     # registration/login.html is the django default - https://docs.djangoproject.com/en/dev/topics/auth/#django.contrib.auth.views.login
     url(r'^login/$', 'django.contrib.auth.views.login'),
@@ -37,7 +37,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     # moving the category slug url here from contrane/urls/categories.py
-    url(r'^(?P<slug>[-\w]+)/$', 'coltrane.views.category_detail', {}, 'coltrane_category_detail'),
+    url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
 )
 
 
@@ -50,10 +50,10 @@ urlpatterns = patterns('',
 # )
 
 # TODO: categories as globalnav
-# from coltrane.models import Category
+# from phytosanitary.models import Category
 # urlpatterns += patterns('',
-#     (r'^$', 'django.views.generic.list_detail.object_list', { 'queryset': Category.objects.all() }, 'coltrane_category_list'),
-#     (r'^(?P<slug>[-\w]+)/$', 'coltrane.views.category_detail', {}, 'coltrane_category_detail'),
+#     (r'^$', 'django.views.generic.list_detail.object_list', { 'queryset': Category.objects.all() }, 'phytosanitary_category_list'),
+#     (r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
 # )
 
 # http://docs.djangoproject.com/en/dev/howto/static-files/#serving-static-files-in-development

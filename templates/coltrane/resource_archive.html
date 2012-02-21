@@ -1,0 +1,57 @@
+{# =homepage #}
+
+{% extends "phytosanitary/base_resources.html" %}
+
+{# {% block title %}{{ block.super }}{% endblock %} #}
+
+{% block content %}
+
+{% block editingtoolbar %}{{ block.super }}{% endblock %}
+
+{# <p>This is a list of the latest {{ latest.count }} resources published in the blog.</p> #}
+<h1 class="first">About Phytosanitary.info</h1>
+
+<p>Welcome to the IPPC Phytosanitary Resources homepage, where you can find resources contributed by the world’s plant protection community including <a href="dbtools/">databases &amp; tools</a>, <a href="advocacy/">advocacy</a> and <a href="training/">training materials</a>, a <a href="media/">media library</a> and <a href="misc/">more</a>.</p>
+
+<h2>Latest Updates</h2>
+
+<div class="dashbox">
+        <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
+            {# <caption>My Latest Changes</caption> #}
+            <thead>
+                <tr>
+                    {# <th>Tags</th> #}
+                    <th>Title <span class="small normal quiet">click titles to go to the resource</span></th>
+                    <th>Date <span class="small normal"><acronym title="ISO Date Format: YEAR-MONTH-DAY">Y-M-D</acronym></span></th>    
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for resource in latest %}
+                <tr>
+                    {# <td class="typetd">{{ resource.tag }}</td> #}
+                    <td><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
+                        
+                        {% if user.is_staff %} 
+                            <a class="edit" href="/admin/phytosanitary/resource/{{ resource.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+                        {% endif %}
+                        
+                        </td>
+                    <td class="datetd">{{ resource.pub_date|date:"Y-m-j" }}</td>
+                </tr>
+                {% endfor %}
+             </tbody>
+             </table>
+             </div>   
+    {# {% for resource in latest %} #}
+    {#   <h2>{{ resource.title }}</h2> #}
+    {#   <p>Published on {{ resource.pub_date|date:"F j, Y" }}</p> #}
+    {#   {% if resource.excerpt_html %} #}
+    {#    {{ resource.excerpt_html|safe }} #}
+    {#   {% else %} #}
+    {#     {{ resource.body_html|truncatewords_html:"50"|safe }} #}
+    {#   {% endif %} #}
+    {#   <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p> #}
+    {# {% endfor %} #}
+{% endblock %}
+

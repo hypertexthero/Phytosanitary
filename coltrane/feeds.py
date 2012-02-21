@@ -2,7 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils.feedgenerator import Atom1Feed
 from django.contrib.sites.models import Site
 from django.contrib.syndication.feeds import Feed
-from coltrane.models import Category, Entry, Link
+from phytosanitary.models import Category, Resource, Link
 
 current_site = Site.objects.get_current()
 
@@ -18,7 +18,7 @@ class LatestEntriesFeed(Feed):
     title = "%s: Latest entries" % current_site.name
     
     def items(self):
-        return Entry.live.all()[:15]
+        return Resource.live.all()[:15]
     
     def item_pubdate(self, item):
         return item.pub_date
@@ -71,5 +71,5 @@ class CategoryFeed(LatestEntriesFeed):
         return obj.get_absolute_url()
     
     def items(self, obj):
-        return obj.live_entry_set()[:15]
+        return obj.live_resource_set()[:15]
     

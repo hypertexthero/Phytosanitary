@@ -87,7 +87,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.flatpages',
     'cab',
-    'coltrane',
+    'phytosanitary',
     'tagging',
 )
 

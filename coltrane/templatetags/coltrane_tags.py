@@ -21,7 +21,7 @@ class LatestContentNode(template.Node):
         
     def render(self, context):
         manager = self.model._default_manager
-        if self.model.__name__ == 'Entry':
+        if self.model.__name__ == 'Resource':
             manager = self.model.live
         context[self.varname] = manager.all()[:self.num]
         return ''

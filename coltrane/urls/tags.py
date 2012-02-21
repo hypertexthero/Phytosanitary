@@ -1,21 +1,21 @@
 from django.conf.urls.defaults import *
-from coltrane.models import Entry, Link
+from phytosanitary.models import Resource, Link
 from tagging.models import Tag
 
 
 urlpatterns = patterns('',
     (r'^$', 'django.views.generic.list_detail.object_list', {
         'queryset': Tag.objects.all(),
-        'template_name': 'coltrane/tag_list.html'
-    }, 'coltrane_tag_list'),
+        'template_name': 'phytosanitary/tag_list.html'
+    }, 'phytosanitary_tag_list'),
     
     (r'^(?P<tag>[-\w]+)/$', 'tagging.views.tagged_object_list', { 
-        'queryset_or_model': Entry.live.all(), 
-        'template_name': 'coltrane/entries_by_tag.html'
-    }, 'coltrane_entry_archive_tag'),
+        'queryset_or_model': Resource.live.all(), 
+        'template_name': 'phytosanitary/entries_by_tag.html'
+    }, 'phytosanitary_resource_archive_tag'),
     
     (r'^links/(?P<tag>[-\w]+)/$', 'tagging.views.tagged_object_list', {
         'queryset_or_model': Link.objects.all(),
-        'template_name': 'coltrane/links_by_tag.html'
-    }, 'coltrane_link_archive_tag'),
+        'template_name': 'phytosanitary/links_by_tag.html'
+    }, 'phytosanitary_link_archive_tag'),
 )

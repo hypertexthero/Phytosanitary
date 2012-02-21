@@ -19,7 +19,7 @@
 <div id="container">
     <div id="header">
         <div class="logo">
-            <a class="imglink" href="{% url coltrane_entry_archive_index %}" title="Go to the Phytosanitary Resources homepage."><img src="/static/img/LogoPhytosanitaryResources.gif" alt="Phytosanitary Resources" border="0" /></a>
+            <a class="imglink" href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage."><img src="/static/img/LogoPhytosanitaryResources.gif" alt="Phytosanitary Resources" border="0" /></a>
 		</div> {# / .logo #}
         <div id="nav">
             {% block nav %}
@@ -52,11 +52,11 @@
             
             {# Categories of content, or 'sections' of the site - the table of contents of a book #}
             {% block globalnav %}
-            {% load coltrane_tags %}
-            {% get_latest_content coltrane.category 5 as latest_categories %}
+            {% load phytosanitary_tags %}
+            {% get_latest_content phytosanitary.category 5 as latest_categories %}
             <ul class="globalnav">
                 <li>
-                    <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url coltrane_entry_archive_index %}">Home</a>
+                    <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url phytosanitary_resource_archive_index %}">Home</a>
                 </li>
                 {% for category in latest_categories %}
                 <li>
@@ -69,7 +69,7 @@
     </div> {# / #header #}
     
     <p class="breadcrumbs">
-        <strong><a class="logo" title="Homepage." href="{% url coltrane_entry_archive_index %}">Phytosanitary.info</a></strong> {% block breadcrumbs %}{% endblock %}
+        <strong><a class="logo" title="Homepage." href="{% url phytosanitary_resource_archive_index %}">Phytosanitary.info</a></strong> {% block breadcrumbs %}{% endblock %}
     </p>
     
     <div id="content">
@@ -80,7 +80,7 @@
 
 
             
-            {% block whatis %} {# entry_archive, etc #}
+            {% block whatis %} {# resource_archive, etc #}
             {% endblock %}
 
             {% block content %}
@@ -89,7 +89,7 @@
                 {% block editingtoolbar %}
                 {% if user.is_staff %}
                 <div class="editingtoolbar floatright">
-                    <a href="/admin/coltrane/entry/add/">Add an entry</a>{# TODO: this URL is hackish - make it better #}
+                    <a href="/admin/phytosanitary/resource/add/">Add an resource</a>{# TODO: this URL is hackish - make it better #}
                     {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}                        
                 </div>
                 {% endif %}
@@ -114,7 +114,7 @@
 
                 {# Tags, or 'keywords' - the index of a book #}
                 {# =todo: we should display all tags here regardless of whether they are the 'latest' or not. change this. #}
-                {% load coltrane_tags %}
+                {% load phytosanitary_tags %}
                 {% get_latest_content tagging.tag 50 as latest_tags %}
                 <ul>
                 {% for tag in latest_tags %}
@@ -124,13 +124,13 @@
                 {% endfor %}
                 </ul>
 
-                {# {% load coltrane_tags %} #}
+                {# {% load phytosanitary_tags %} #}
                 {#         <h2>Latest Published Resources</h2> #}
                 {#         <ul> #}
-                {#             {% get_latest_content coltrane.entry 5 as latest_entries %} #}
-                {#             {% for entry in latest_entries %} #}
+                {#             {% get_latest_content phytosanitary.resource 5 as latest_resources %} #}
+                {#             {% for resource in latest_resources %} #}
                 {#             <li> #}
-                {#                 <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>, posted {{ entry.pub_date|timesince }} ago. #}
+                {#                 <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>, posted {{ resource.pub_date|timesince }} ago. #}
                 {#             </li> #}
                 {#             {% endfor %} #}
                 {#         </ul> #}

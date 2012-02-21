@@ -1,5 +1,5 @@
 from django.contrib import admin
-from coltrane.models import Category, Entry, Link
+from phytosanitary.models import Category, Resource, Link
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title'] }
@@ -7,10 +7,10 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 
-class EntryAdmin(admin.ModelAdmin):
+class ResourceAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title'] }
 
-admin.site.register(Entry, EntryAdmin)
+admin.site.register(Resource, ResourceAdmin)
 
 
 class LinkAdmin(admin.ModelAdmin):
