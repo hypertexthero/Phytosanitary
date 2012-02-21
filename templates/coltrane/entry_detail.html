@@ -47,9 +47,9 @@
         {# <p>This entry isn't part of any categories.</p> #}
     {% endif %}
 
-    {% load comments %}
-    {% get_comment_count for object as comment_count %}
-    So far, this entry has {{ comment_count }} comment{{ comment_count|pluralize }}.
+    {# {% load comments %} #}
+    {# {% get_comment_count for object as comment_count %} #}
+    {# So far, this entry has {{ comment_count }} comment{{ comment_count|pluralize }}. #}
     
     {% if object.etags.count %}
     This entry is tagged {% for tag in object.etags %}<a href="{% url coltrane_entry_archive_tag tag.name %}">{{ tag.name }}</a>{% if forloop.last %}{% else %}{% ifequal forloop.revcounter0 1 %}and {% else %}, {% endifequal %}{% endif %}{% endfor %}.

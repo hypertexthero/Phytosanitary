@@ -8,36 +8,6 @@ from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
 
-# http://www.djangobook.com/en/1.0/chapter12/
-# =todo: 
-    # - http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django
-    # - http://stackoverflow.com/questions/3301285/django-profiles-custom-create-edit-modelform-not-saving-properly
-# class UserProfile(models.Model):
-#     # This is the only required field
-#     user = models.OneToOneField(User)
-#     # The rest is completely up to you...
-#     # favorite_band = models.CharField(maxlength=100, blank=True)
-#     # favorite_cheese = models.CharField(maxlength=100, blank=True)
-#     # lucky_number = models.IntegerField()
-#     url = models.URLField()
-#     # address = models.TextField()
-#     # phone = models.PhoneNumberField()
-#     # fax = models.PhoneNumberField()
-#     
-#     def __str__(self):  
-#         return "%s's profile" % self.user
-#         
-#     def get_absolute_url(self):
-#         return ('profiles_profile_detail', (), { 'username': self.user.username })
-#         get_absolute_url = models.permalink(get_absolute_url)
-# 
-# # Extending the User model with custom fields in Django - http://stackoverflow.com/a/965883/412329
-# def create_user_profile(sender, instance, created, **kwargs):  
-#     if created:  
-#        profile, created = UserProfile.objects.get_or_create(user=instance)  
-# 
-# post_save.connect(create_user_profile, sender=User)
-
 from userena.models import UserenaBaseProfile
 
 class MyProfile(UserenaBaseProfile):
@@ -66,7 +36,7 @@ class Category(models.Model):
     def __unicode__(self):
         return self.title
     
-    # =todo: enabling markdown for category description
+    # =todo: enable markdown for category description
     # def save(self, force_insert=False, force_update=False):
     #     self.description_html = markdown(self.description)
     #     super(Category, self).save(force_insert, force_update)
