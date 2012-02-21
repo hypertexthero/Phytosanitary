@@ -1,0 +1,21 @@
+{% extends "phytosanitary/base_tags.html" %}
+
+{% block title %}{{ block.super }} - Tags{% endblock %}
+
+
+{% block content %}
+    <h1>Tags</h1>
+    
+    <ul>
+    {% for tag in object_list %}
+    <li><a href="/tags/{{ tag.name }}">{{ tag.name }}</a>
+        
+             {% if user.is_authenticated %} 
+                    <a class="edit" href="/admin/phytosanitary/tag/{{ object.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+                {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    
+{% endblock %}
+

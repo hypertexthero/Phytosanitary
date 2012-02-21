@@ -1,0 +1,61 @@
+{% extends "phytosanitary/base_resources.html" %}
+
+{% block title %}{{ tag.name }} - Tags - {% endblock %}
+
+{% block breadcrumbs %}
+    &rarr; <a href="/tags">Tag</a> &rarr; {{ tag.name }}
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="first"><span class="normal">Resources tagged with</span> &lsquo;{{ tag.name }}&rsquo;</h2>
+    {# {% for object in object_list %} #}
+    {#   <p><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></p> #}
+    {# {% endfor %} #}
+    
+    {# {% block content %} #}
+
+    <div class="dashbox">
+            <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
+                <!-- <caption>My Latest Changes</caption> -->
+                <thead>
+                    <tr>
+                        <th>Title <span class="small normal quiet">click titles to go to the resource</span></th>
+                        <th>Date <span class="small normal"><acronym title="ISO Date Format: YEAR-MONTH-DAY">Y-M-D</acronym></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for object in object_list %}
+                    <tr>
+                        <td><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                        
+                             {% if user.is_authenticated %} 
+                                    <a class="edit" href="/admin/phytosanitary/resource/{{ resource.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+                                {% endif %}
+                        
+                        </td>
+                        <td class="datetd">{{ object.pub_date|date:"Y-m-j" }}</td>
+                    </tr>
+                    {% endfor %}
+                 </tbody>
+                 </table>
+                 </div>   
+        {# {% for resource in latest %} #}
+        {#   <h2>{{ resource.title }}</h2> #}
+        {#   <p>Published on {{ resource.pub_date|date:"F j, Y" }}</p> #}
+        {#   {% if resource.excerpt_html %} #}
+        {#    {{ resource.excerpt_html|safe }} #}
+        {#   {% else %} #}
+        {#     {{ resource.body_html|truncatewords_html:"50"|safe }} #}
+        {#   {% endif %} #}
+        {#   <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p> #}
+        {# {% endfor %} #}
+    {# {% endblock %} #}
+    
+{% endblock %}
+
+{% block sidebar %}
+{# <p>This is a list of the latest resources with the <strong>{{ tag.name }}</strong> tag.</p> #}
+{{ block.super }}
+{% endblock %}
