@@ -108,7 +108,7 @@ USERENA_ACTIVATION_DAYS = 7
 USERENA_MUGSHOT_PATH = 'user/photos/%Y/%m/'
 USERENA_WITHOUT_USERNAMES = False
 
-ROOT_URLCONF = 'phytosanitary.urls'
+ROOT_URLCONF = 'phytosanitary-project.urls'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -126,12 +126,10 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'phytosanitary',
     'tagging',
-    # 'registration',
-    # 'profiles',
     'userena',
     'guardian',
     'easy_thumbnails',
-    'south',
+    # 'south',
 )
 
 # A sample logging configuration. The only tangible logging

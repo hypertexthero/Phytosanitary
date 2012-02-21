@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 # for custom registration userena form with first name and last name
-from phytosanitary.phytosanitary.forms import SignupFormExtra
+from phytosanitary.forms import SignupFormExtra
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin

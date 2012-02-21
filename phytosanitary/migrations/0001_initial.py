@@ -8,13 +8,15 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'UserProfile'
-        db.create_table('phytosanitary_userprofile', (
+        # Adding model 'MyProfile'
+        db.create_table('phytosanitary_myprofile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], unique=True)),
+            ('mugshot', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
+            ('privacy', self.gf('django.db.models.fields.CharField')(default='registered', max_length=15)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(related_name='my_profile', unique=True, to=orm['auth.User'])),
             ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
         ))
-        db.send_create_signal('phytosanitary', ['UserProfile'])
+        db.send_create_signal('phytosanitary', ['MyProfile'])
 
         # Adding model 'Category'
         db.create_table('phytosanitary_category', (
@@ -22,11 +24,12 @@ class Migration(SchemaMigration):
             ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
             ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, db_index=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
+            ('order', self.gf('django.db.models.fields.IntegerField')()),
         ))
         db.send_create_signal('phytosanitary', ['Category'])
 
-        # Adding model 'Entry'
-        db.create_table('phytosanitary_entry', (
+        # Adding model 'Resource'
+        db.create_table('phytosanitary_resource', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
             ('excerpt', self.gf('django.db.models.fields.TextField')(blank=True)),
@@ -41,15 +44,15 @@ class Migration(SchemaMigration):
             ('status', self.gf('django.db.models.fields.IntegerField')(default=1)),
             ('tags', self.gf('tagging.fields.TagField')()),
         ))
-        db.send_create_signal('phytosanitary', ['Entry'])
+        db.send_create_signal('phytosanitary', ['Resource'])
 
-        # Adding M2M table for field categories on 'Entry'
-        db.create_table('phytosanitary_entry_categories', (
+        # Adding M2M table for field categories on 'Resource'
+        db.create_table('phytosanitary_resource_categories', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('entry', models.ForeignKey(orm['phytosanitary.entry'], null=False)),
+            ('resource', models.ForeignKey(orm['phytosanitary.resource'], null=False)),
             ('category', models.ForeignKey(orm['phytosanitary.category'], null=False))
         ))
-        db.create_unique('phytosanitary_entry_categories', ['entry_id', 'category_id'])
+        db.create_unique('phytosanitary_resource_categories', ['resource_id', 'category_id'])
 
         # Adding model 'Link'
         db.create_table('phytosanitary_link', (
@@ -72,17 +75,17 @@ class Migration(SchemaMigration):
 
     def backwards(self, orm):
         
-        # Deleting model 'UserProfile'
-        db.delete_table('phytosanitary_userprofile')
+        # Deleting model 'MyProfile'
+        db.delete_table('phytosanitary_myprofile')
 
         # Deleting model 'Category'
         db.delete_table('phytosanitary_category')
 
-        # Deleting model 'Entry'
-        db.delete_table('phytosanitary_entry')
+        # Deleting model 'Resource'
+        db.delete_table('phytosanitary_resource')
 
-        # Removing M2M table for field categories on 'Entry'
-        db.delete_table('phytosanitary_entry_categories')
+        # Removing M2M table for field categories on 'Resource'
+        db.delete_table('phytosanitary_resource_categories')
 
         # Deleting model 'Link'
         db.delete_table('phytosanitary_link')
@@ -118,28 +121,19 @@ class Migration(SchemaMigration):
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
+        'contenttypes.contenttype': {
+            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
         'phytosanitary.category': {
-            'Meta': {'ordering': "['title']", 'object_name': 'Category'},
+            'Meta': {'ordering': "['order']", 'object_name': 'Category'},
             'description': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'order': ('django.db.models.fields.IntegerField', [], {}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        'phytosanitary.entry': {
-            'Meta': {'ordering': "['-pub_date']", 'object_name': 'Entry'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'body': ('django.db.models.fields.TextField', [], {}),
-            'body_html': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['phytosanitary.Category']", 'symmetrical': 'False'}),
-            'enable_comments': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'excerpt': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'excerpt_html': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
-            'tags': ('tagging.fields.TagField', [], {}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
         },
         'phytosanitary.link': {
@@ -158,18 +152,30 @@ class Migration(SchemaMigration):
             'via_name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
             'via_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
-        'phytosanitary.userprofile': {
-            'Meta': {'object_name': 'UserProfile'},
+        'phytosanitary.myprofile': {
+            'Meta': {'object_name': 'MyProfile'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'mugshot': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
+            'privacy': ('django.db.models.fields.CharField', [], {'default': "'registered'", 'max_length': '15'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'unique': 'True'})
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'my_profile'", 'unique': 'True', 'to': "orm['auth.User']"})
         },
-        'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+        'phytosanitary.resource': {
+            'Meta': {'ordering': "['-pub_date']", 'object_name': 'Resource'},
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'body': ('django.db.models.fields.TextField', [], {}),
+            'body_html': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['phytosanitary.Category']", 'symmetrical': 'False'}),
+            'enable_comments': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'excerpt': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'excerpt_html': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'tags': ('tagging.fields.TagField', [], {}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
         }
     }
 

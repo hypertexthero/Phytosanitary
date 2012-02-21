@@ -7,13 +7,3 @@ def category_detail(request, slug):
     return object_list(request, queryset=category.live_resource_set(), extra_context={
         'category': category
     })
-# 
-# def add_user(request):
-#     if request.method == "POST":
-#         uform = UserForm(data = request.POST)
-#         pform = UserProfileForm(data = request.POST)
-#         if uform.is_valid() and pform.is_valid():
-#             user = uform.save()
-#             profile = pform.save(commit = False)
-#             profile.user = user
-#             profile.save()

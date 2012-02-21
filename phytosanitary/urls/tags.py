@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     
     (r'^(?P<tag>[-\w]+)/$', 'tagging.views.tagged_object_list', { 
         'queryset_or_model': Resource.live.all(), 
-        'template_name': 'phytosanitary/entries_by_tag.html'
+        'template_name': 'phytosanitary/resources_by_tag.html'
     }, 'phytosanitary_resource_archive_tag'),
     
     (r'^links/(?P<tag>[-\w]+)/$', 'tagging.views.tagged_object_list', {
