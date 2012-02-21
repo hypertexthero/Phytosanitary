@@ -32,7 +32,8 @@
                                     <a href="{% url userena_profile_detail user.username %}" title="{% trans "View, edit your profile" %}">{{ user.first_name }} {{ user.last_name }}</a>!
                                 {# {% endif %} #}
                             
-                            <a href="{% url userena_signout %}?next={% firstof request.path '/' %}">Log out</a> {# or <a href="/profiles/{{ user.username }}">see your profile</a> #}
+                            {# <a href="{% url userena_signout %}?next={% firstof request.path '/' %}">Log out</a> #}
+                            <a href="{% url userena_signout %}">Log out</a>
                         
                             {% if user.is_staff %}
                                 <strong><a class="edit" href="/admin/">Admin</a></strong>
@@ -42,13 +43,17 @@
                     {# http://stackoverflow.com/a/1711592/412329 #}
                     {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
                     {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Log in</a> #}
-                    <a href="{% url userena_signin %}?next={% firstof request.path '/' %}">Log in</a> or <a href="{% url userena_signup %}">Register</a>
+                    <a href="{% url userena_signin %}">Log in</a> or <a href="{% url userena_signup %}">Register</a>
                 {% endif %}
             {% endblock %}
-            {# {% block navsearch %} #}
-            {#                 {% include "includes/search_form.html" %} #}
-            {# {% endblock %} #}
-        </div> {# / #nav #}
+            
+                <form method="get" action="/search/"> 
+                        {# <label for="id_q">Search:</label>  #}
+                        <input type="text" name="q" id="id_q" size="30" /> 
+                        <input type="submit" value="Search" />
+                </form>
+                
+            </div> {# / #nav #}
             
             {# Categories of content, or 'sections' of the site - the table of contents of a book #}
             {% block globalnav %}
@@ -89,7 +94,7 @@
                 {% block editingtoolbar %}
                 {% if user.is_staff %}
                 <div class="editingtoolbar floatright">
-                    <a href="/admin/phytosanitary/resource/add/">Add an resource</a>{# TODO: this URL is hackish - make it better #}
+                    <a href="/admin/phytosanitary/resource/add/">Add a resource</a>{# TODO: this URL is hackish - make it better #}
                     {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}                        
                 </div>
                 {% endif %}

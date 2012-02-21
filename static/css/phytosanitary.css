@@ -16,8 +16,8 @@ div#nav {float:right; width:30%; text-align:right;}
 
 ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both;}
 ul.globalnav li {display:inline; padding:0; margin:0;}
-ul.globalnav li a {background:none !important; color:#063 !important; font-weight:bold; text-decoration:none !important; padding:1.2em;}
-ul.globalnav li a:hover {color:#111 !important; background:#cff url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important;}
+ul.globalnav li a {background:none; font-weight:bold; text-decoration:none; padding:1.2em;}
+ul.globalnav li a:hover {color:#111 !important; background:#F1F7EB url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important;}
 
 ul.globalnav li a.home-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;} /* highlight homepage tab - see first li of ul class="globalnav" in base.html */
 
@@ -48,9 +48,9 @@ h5 {font-size:1.1em;}
 h6 {font-size:0.9em; text-transform:uppercase; font-style:italic; letter-spacing:1px;}
 
 /* =Links ------- */
-a, a:link {color:#125AA7 !important; text-decoration:underline;}
-a:visited {color:#360;}
-a:hover, .treeview .hover {color:#000 !important; background:#cff !important; text-decoration:none;}
+a, a:link {color:#125AA7; text-decoration:underline;}
+a:visited {color:#125AA7;}
+a:hover, .treeview .hover {color:#000; background:#F1F7EB; text-decoration:none;}
 a.imglink:hover {background:none !important;}
 a:active {color:#f90; border:none; text-decoration:none !important;}
 #sidebar ul, #sidebar ol {line-height:1.5em; margin-left:0; padding-left:1.5em;}
@@ -149,15 +149,17 @@ fieldset {border:1px solid #ccc;}
 
 /* =Editing toolbar ----------------- */
 
-div.editingtoolbar {background:#cff; margin:1em 0; padding:1em 0.5em;}
-div.editingtoolbar form, div.editingtoolbar select {margin:0 !important; padding:0 !important; vertical-align:middle;}
-div.editingtoolbar ul {margin:0; padding:6px;}
-div.editingtoolbar li {display:inline; padding:0 12px 0 0; margin:0;}
-div.editingtoolbar a {color:#066; font-weight:bold !important; padding:1em 0.5em;}
-.edit {background:#cff; padding:0.05em 0.25em;}
+div.editingtoolbar {background:#cff; margin:1em 0; padding:1em 0;}
+/*div.editingtoolbar form, div.editingtoolbar select {margin:0 !important; padding:0 !important; vertical-align:middle;}
+div.editingtoolbar ul {}
+div.editingtoolbar li {display:inline;}
+*/
+div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0;}
+.edit {background:#cff;}
 
 /*=misc ------ */
 
+.featured {}
 .nomargin {margin:0;}
 .titlecase {text-transform:capitalize;}
 .small {font-size:0.9;}

@@ -1,12 +1,15 @@
 import datetime
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _ 
-# from django.db.models.signals import post_save # http://stackoverflow.com/a/965883/412329
 from django.db import models
 from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
+
+# automatically users who register using front-end form to the 'contributors' group
+from django.db.models.signals import post_save # http://stackoverflow.com/a/965883/412329
+from django.dispatch import receiver # https://docs.djangoproject.com/en/dev/topics/signals/#receiver-functions
 
 from userena.models import UserenaBaseProfile
 
@@ -16,6 +19,14 @@ class MyProfile(UserenaBaseProfile):
                                 verbose_name=_('user'),
                                 related_name='my_profile')
     url = models.URLField()
+
+# http://stackoverflow.com/a/8949526/412329
+@receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
+def user_post_save(sender, instance, created, **kwargs):
+    """ This method is executed whenever an user object is saved - automatically users who register using front-end form to the 'contributors' group                                                                                     
+    """
+    if created:
+        instance.groups.add(Group.objects.get(name='contributor'))
 
     
 class Category(models.Model):
@@ -55,10 +66,12 @@ class Resource(models.Model):
     LIVE_STATUS = 1
     DRAFT_STATUS = 2
     HIDDEN_STATUS = 3
+    FOR_REVIEW_STATUS = 4
     STATUS_CHOICES = (
         (LIVE_STATUS, 'Live'),
         (DRAFT_STATUS, 'Draft'),
         (HIDDEN_STATUS, 'Hidden'),
+        (FOR_REVIEW_STATUS, 'For Review'),
     )
     
     # Core fields.
@@ -73,7 +86,7 @@ class Resource(models.Model):
 
     # Metadata.
     author = models.ForeignKey(User)
-    enable_comments = models.BooleanField(default=True)
+    enable_comments = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     slug = models.SlugField(unique_for_date='pub_date')
     status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS)

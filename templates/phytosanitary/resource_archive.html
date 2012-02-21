@@ -43,15 +43,24 @@
              </tbody>
              </table>
              </div>   
-    {# {% for resource in latest %} #}
-    {#   <h2>{{ resource.title }}</h2> #}
-    {#   <p>Published on {{ resource.pub_date|date:"F j, Y" }}</p> #}
-    {#   {% if resource.excerpt_html %} #}
-    {#    {{ resource.excerpt_html|safe }} #}
-    {#   {% else %} #}
-    {#     {{ resource.body_html|truncatewords_html:"50"|safe }} #}
-    {#   {% endif %} #}
-    {#   <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p> #}
-    {# {% endfor %} #}
+
 {% endblock %}
 
+{% block sidebar %}
+{{ block.super }} {# include stuff templates we are inheriting from #}
+    {% for resource in latest %}{# the 'latest' variable of the template context is assigned automatically by the django.views.generic.date_based.archive_index generic view - https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-date-based-archive-index #}
+        {% if resource.featured == 1 %}
+        <div class="featured">
+            <h3>Featured Resource</h3>
+          <h4><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a></h4>
+          <p><em>Published on {{ resource.pub_date|date:"F j, Y" }}</em></p>
+          {% if resource.excerpt_html %}
+           {{ resource.excerpt_html|safe }}
+          {% else %}
+            {{ resource.body_html|truncatewords_html:"50"|safe }}
+          {% endif %}
+          {# <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p> #}
+          </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
