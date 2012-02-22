@@ -24,6 +24,26 @@
 
 {% block content %}
 
+
+{% for object in object_list %}{# the 'latest' variable of the template context is assigned automatically by the django.views.generic.date_based.archive_index generic view - https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-date-based-archive-index #}
+    {% if object.featured == 1 %}
+        <div class="featured">
+            <p class="quiet">Featured Resources:</p>
+            {% for object in object_list  %}
+                <h1 style="margin-top:0;"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a> <span class="quiet normal smaller">{{ object.pub_date|date:"F j, Y" }}</span></h1>
+                {% if object.excerpt_html %}
+                    {{ object.excerpt_html|safe }}
+                {% else %}
+                    {{ object.body_html|truncatewords_html:"50"|safe }}
+                {% endif %}      
+            {% endfor %}            
+        </div>
+    {% endif %}
+{% endfor %}
+
+
+
+
     {% block editingtoolbar %}{{ block.super }}{% endblock %}
     
     <h1 class="first">{{ category.title }}</h1>

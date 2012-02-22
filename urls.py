@@ -20,13 +20,15 @@ urlpatterns = patterns('',
     url(r'^', include('phytosanitary.urls.resources')),    
     # search
     url(r'^search/', 'phytosanitary.views.search', name="resources_search"),
-    # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
-    url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
+
     
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    
+    # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
+    url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
 )
 
 # http://docs.djangoproject.com/en/dev/howto/static-files/#serving-static-files-in-development

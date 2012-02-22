@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404, render_to_response
 from phytosanitary.models import Category, Resource
 from django.views.generic.list_detail import object_list
 
-# categories are the site sections i.e. the global navigation
 def category_detail(request, slug):
+    """ categories are the site sections i.e. the global navigation """
     category = get_object_or_404(Category, slug=slug)
     return object_list(
         request, 
@@ -29,8 +29,6 @@ def category_detail(request, slug):
 
 # or use django's render_to_response shortcut:
 
-
-
 # def search(request):
 #     query = request.GET['q']
 #     return render_to_response('notes/search.html',
@@ -46,7 +44,8 @@ from django.core.urlresolvers import reverse
 from django.views.generic.list_detail import object_detail
 from django.views.generic.date_based import archive_index
 
-def search(request):    
+def search(request):
+    """ Search form for body_html and titles so far """
     query = request.GET.get('q', '') # both /search/ and /search/?q=query work
     results = []
     user = request.user # http://stackoverflow.com/a/4338108/412329 - passing the user variable into the context
@@ -62,3 +61,19 @@ def search(request):
             'results': results,
             'user': user
              })
+
+# =todo: upload resources form for contributors
+# - http://parand.com/say/index.php/2010/02/19/django-using-the-permission-system/:
+def upload():
+    """
+        upload resources form
+    
+        Resource publication [moderation](https://github.com/dominno/django-moderation#readme) - permissions Groups for contributors, moderators, secretariat staff
+            - Non-secretariat users who register can only submit resources for approval by a moderator or chief administrator, not publish directly to the site.
+                - <del>[Users who register through front-end of site need to be automatically assigned to 'contributors' group](http://stackoverflow.com/questions/8949303/how-to-assign-a-user-to-a-group-at-signup-using-django-userena)</del> Done.
+                - *Contributors can add/save a resource as Draft/for review only*
+            - [Email](http://stackoverflow.com/questions/2349483/django-models-signals-and-email-sending-delay) [notification](https://github.com/jtauber/django-notification/) to moderators/staff when new resources are submitted
+    
+    
+    """
+    pass

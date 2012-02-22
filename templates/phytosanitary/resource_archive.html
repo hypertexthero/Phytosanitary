@@ -13,7 +13,7 @@
 
 <p>Welcome to the IPPC Phytosanitary Resources homepage, where you can find resources contributed by the world’s plant protection community including <a href="dbtools/">databases &amp; tools</a>, <a href="advocacy/">advocacy</a> and <a href="training/">training materials</a>, a <a href="media/">media library</a> and <a href="misc/">more</a>.</p>
 
-<h2>Latest Updates</h2>
+<h2 class="clearboth">Latest Updates</h2>
 
 <div class="dashbox">
         <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
@@ -48,19 +48,20 @@
 
 {% block sidebar %}
 {{ block.super }} {# include stuff templates we are inheriting from #}
-    {% for resource in latest %}{# the 'latest' variable of the template context is assigned automatically by the django.views.generic.date_based.archive_index generic view - https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-date-based-archive-index #}
-        {% if resource.featured == 1 %}
-        <div class="featured">
-            <h3>Featured Resource</h3>
-          <h4><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a></h4>
-          <p><em>Published on {{ resource.pub_date|date:"F j, Y" }}</em></p>
-          {% if resource.excerpt_html %}
-           {{ resource.excerpt_html|safe }}
-          {% else %}
-            {{ resource.body_html|truncatewords_html:"50"|safe }}
-          {% endif %}
-          {# <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p> #}
-          </div>
-        {% endif %}
-    {% endfor %}
+{# the 'latest' variable of the template context is assigned automatically by the django.views.generic.date_based.archive_index generic view - https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-date-based-archive-index #}
+{# {% for resource in latest %} #}
+{#     {% if resource.featured == 1 %} #}
+{#     <div class="featured"> #}
+{#         <h2>Featured Resources</h2> #}
+{#             <ul> #}
+{#             {% for resource in latest  %} #}
+{#                       <li><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <span class="quiet">{{ resource.pub_date|date:"F j, Y" }}</span>     #}
+{#                       </li> #}
+{#                        #}
+{#             {% endfor %} #}
+{#         </ul> #}
+{#       </div> #}
+{#     {% endif %} #}
+{# {% endfor %} #}
+
 {% endblock %}

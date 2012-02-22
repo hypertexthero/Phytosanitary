@@ -8,29 +8,46 @@
 
 {% block content %}
 {% if title_results or results %} 
-    <p>Search results for &ldquo;<strong>{{ query }}</strong>&rdquo;:</p> 
+    <h1 class="first"><span class="normal">Search results for &ldquo;</span>{{ query }}&rdquo;</h1> 
     {% if title_results %}
-        <ul>
+        <dl>
         {% for resource in title_results %} 
-
-            {# <li><a href="{% url phytosanitary_resource_detail resource.id %}">{{ resource.title }}</a></li> #}
-            
-                        {# couldn't figure out the TemplateSyntaxError  Caught NoReverseMatch while rendering: Reverse for '*' with arguments '()' and keyword arguments '{}' not found, so doing this instead - see https://docs.djangoproject.com/en/dev/topics/http/urls/#defining-url-namespaces for possible solution #}
+        {# <li><a href="{% url phytosanitary_resource_detail resource.id %}">{{ resource.title }}</a></li> #}
+        
+                    {# couldn't figure out the TemplateSyntaxError  Caught NoReverseMatch while rendering: Reverse for '*' with arguments '()' and keyword arguments '{}' not found, so doing this instead - see https://docs.djangoproject.com/en/dev/topics/http/urls/#defining-url-namespaces for possible solution #}
                         
-            <li><a href="/{{ resource.pub_date|date:"Y" }}/{{ resource.pub_date|date:"M" }}/{{ resource.pub_date|date:"d" }}/{{ resource.slug }}/">{{ resource.title }}</a></li>
+            <dt><a href="/{{ resource.pub_date|date:"Y" }}/{{ resource.pub_date|date:"M" }}/{{ resource.pub_date|date:"d" }}/{{ resource.slug }}/">{{ resource.title }}</a> <span class="small quiet normal"> - {{ resource.pub_date|date:"l, d F Y" }}</span></dt>
+            
+            <dd>
+                {% if resource.excerpt_html %}
+                   {{ resource.excerpt_html|safe }}
+                  {% else %}
+                    {{ resource.body_html|truncatewords_html:"50"|safe }}
+                  {% endif %}
+                
+            </dd>
         {% endfor %} 
-        </ul>
+        </dl>
     {% endif %} 
     {% if results %}
-        <ul>
+        <dl>
         {% for resource in results %} 
         {# <li><a href="{% url phytosanitary_resource_detail resource.id %}">{{ resource.title }}</a></li> #}
         
                     {# couldn't figure out the TemplateSyntaxError  Caught NoReverseMatch while rendering: Reverse for '*' with arguments '()' and keyword arguments '{}' not found, so doing this instead - see https://docs.djangoproject.com/en/dev/topics/http/urls/#defining-url-namespaces for possible solution #}
                         
-            <li><a href="/{{ resource.pub_date|date:"Y" }}/{{ resource.pub_date|date:"M" }}/{{ resource.pub_date|date:"d" }}/{{ resource.slug }}/">{{ resource.title }}</a></li>
+            <dt><a href="/{{ resource.pub_date|date:"Y" }}/{{ resource.pub_date|date:"M" }}/{{ resource.pub_date|date:"d" }}/{{ resource.slug }}/">{{ resource.title }}</a> <span class="small quiet normal"> - {{ resource.pub_date|date:"l, d F Y" }}</span></dt>
+            
+            <dd>
+                {% if resource.excerpt_html %}
+                   {{ resource.excerpt_html|safe }}
+                  {% else %}
+                    {{ resource.body_html|truncatewords_html:"50"|safe }}
+                  {% endif %}
+                
+            </dd>
         {% endfor %} 
-        </ul>
+        </dl>
     {% endif %} 
 {% endif %} 
 

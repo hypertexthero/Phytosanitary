@@ -16,7 +16,7 @@ div#nav {float:right; width:30%; text-align:right;}
 
 ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both;}
 ul.globalnav li {display:inline; padding:0; margin:0;}
-ul.globalnav li a {background:none; font-weight:bold; text-decoration:none; padding:1.2em;}
+ul.globalnav li a {background:none; font-weight:bold; text-decoration:none; padding:1.2em 1em;}
 ul.globalnav li a:hover {color:#111 !important; background:#F1F7EB url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important;}
 
 ul.globalnav li a.home-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;} /* highlight homepage tab - see first li of ul class="globalnav" in base.html */
@@ -36,6 +36,7 @@ div.pageinfo {border-bottom:1px solid #eee;}
 
 p, li, dd {font-size:1em; line-height:1.6em;}
 div#content p, div#content li, div#content dd {max-width:46em;}
+dt {font-weight:bold;} 
 
 /* =Headings ------- */
 h1,h2,h3,h4,h5,h6 {color:#000; margin:1em 0 0.5em;}
@@ -57,7 +58,7 @@ a:active {color:#f90; border:none; text-decoration:none !important;}
 /*#sidebar a {font-weight:normal !important;}*/
 #sidebar a:hover {text-decoration:none !important;}
 
-div.featured {padding:0 2em 2em 0;}
+/*div.featured {padding:0 1em; width:30%; float:right; border:solid #eee 1px; border-top:0;}*/
 div.aside {width:20%; float:right; padding:0 0 3em 3em; text-align:left;}
 div.aside img {margin-bottom:1em;}
 
@@ -137,6 +138,7 @@ p.pagenav span { padding:1px 3px;  margin:0; font-weight:normal; border: none; b
 /*=forms -------------------*/
 
 form {margin:1em 0;}
+#header form {margin-bottom:0;}
 legend {font-weight:bold; font-size:2em;}
 /*label {display:block;}*/
 input.text {width:20em;}
@@ -155,14 +157,16 @@ div.editingtoolbar ul {}
 div.editingtoolbar li {display:inline;}
 */
 div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0;}
-.edit {background:#cff;}
+.edit {background:#cff; padding:1em;}
 
 /*=misc ------ */
 
-.featured {}
+.featured {border-bottom:1px solid #eee; padding:1em 0 2em;}
 .nomargin {margin:0;}
+.nobullets {list-style:none; padding-left:0;}
 .titlecase {text-transform:capitalize;}
-.small {font-size:0.9;}
+.small {font-size:0.9em;}
+.smaller {font-size:0.7em;}
 .quiet {color:#999;}
 .normal {font-weight:normal;}
 .textalignleft {text-align:left;}
@@ -171,3 +175,4 @@ div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0;}
 .floatright {float:right;}
 .clearfloatsinside {overflow:auto; width:100%;}
 .clearboth {clear:both;}
+.block {display:block;}

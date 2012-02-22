@@ -43,15 +43,17 @@
                     {# http://stackoverflow.com/a/1711592/412329 #}
                     {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
                     {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Log in</a> #}
-                    <a href="{% url userena_signin %}">Log in</a> or <a href="{% url userena_signup %}">Register</a>
+                    
+                    <a href="{% url userena_signin %}">Log in</a> {# or <a href="{% url userena_signup %}">Register</a> #}
                 {% endif %}
-            {% endblock %}
-            
                 <form method="get" action="/search/"> 
                         {# <label for="id_q">Search:</label>  #}
                         <input type="text" name="q" id="id_q" size="30" /> 
                         <input type="submit" value="Search" />
                 </form>
+            {% endblock %}
+            
+                
                 
             </div> {# / #nav #}
             
@@ -140,13 +142,27 @@
                 {#             {% endfor %} #}
                 {#         </ul> #}
             
-            
+
+                
                     <h2>Contribute</h2>
 
-                    <p>To contribute materials please <a href="{% url userena_signup %}">register</a>. Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically here if approved.</p>
+                        {# TODO:  #}
+                        {#     - http://bradmontgomery.blogspot.com/2009/04/restricting-access-by-group-in-django.html #}
+                        {#     - http://stackoverflow.com/questions/4888708/user-permissions-for-django-module #}
+                        {#     -  #}
+                    <p>
+                        {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+                        {% if user.is_authenticated and user.username == user.username %}
+                        <a class="edit" href="/upload/">Upload a resource</a><br /><br />
+                        {% else  %}
+                            To contribute materials please <a href="{% url userena_signin %}">log in</a> or <a href="{% url userena_signup %}">register</a>.
+                        {% endif %}
+                        
+                            Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically here if approved.
+                    </p>
 
-                    {# <p><strong><a href="{% url userena_signup %}">Register to upload technical resources</a>.</strong></p> #}
-
+                
+                        
                     </div> <!-- end docs -->
             
             {% endblock %}

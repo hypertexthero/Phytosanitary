@@ -1,5 +1,5 @@
 from django.contrib import admin
-from phytosanitary.models import Category, Resource, Link
+from phytosanitary.models import Category, Resource, MyProfile#, Link
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title'] }
@@ -13,7 +13,12 @@ class ResourceAdmin(admin.ModelAdmin):
 admin.site.register(Resource, ResourceAdmin)
 
 
-class LinkAdmin(admin.ModelAdmin):
-    prepopulated_fields = { 'slug': ['title'] }
-    
-admin.site.register(Link, LinkAdmin)
+# class MyProfileAdmin(admin.ModelAdmin):
+#     pass
+#     
+# admin.site.register(MyProfile, MyProfileAdmin)
+
+# class LinkAdmin(admin.ModelAdmin):
+#     prepopulated_fields = { 'slug': ['title'] }
+#     
+# admin.site.register(Link, LinkAdmin)
