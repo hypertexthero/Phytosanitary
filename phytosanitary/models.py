@@ -23,11 +23,10 @@ class MyProfile(UserenaBaseProfile):
 # http://stackoverflow.com/a/8949526/412329
 @receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
 def user_post_save(sender, instance, created, **kwargs):
-    """ This method is executed whenever an user object is saved - automatically users who register using front-end form to the 'contributors' group                                                                                     
+    """ This method is executed whenever an user object is saved - automatically adding users who register using the front-end form to the 'contributors' group                                                                                     
     """
     if created:
         instance.groups.add(Group.objects.get(name='contributor'))
-
     
 class Category(models.Model):
     title = models.CharField(max_length=250, help_text='Maximum 250 characters.')

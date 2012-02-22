@@ -158,6 +158,7 @@ div.editingtoolbar li {display:inline;}
 */
 div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0;}
 .edit {background:#cff; padding:1em;}
+table .edit {padding:0 0.5em;}
 
 /*=misc ------ */
 
