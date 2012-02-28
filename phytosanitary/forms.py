@@ -17,11 +17,11 @@ class SignupFormExtra(SignupForm):
     """
     first_name = forms.CharField(label=_(u'First name'),
                                  max_length=30,
-                                 required=False)
+                                 required=True)
 
     last_name = forms.CharField(label=_(u'Last name'),
                                 max_length=30,
-                                required=False)
+                                required=True)
 
     def __init__(self, *args, **kw):
         """

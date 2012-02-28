@@ -29,7 +29,16 @@
                             Hello, 
                                 {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                                 {# {% if user.username == profile.user.username %} #}
-                                    <a href="{% url userena_profile_detail user.username %}" title="{% trans "View, edit your profile" %}">{{ user.first_name }} {{ user.last_name }}</a>!
+                                    <a href="{% url userena_profile_detail user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">
+                                        {% if user.first_name and user.last_name %}
+                                            {{ user.first_name }} {{ user.last_name }}
+                                            {% else %}
+                                            {{ user.username }}
+                                        {% endif %}
+                                        
+                                        
+                                        
+                                        </a>!
                                 {# {% endif %} #}
                             
                             {# <a href="{% url userena_signout %}?next={% firstof request.path '/' %}">Log out</a> #}

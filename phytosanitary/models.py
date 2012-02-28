@@ -13,12 +13,20 @@ from django.dispatch import receiver # https://docs.djangoproject.com/en/dev/top
 
 from userena.models import UserenaBaseProfile
 
+# todo - rename MyProfile to Contributors or SiteUsers
 class MyProfile(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
                                 verbose_name=_('user'),
                                 related_name='my_profile')
-    url = models.URLField()
+    url = models.URLField(blank=True)
+    
+    class Meta:
+        ordering = ['user']
+        verbose_name_plural = "Non-admin user profiles"
+    
+    def __str__(self):
+        return self.user
 
 # http://stackoverflow.com/a/8949526/412329
 @receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
@@ -94,13 +102,13 @@ class Resource(models.Model):
     categories = models.ManyToManyField(Category)
     tags = TagField()
     
-    # Need to be this way around so that non-live entries will show up in Admin, which uses the default (first) manager.
+    # Need to be this way around so that non-live resources will show up in Admin, which uses the default (first) manager.
     objects = models.Manager()
     live = LiveResourceManager()
     
     class Meta:
         ordering = ['-pub_date']
-        verbose_name_plural = "Entries"
+        verbose_name_plural = "Resources"
 
     def __unicode__(self):
         return self.title
