@@ -7,27 +7,25 @@ from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
 
-# add users who register using front-end form to the 'contributors' group automatically
 from django.db.models.signals import post_save # http://stackoverflow.com/a/965883/412329
 from django.dispatch import receiver # https://docs.djangoproject.com/en/dev/topics/signals/#receiver-functions
 
 from userena.models import UserenaBaseProfile
 
-# todo - rename MyProfile to Contributor or SiteUser
-class MyProfile(UserenaBaseProfile):
+class Contributor(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
                                 verbose_name=_('user'),
-                                related_name='my_profile')
-    url = models.URLField(blank=True)
+                                related_name='contributor')
     
     class Meta:
         ordering = ['user']
-        verbose_name_plural = "Non-admin user profiles"
+        verbose_name_plural = "Contributor user profiles"
     
     def __str__(self):
         return self.user
 
+# add users who register using front-end form to the 'contributors' group automatically
 # http://stackoverflow.com/a/8949526/412329
 @receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
 def user_post_save(sender, instance, created, **kwargs):
@@ -69,27 +67,41 @@ class LiveResourceManager(models.Manager):
     def get_query_set(self):
         return super(LiveResourceManager, self).get_query_set().filter(status=self.model.LIVE_STATUS)
 
+# http://stackoverflow.com/a/1190866/412329
+def content_file_name(instance, filename):
+    return '/%Y/%m/'.join(['content', instance.user.username, filename])
 
 class Resource(models.Model):
     LIVE_STATUS = 1
-    DRAFT_STATUS = 2
-    HIDDEN_STATUS = 3
-    FOR_REVIEW_STATUS = 4
+    FOR_REVIEW_STATUS = 2
     STATUS_CHOICES = (
         (LIVE_STATUS, 'Live'),
-        (DRAFT_STATUS, 'Draft'),
-        (HIDDEN_STATUS, 'Hidden'),
         (FOR_REVIEW_STATUS, 'For Review'),
     )
     
+    CONTACT_TYPE_CHOICES = (
+        ('R', 'RPPO'),
+        ('N', 'NPPO'),
+        ('O', 'Other'),
+    )
+
     # Core fields.
     title = models.CharField(max_length=250)
-    excerpt = models.TextField(blank=True)
-    body = models.TextField(help_text='Use Markdown format')
-    pub_date = models.DateTimeField(default=datetime.datetime.now)
+    # excerpt = models.TextField(blank=True)
+    body = models.TextField(help_text='Use Markdown format', verbose_name='Description')
+    pub_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Publication Date', help_text='(will only be published when approved by an administrator)')
+    org_title = models.CharField(max_length=250, help_text='', verbose_name='Organization', blank=True)
+    # http://stackoverflow.com/a/1190866/412329
+    file = models.FileField(max_length=250, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', blank=True, upload_to=content_file_name) 
+    # OLD - do not usefile = models.FileField('Upload', upload_to='files/%Y/%m%d%H%M%S/')
+    url = models.URLField(blank=True, help_text="A link to something elsewhere.")
+    contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1)
+    contact_email = models.EmailField(blank=True)
+    contact_address = models.TextField(blank=True, verbose_name='Address')
+    agreement = models.BooleanField(verbose_name='Permission to Publish', help_text='Do you agree to have these Phytosanitary Technical Resources published in public?')
 
     # Fields to store generated HTML.
-    excerpt_html = models.TextField(editable=False, blank=True)
+    # excerpt_html = models.TextField(editable=False, blank=True)
     body_html = models.TextField(editable=False, blank=True)
 
     # Metadata.
@@ -97,7 +109,7 @@ class Resource(models.Model):
     enable_comments = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     slug = models.SlugField(unique_for_date='pub_date')
-    status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=FOR_REVIEW_STATUS)
 
     # Categorization.
     categories = models.ManyToManyField(Category)
@@ -116,10 +128,9 @@ class Resource(models.Model):
     
     def save(self, force_insert=False, force_update=False):
         self.body_html = markdown(self.body)
-        if self.excerpt:
-            self.excerpt_html = markdown(self.excerpt)
+        # if self.excerpt:
+        #     self.excerpt_html = markdown(self.excerpt)
         super(Resource, self).save(force_insert, force_update)
-    
     
     @models.permalink
     def get_absolute_url(self):
@@ -128,55 +139,66 @@ class Resource(models.Model):
                                                 'day': self.pub_date.strftime("%d"),
                                                 'slug': self.slug })
 
+# tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
 tagging.register(Resource, tag_descriptor_attr='etags')
 
 
-class Link(models.Model):
-    # Metadata.
-    enable_comments = models.BooleanField(default=True)
-    post_elsewhere = models.BooleanField('Post to Delicious', default=True, help_text='If checked, this will be posted both to your weblog and to your delicious.com account. (Currently disabled)')
-    posted_by = models.ForeignKey(User)
-    pub_date = models.DateTimeField(default=datetime.datetime.now)
-    slug = models.SlugField(unique_for_date='pub_date', help_text='Must be unique for the publication date.')
-    title = models.CharField(max_length=250)
-    
-    # The actual link bits.
-    description = models.TextField(blank=True)
-    description_html = models.TextField(editable=False, blank=True)
-    via_name = models.CharField('Via', max_length=250, blank=True, help_text='The name of the person whose site you spotted the link on. Optional.')
-    via_url = models.URLField('Via URL', blank=True, help_text='The URL of the site where you spotted the link. Optional.')
-    url = models.URLField('URL', unique=True)
-    tags = TagField()
-    
-    class Meta:
-        ordering = ['-pub_date']
-        
-    def __unicode__(self):
-        return self.title
-    
-    def save(self):
-        if not self.id and self.post_elsewhere:
-            import pydelicious
-            from django.utils.encoding import smart_str
-            pydelicious.add(settings.DELICIOUS_USER, 
-                            settings.DELICIOUS_PASSWORD, 
-                            smart_str(self.url), 
-                            smart_str(self.title), 
-                            smart_str(self.tags))
-        if self.description:
-            self.description_html = markdown(self.description)
-        super(Link, self).save()
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('phytosanitary_link_detail', (), {   'year': self.pub_date.strftime('%Y'),
-                                                'month': self.pub_date.strftime('%b').lower(),
-                                                'day': self.pub_date.strftime('%d'),
-                                                'slug': self.slug })
 
+
+
+
+
+# FOR FUTURE USE:
+
+# class Link(models.Model):
+#     # Metadata.
+#     enable_comments = models.BooleanField(default=True)
+#     post_elsewhere = models.BooleanField('Post to Delicious', default=True, help_text='If checked, this will be posted both to your weblog and to your delicious.com account. (Currently disabled)')
+#     posted_by = models.ForeignKey(User)
+#     pub_date = models.DateTimeField(default=datetime.datetime.now)
+#     slug = models.SlugField(unique_for_date='pub_date', help_text='Must be unique for the publication date.')
+#     title = models.CharField(max_length=250)
+#     
+#     # The actual link bits.
+#     description = models.TextField(blank=True)
+#     description_html = models.TextField(editable=False, blank=True)
+#     via_name = models.CharField('Via', max_length=250, blank=True, help_text='The name of the person whose site you spotted the link on. Optional.')
+#     via_url = models.URLField('Via URL', blank=True, help_text='The URL of the site where you spotted the link. Optional.')
+#     url = models.URLField('URL', unique=True)
+#     tags = TagField()
+#     
+#     class Meta:
+#         ordering = ['-pub_date']
+#         
+#     def __unicode__(self):
+#         return self.title
+#     
+#     def save(self):
+#         if not self.id and self.post_elsewhere:
+#             import pydelicious
+#             from django.utils.encoding import smart_str
+#             pydelicious.add(settings.DELICIOUS_USER, 
+#                             settings.DELICIOUS_PASSWORD, 
+#                             smart_str(self.url), 
+#                             smart_str(self.title), 
+#                             smart_str(self.tags))
+#         if self.description:
+#             self.description_html = markdown(self.description)
+#         super(Link, self).save()
+#     
+#     @models.permalink
+#     def get_absolute_url(self):
+#         return ('phytosanitary_link_detail', (), {   'year': self.pub_date.strftime('%Y'),
+#                                                 'month': self.pub_date.strftime('%b').lower(),
+#                                                 'day': self.pub_date.strftime('%d'),
+#                                                 'slug': self.slug })
+
+# tagging users django-tagging
 # See http://blog.sveri.de/index.php?/categories/2-Django
-tagging.register(Link, tag_descriptor_attr='etags')
+# tagging.register(Link, tag_descriptor_attr='etags')
+
+
 
 # The first comment moderation system...
 #
@@ -213,30 +235,30 @@ tagging.register(Link, tag_descriptor_attr='etags')
 
 # The second comment moderation system...
 
-from akismet import Akismet
-from django.conf import settings
-from django.contrib.comments.moderation import CommentModerator, moderator
-from django.contrib.sites.models import Site
-from django.utils.encoding import smart_str
-
-class ResourceModerator(CommentModerator):
-    auto_moderate_field = 'pub_date'
-    moderate_after = 30
-    email_notification = True
-    
-    def moderate (self, comment, content_object, request):
-        already_moderated = super(ResourceModerator, self).moderate(comment, content_object, request)
-        if already_moderated:
-            return True
-        akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url="http:/%s/" %Site.objects.get_current().domain)
-        if akismet_api.verify_key():
-            akismet_data = { 'comment_type': 'comment',
-                             'referrer': request.META['HTTP_REFERER'],
-                             'user_ip': comment.ip_address,
-                             'user-agent': request.META['HTTP_USER_AGENT'] }
-            return akismet_api.comment_check(smart_str(comment.comment),
-                                akismet_data,
-                                build_data=True)
-        return False
-        
-moderator.register(Resource, ResourceModerator)
+# from akismet import Akismet
+# from django.conf import settings
+# from django.contrib.comments.moderation import CommentModerator, moderator
+# from django.contrib.sites.models import Site
+# from django.utils.encoding import smart_str
+# 
+# class ResourceModerator(CommentModerator):
+#     auto_moderate_field = 'pub_date'
+#     moderate_after = 30
+#     email_notification = True
+#     
+#     def moderate (self, comment, content_object, request):
+#         already_moderated = super(ResourceModerator, self).moderate(comment, content_object, request)
+#         if already_moderated:
+#             return True
+#         akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url="http:/%s/" %Site.objects.get_current().domain)
+#         if akismet_api.verify_key():
+#             akismet_data = { 'comment_type': 'comment',
+#                              'referrer': request.META['HTTP_REFERER'],
+#                              'user_ip': comment.ip_address,
+#                              'user-agent': request.META['HTTP_USER_AGENT'] }
+#             return akismet_api.comment_check(smart_str(comment.comment),
+#                                 akismet_data,
+#                                 build_data=True)
+#         return False
+#         
+# moderator.register(Resource, ResourceModerator)

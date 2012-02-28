@@ -13,11 +13,11 @@
     {% for resource in object_list %}
        <h2>{{ resource.title }}</h2>
        <p>Published on {{ resource.pub_date|date:"F j, Y" }}</p>
-       {% if resource.excerpt_html %}
-        {{ resource.excerpt_html|safe }}
-       {% else %}
+       {# {% if resource.excerpt_html %} #}
+       {#  {{ resource.excerpt_html|safe }} #}
+       {# {% else %} #}
          {{ resource.body_html|truncatewords_html:"50"|safe }}
-       {% endif %}
+       {# {% endif %} #}
        <p><a href="{{ resource.get_absolute_url }}">Read full resource</a></p>
      {% endfor %}
 {% endblock %}

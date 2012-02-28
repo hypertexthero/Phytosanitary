@@ -99,7 +99,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-AUTH_PROFILE_MODULE = 'phytosanitary.MyProfile'
+AUTH_PROFILE_MODULE = 'phytosanitary.Contributor'
 ANONYMOUS_USER_ID = '-1'
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'

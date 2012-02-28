@@ -19,11 +19,11 @@
             <dt><a href="/{{ resource.pub_date|date:"Y" }}/{{ resource.pub_date|date:"M" }}/{{ resource.pub_date|date:"d" }}/{{ resource.slug }}/">{{ resource.title }}</a> <span class="small quiet normal"> - {{ resource.pub_date|date:"l, d F Y" }}</span></dt>
             
             <dd>
-                {% if resource.excerpt_html %}
-                   {{ resource.excerpt_html|safe }}
-                  {% else %}
+                {# {% if resource.excerpt_html %} #}
+                {#    {{ resource.excerpt_html|safe }} #}
+                {#   {% else %} #}
                     {{ resource.body_html|truncatewords_html:"50"|safe }}
-                  {% endif %}
+                  {# {% endif %} #}
                 
             </dd>
         {% endfor %} 

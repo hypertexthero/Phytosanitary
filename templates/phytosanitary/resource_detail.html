@@ -19,6 +19,9 @@
     <p><i>By {{ user.first_name }} {{ user.last_name }} on {{ object.pub_date|date:"l, d F Y" }}</i></p>
     {{ object.body_html|safe }}
     
+    {# TODO #}
+    {# http://stackoverflow.com/a/4832313/412329 #}
+    
     {# <h2>Comments</h2> #}
     {# {% load comments %} #}
     {# {% load markup %} #}

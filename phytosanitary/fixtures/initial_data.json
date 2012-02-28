@@ -1,10 +1,10 @@
 [
     {
         "pk": 1,
-         "model": "Category",
+         "model": "phytosanitary.Category",
          "fields": 
         {
-            "description": "Databases & Tools",
+            "description": "Databases & Tools _description._",
              "order": 0,
              "slug": "dbtools",
              "title": "Databases & Tools"
@@ -13,10 +13,10 @@
      
     {
         "pk": 2,
-         "model": "Category",
+         "model": "phytosanitary.Category",
          "fields": 
         {
-            "description": "Advocacy",
+            "description": "Advocacy _description._",
              "order": 1,
              "slug": "advocacy",
              "title": "Advocacy"
@@ -25,10 +25,10 @@
      
     {
         "pk": 3,
-         "model": "Category",
+         "model": "phytosanitary.Category",
          "fields": 
         {
-            "description": "Media Library",
+            "description": "Media Library _description._",
              "order": 2,
              "slug": "media",
              "title": "Media Library"
@@ -37,10 +37,10 @@
      
     {
         "pk": 4,
-         "model": "Category",
+         "model": "phytosanitary.Category",
          "fields": 
         {
-            "description": "Training Materials",
+            "description": "Training Materials _description._",
              "order": 3,
              "slug": "training",
              "title": "Training Materials"
@@ -49,10 +49,10 @@
      
     {
         "pk": 5,
-         "model": "Category",
+         "model": "phytosanitary.Category",
          "fields": 
         {
-            "description": "Miscellaneous",
+            "description": "Miscellaneous _description._",
              "order": 4,
              "slug": "misc",
              "title": "Miscellaneous"

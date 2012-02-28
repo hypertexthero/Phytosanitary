@@ -1,5 +1,5 @@
 from django.contrib import admin
-from phytosanitary.models import Category, Resource, MyProfile#, Link
+from phytosanitary.models import Category, Resource, Contributor#, Link
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'description')
@@ -22,10 +22,10 @@ class ResourceAdmin(admin.ModelAdmin):
 admin.site.register(Resource, ResourceAdmin)
 
 
-# class MyProfileAdmin(admin.ModelAdmin):
+# class ContributorAdmin(admin.ModelAdmin):
 #     pass
 #     
-# admin.site.register(MyProfile, MyProfileAdmin)
+# admin.site.register(Contributor, ContributorAdmin)
 
 # class LinkAdmin(admin.ModelAdmin):
 #     prepopulated_fields = { 'slug': ['title'] }
