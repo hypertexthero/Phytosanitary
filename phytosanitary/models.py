@@ -67,9 +67,10 @@ class LiveResourceManager(models.Manager):
     def get_query_set(self):
         return super(LiveResourceManager, self).get_query_set().filter(status=self.model.LIVE_STATUS)
 
+# todo - better file storage:
 # http://stackoverflow.com/a/1190866/412329
-def content_file_name(instance, filename):
-    return '/%Y/%m/'.join(['content', instance.user.username, filename])
+# def content_file_name(instance, filename):
+    # return '/%Y/%m/'.join(['content', instance.user.username, filename])
 
 class Resource(models.Model):
     LIVE_STATUS = 1
@@ -92,7 +93,7 @@ class Resource(models.Model):
     pub_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Publication Date', help_text='(will only be published when approved by an administrator)')
     org_title = models.CharField(max_length=250, help_text='', verbose_name='Organization', blank=True)
     # http://stackoverflow.com/a/1190866/412329
-    file = models.FileField(max_length=250, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', blank=True, upload_to=content_file_name) 
+    file = models.FileField(max_length=250, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', blank=True, upload_to='%Y/%m/%d/') 
     # OLD - do not usefile = models.FileField('Upload', upload_to='files/%Y/%m%d%H%M%S/')
     url = models.URLField(blank=True, help_text="A link to something elsewhere.")
     contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1)
@@ -138,6 +139,7 @@ class Resource(models.Model):
                                                 'month': self.pub_date.strftime("%b").lower(),
                                                 'day': self.pub_date.strftime("%d"),
                                                 'slug': self.slug })
+
 
 # tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html

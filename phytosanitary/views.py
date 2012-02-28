@@ -14,6 +14,14 @@ def category_detail(request, slug):
         }
     )
 
+
+# todo - only display fields that have values entered in resource_detail.html:
+# http://stackoverflow.com/questions/2170228/django-iterate-over-model-instance-field-names-and-values-in-template/2226150#2226150
+# from django.core import serializers
+# data = serializers.serialize( "python", Resource.objects.all() )
+
+
+
 # =Search
 
 # from django.http import HttpResponse 

@@ -5,7 +5,7 @@ Author: Simon Griffee
 Last update: Monday, 20 February 2012 at 16:51:34
 */
 
-body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:25px 15px; background:#fff url(/static/img/website-bar-3.0.gif) repeat-x; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/
+body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:17px 7px; background:#fff url(/static/img/website-bar-3.0.gif) repeat-x; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/
 
 /* =Layout ------- */
 #container {/*max-width:98% !important; width:98% !important;*/ /*width:970px;*/}
@@ -13,6 +13,7 @@ div#header {/*overflow:auto;*/ width:100%;} /* clear the floats inside the heade
 
 div.logo {float:left;}
 div#nav {float:right; width:30%; text-align:right;}
+div#nav p {margin:0;}
 
 ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both;}
 ul.globalnav li {display:inline; padding:0; margin:0;}
@@ -74,10 +75,10 @@ div.docs, div.pageinfo {background:#F5F6EC !important;} /*F5F6EC*/
 div.docs {padding-bottom:2.5em !important;}
 div.latestupdates h3 {text-transform:capitalize !important; font-size:1.7em; letter-spacing:normal !important;}
 
-div.logo {text-align:left; padding:0; margin:0; height:auto;}
+/*div.logo {text-align:left; padding:0; margin:0;}
 a#LogoResources {font-size:2em; color:#000;}
 img.ippclogoglyph {padding:0 0 0 9px;}
-
+*/
 .btn {background:#063; color:#cff !important;}
 form#search button.btn, form#searchfooter button.btn {font-size:1em; padding:0.25em 0.5em; margin:0; background:#063;}
 form#search input, form#searchfooter input {border-left:1px solid #063; border-top:1px solid #063; border-bottom:1px solid #ddd; border-right:1px solid #ddd; padding:1px 0.25em 0.25em;}
@@ -159,6 +160,7 @@ div.editingtoolbar li {display:inline;}
 div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0;}
 .edit {background:#cff; padding:1em;}
 table .edit {padding:0 0.5em;}
+div#nav .edit {padding:0;}
 
 /*=misc ------ */
 
