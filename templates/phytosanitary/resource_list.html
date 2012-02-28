@@ -46,7 +46,7 @@
     {% block editingtoolbar %}{{ block.super }}{% endblock %}
     
     <h1 class="first">{{ category.title }}</h1>
-    <p>{{ category.description }}</p>
+    <p>{{ category.description_html|safe }}</p>
     
     <div class="dashbox">
             <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 

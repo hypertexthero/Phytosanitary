@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'userena',
     'guardian',
     'easy_thumbnails',
-    # 'south',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging

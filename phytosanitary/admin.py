@@ -9,7 +9,7 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class ResourceAdmin(admin.ModelAdmin):
-    exclude = ('author',)
+    exclude = ('author', 'enable_comments',)
     list_display = ('title', 'pub_date', 'author')
     prepopulated_fields = { 'slug': ['title'] }
     

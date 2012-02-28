@@ -7,13 +7,13 @@ from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
 
-# automatically users who register using front-end form to the 'contributors' group
+# add users who register using front-end form to the 'contributors' group automatically
 from django.db.models.signals import post_save # http://stackoverflow.com/a/965883/412329
 from django.dispatch import receiver # https://docs.djangoproject.com/en/dev/topics/signals/#receiver-functions
 
 from userena.models import UserenaBaseProfile
 
-# todo - rename MyProfile to Contributors or SiteUsers
+# todo - rename MyProfile to Contributor or SiteUser
 class MyProfile(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
@@ -35,12 +35,13 @@ def user_post_save(sender, instance, created, **kwargs):
     """
     if created:
         instance.groups.add(Group.objects.get(name='contributor'))
-    
+
 class Category(models.Model):
+    """ Categories are the site sections i.e. the global navigation """
     title = models.CharField(max_length=250, help_text='Maximum 250 characters.')
     slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title. Must be unique.")
-    description = models.TextField()
-    # description_html = models.TextField(editable=False, blank=True) =todo: markdown for description (see below)
+    description = models.TextField(help_text='Use Markdown format')
+    description_html = models.TextField(editable=False, blank=True)
     order = models.IntegerField()
     
     def live_resource_set(self):
@@ -54,10 +55,10 @@ class Category(models.Model):
     def __unicode__(self):
         return self.title
     
-    # =todo: enable markdown for category description
-    # def save(self, force_insert=False, force_update=False):
-    #     self.description_html = markdown(self.description)
-    #     super(Category, self).save(force_insert, force_update)
+    # markdown for category description
+    def save(self, force_insert=False, force_update=False):
+        self.description_html = markdown(self.description)
+        super(Category, self).save(force_insert, force_update)
     
     @models.permalink
     def get_absolute_url(self):
@@ -84,7 +85,7 @@ class Resource(models.Model):
     # Core fields.
     title = models.CharField(max_length=250)
     excerpt = models.TextField(blank=True)
-    body = models.TextField()
+    body = models.TextField(help_text='Use Markdown format')
     pub_date = models.DateTimeField(default=datetime.datetime.now)
 
     # Fields to store generated HTML.
@@ -127,7 +128,7 @@ class Resource(models.Model):
                                                 'day': self.pub_date.strftime("%d"),
                                                 'slug': self.slug })
 
-# See http://blog.sveri.de/index.php?/categories/2-Django
+# See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
 tagging.register(Resource, tag_descriptor_attr='etags')
 
 
