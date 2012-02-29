@@ -15,6 +15,48 @@ def category_detail(request, slug):
     )
 
 
+# from django.views.generic.list_detail import object_detail
+from django.views.generic.create_update import create_object
+# from django.views.generic.create_update import update_object
+from django.contrib.auth.decorators import login_required # for @login_required decorator
+from django.core.urlresolvers import reverse
+
+from models import Resource
+from models import ResourceForm
+
+
+# see also this alternative: http://djangosnippets.org/snippets/966/
+@login_required
+def resource_upload(request):
+    """ Form for contributors to upload resources. These should have 'For Review' status. """
+
+    return create_object(request,
+        # model=Resource,
+        form_class=ResourceForm,
+        # form_class=ResourceForm, # Needed to specify form_class instead of model so that the custom date widget for dropdown menu is displayed: https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-create-update-create-object
+        # extra_context={'kind': 'kind', 'url': 'url'},
+        template_name='phytosanitary/resource_upload.html',
+        # post_save_redirect=reverse("notes_list")
+        # post_save_redirect="/notes/archive/%(id)s/" # todo: add object.get_absolute_url() to models.py
+        post_save_redirect="phytosanitary/resource_upload_thanks.html"
+    )            
+
+# @login_required
+# def notes_update(request, id):
+#     """Update note based on id"""
+# 
+#     return update_object(request,
+#         # model=Note
+#         form_class=NoteForm, # Needed to specify form_class instead of model so that the custom date widget for dropdown menu is displayed: https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-create-update-create-object
+#         object_id=id,
+#         template_name='notes/update.html',
+#         # extra_context={'kind': 'kind', 'url': 'url'},
+#         post_save_redirect="/notes/archive/%(id)s/", # todo: add object.get_absolute_url() to models.py
+#         template_object_name='note' # so I can write {{ note.title }} in templates/notes/update.html (otherwise I would need to write {{ object.title }})
+#     )
+
+
+
 # todo - only display fields that have values entered in resource_detail.html:
 # http://stackoverflow.com/questions/2170228/django-iterate-over-model-instance-field-names-and-values-in-template/2226150#2226150
 # from django.core import serializers

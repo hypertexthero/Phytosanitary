@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from phytosanitary.forms import SignupFormExtra # for custom registration userena form with first name and last name
+from django.views.generic.simple import direct_to_template
 
 from django.contrib import admin 
 admin.autodiscover()
@@ -26,7 +27,11 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    
+
+    # contributor upload form
+    url(r'^upload/$', 'phytosanitary.views.resource_upload', name='resource_upload'),
+    url(r'^thanks/$', direct_to_template, {'template': 'phytosanitary/resource_upload_thanks.html'}),
+
     # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
     url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
 )

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+    &rarr; Upload Resource
+{% endblock %}
+
+{% block content %}
+<h1 class="first">Upload a Resource</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}    
+        <p><input class="editbig" type="submit" value="Submit" /> <a href="/thanks/">after submitting...</a></p>
+    </form>
+{% endblock %}
+
+{% block sidebar %}
+    
+    <p><strong>NOTE:</strong> Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically on phytosanitary.info if approved.</p>
+    
+{% endblock %}

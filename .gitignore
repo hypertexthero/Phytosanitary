@@ -2,6 +2,9 @@
 settings_local.py
 settings_local_production.py
 
+# no deployment docs until they are ready
+deployment.md
+
 # No shell scripts or conf files?
 conf/
 init.sh

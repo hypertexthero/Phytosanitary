@@ -53,7 +53,7 @@
                     {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
                     {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Log in</a> #}
                     
-                    <a href="{% url userena_signin %}">Log in</a> {# or <a href="{% url userena_signup %}">Register</a> #}
+                    <a class="edit" href="{% url userena_signin %}">Log in</a> {# or <a href="{% url userena_signup %}">Register</a> #}
                 {% endif %}
                 <form method="get" action="/search/"> 
                         {# <label for="id_q">Search:</label>  #}
@@ -162,7 +162,7 @@
                     <p>
                         {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                         {% if user.is_authenticated and user.username == user.username %}
-                        <a class="edit" href="/upload/">Upload a resource</a><br /><br />
+                        <a class="editbig" href="/upload/">Upload a resource</a><br /><br />
                         {% else  %}
                             To contribute materials please <a href="{% url userena_signin %}">log in</a> or <a href="{% url userena_signup %}">register</a>.
                         {% endif %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+    &rarr; Resource upload successful
+{% endblock %}
+
+{% block content %}
+<h1 class="first">Resource uploaded, thank you!</h1>
+    <p>Thank you for uploading a phytosanitary resource! Your resource will be reviewed by the <em>Expert Working Group on Capacity Development</em> and will be published here in <a href="phytosanitary.info">phytosanitary.info</a> if approved.</p>
+    
+    <p class="note">Probably a good idea to notify the contributor by email when the resource is published?</p>
+{% endblock %}
+
+{% block sidebar %}
+    {# {{ block.super }} #}
+{% endblock %}

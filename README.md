@@ -9,28 +9,17 @@ Hacking [django-coltrane](http://www.gyford.com/phil/writing/2010/01/14/django.p
         - <del>[Users who register through front-end of site need to be automatically assigned to 'contributors' group](http://stackoverflow.com/questions/8949303/how-to-assign-a-user-to-a-group-at-signup-using-django-userena)</del> Done.
         - *Contributors can add/save a resource with [For Review](http://collingrady.wordpress.com/2008/07/24/useful-form-tricks-in-django/) status only*
     - [Email](http://stackoverflow.com/questions/2349483/django-models-signals-and-email-sending-delay) [notification](https://github.com/jtauber/django-notification/) [to](https://docs.djangoproject.com/en/dev/topics/email/) moderators/staff when new resources are submitted
-2. Create contributor resource upload form with the following fields:
-    - title - text
-    - date of publication - YYYY Month DD select menu or calendar widget
-    - description - textarea
-    - authors/editors - text
-    - title of organization - text
-    - file upload - file
-    - url - text
-    - contact type - radio: rppo, nppo, other. if other: text
-    - email - input
-    - address of contact - textarea
-    - phytosanitary resource type ([tags](https://github.com/brosner/django-tagging/blob/master/docs/overview.txt#L701)) - checkbox or text with anchor list
-    - Do you agree to have these Phytosanitary Technical Resources published in public? - checkbox
-3. <del>Search</del>. Done, but debug the error when using named url in search.html
+2. Set up and document deployment to production server
+3. Implement ability to [upload multiple files](http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models) per resource
 4. Currently selected tag should be highlighted in Browse Tags menu
 5. Markdown WYSIWYG with WMD
-6. Set up and document deployment to production server
+6. Set up 'other' text field for phytosanitary resource type
 7. Set up authentication on existing user database backend
 8. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
 9. [Set up fixtures](fixtures) for Categories, Tags and Sitename to be automatically added to the database upon installation. Also update tagging
 10. Change banner design and colors
 11. Syndication feeds
+12. <del>Search</del>. Done, but debug the error when using named url in search.html
 
 
 ### Future

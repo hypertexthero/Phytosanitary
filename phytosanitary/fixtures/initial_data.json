@@ -152,3 +152,16 @@
         }
     }
 ]
+
+[
+    {
+        "pk": 1, 
+        "model": "auth.group", 
+        "fields": {
+            "name": "contributor", 
+            "permissions": [
+            47
+            ]
+        }
+    }
+]

@@ -7,6 +7,8 @@ from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
 
+import os.path
+
 from django.db.models.signals import post_save # http://stackoverflow.com/a/965883/412329
 from django.dispatch import receiver # https://docs.djangoproject.com/en/dev/topics/signals/#receiver-functions
 
@@ -29,10 +31,10 @@ class Contributor(UserenaBaseProfile):
 # http://stackoverflow.com/a/8949526/412329
 @receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
 def user_post_save(sender, instance, created, **kwargs):
-    """ This method is executed whenever an user object is saved - automatically adding users who register using the front-end form to the 'contributors' group                                                                                     
+    """ This method is executed whenever an user object is saved - automatically adding users who register using the front-end form to the 'contributors' group                                  
     """
     if created:
-        instance.groups.add(Group.objects.get(name='contributor'))
+        instance.groups.add(Group.objects.get(name='contributors'))
 
 class Category(models.Model):
     """ Categories are the site sections i.e. the global navigation """
@@ -95,11 +97,11 @@ class Resource(models.Model):
     # http://stackoverflow.com/a/1190866/412329
     file = models.FileField(max_length=250, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', blank=True, upload_to='%Y/%m/%d/') 
     # OLD - do not usefile = models.FileField('Upload', upload_to='files/%Y/%m%d%H%M%S/')
-    url = models.URLField(blank=True, help_text="A link to something elsewhere.")
-    contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1)
-    contact_email = models.EmailField(blank=True)
-    contact_address = models.TextField(blank=True, verbose_name='Address')
-    agreement = models.BooleanField(verbose_name='Permission to Publish', help_text='Do you agree to have these Phytosanitary Technical Resources published in public?')
+    url = models.URLField(blank=True, help_text="A link to something elsewhere.", verbose_name='URL')
+    contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1, verbose_name='Type of Contact')
+    contact_email = models.EmailField(blank=True, verbose_name='Email of Contact')
+    contact_address = models.TextField(blank=True, verbose_name='Address of Contact')
+    agreement = models.BooleanField(verbose_name='I agree to have these Phytosanitary Technical Resources published in public')
 
     # Fields to store generated HTML.
     # excerpt_html = models.TextField(editable=False, blank=True)
@@ -140,13 +142,26 @@ class Resource(models.Model):
                                                 'day': self.pub_date.strftime("%d"),
                                                 'slug': self.slug })
 
+    # Display filename in templates - http://stackoverflow.com/a/2683834/412329
+    def filename(self):
+        return os.path.basename(self.file.name)
 
 # tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
 tagging.register(Resource, tag_descriptor_attr='etags')
 
 
-
+from django.forms import ModelForm
+class ResourceForm(ModelForm):
+    class Meta:
+        model = Resource
+        exclude = ('status','enable_comments', 'slug', 'pub_date', 'author', 'featured', 'tags',)
+        prepopulated_fields = { 'slug': ['title'] }
+                
+# def save(self, request, obj, form, change):
+#     if not change:
+#         obj.author = request.user
+#     obj.save()
 
 
 

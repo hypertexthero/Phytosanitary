@@ -49,19 +49,19 @@
 {% block sidebar %}
 {{ block.super }} {# include stuff templates we are inheriting from #}
 {# the 'latest' variable of the template context is assigned automatically by the django.views.generic.date_based.archive_index generic view - https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-date-based-archive-index #}
-{% for resource in latest %}
-    {% if resource.featured %}
-    <div class="featured">
-        <h2>Featured Resources</h2>
-            <ul>
-            {% for resource in latest  %}
-                      <li><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <span class="quiet">{{ resource.pub_date|date:"F j, Y" }}</span>    
-                      </li>
-                      
-            {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-{% endfor %}
+{# {% for resource in latest %} #}
+{#     {% if resource.featured %} #}
+{#     <div class="featured"> #}
+{#         <h2>Featured Resources</h2> #}
+{#             <ul> #}
+{#             {% for resource in latest  %} #}
+{#                       <li><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <span class="quiet">{{ resource.pub_date|date:"F j, Y" }}</span>     #}
+{#                       </li> #}
+{#                        #}
+{#             {% endfor %} #}
+{#         </ul> #}
+{#       </div> #}
+{#     {% endif %} #}
+{# {% endfor %} #}
 
 {% endblock %}
