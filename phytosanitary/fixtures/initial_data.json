@@ -60,3 +60,95 @@
     }
 ]
 
+
+
+[
+    {
+        "pk": 5, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "e-learning"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "guideline"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "manual"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "other"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "photo"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "pra"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "project"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "sop"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "tool"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "tagging.tag", 
+        "fields": {
+            "name": "video"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "tagging.taggeditem", 
+        "fields": {
+            "tag": 1, 
+            "object_id": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tagging.taggeditem", 
+        "fields": {
+            "tag": 1, 
+            "object_id": 2, 
+            "content_type": 16
+        }
+    }
+]
