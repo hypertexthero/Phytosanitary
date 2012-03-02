@@ -58,11 +58,7 @@
              "title": "Miscellaneous"
         }
     }
-]
 
-
-
-[
     {
         "pk": 5, 
         "model": "tagging.tag", 
@@ -151,9 +147,7 @@
             "content_type": 16
         }
     }
-]
 
-[
     {
         "pk": 1, 
         "model": "auth.group", 
