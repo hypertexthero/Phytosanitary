@@ -155,8 +155,8 @@ from django.forms import ModelForm
 class ResourceForm(ModelForm):
     class Meta:
         model = Resource
-        exclude = ('status','enable_comments', 'slug', 'pub_date', 'author', 'featured', 'tags',)
-        prepopulated_fields = { 'slug': ['title'] }
+        exclude = ('status','enable_comments', 'pub_date', 'featured', 'tags', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'file')
+        # prepopulated_fields = {"slug": ("title",)}
                 
 # def save(self, request, obj, form, change):
 #     if not change:

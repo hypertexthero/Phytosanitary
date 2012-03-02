@@ -4,11 +4,25 @@
     &rarr; Upload Resource
 {% endblock %}
 
+{% block globalnav %}
+{% endblock %}
+
 {% block content %}
 <h1 class="first">Upload a Resource</h1>
+
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}    
+        
+        {# <p><input type="hidden" name="author_name" id="id_author_name" value="{{ user.username }}" /></p> #}
+        {# <p><input type="hidden" name="author_id" id="id_author" value="{{ user.id }}" /></p> #}
+        
+        {# <p><label for="id_author">Author:</label>  #}
+        {#     <select name="author" id="id_author"> #}
+        {#  #}
+        {# <option value="{{ user.id }}" selected>{{ user.username }}</option> #}
+        {# </select></p> #}
+        
         <p><input class="editbig" type="submit" value="Submit" /> <a href="/thanks/">after submitting...</a></p>
     </form>
 {% endblock %}

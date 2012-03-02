@@ -30,6 +30,7 @@ urlpatterns = patterns('',
 
     # contributor upload form
     url(r'^upload/$', 'phytosanitary.views.resource_upload', name='resource_upload'),
+    # url(r'^upload/$', 'django.views.generic.create_update.create_object', kwargs={'context_processors':form_user_default}),
     url(r'^thanks/$', direct_to_template, {'template': 'phytosanitary/resource_upload_thanks.html'}),
 
     # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
