@@ -134,7 +134,7 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'gunicorn',
-    'south',
+    # 'south',
 )
 
 # A sample logging configuration. The only tangible logging
