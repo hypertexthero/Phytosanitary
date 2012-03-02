@@ -29,4 +29,5 @@ django-userena
 
 # docutils
 # sorl-thumbnail
+gunicorn
 South
