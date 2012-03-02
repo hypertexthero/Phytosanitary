@@ -40,9 +40,7 @@ USE_I18N = True
 USE_L10N = True
 
 MEDIA_ROOT = os.path.join(DIRNAME, 'uploads')
-MEDIA_URL = 'http://127.0.0.1:8000/uploads/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
-STATIC_URL = 'http://127.0.0.1:8000/static/'
 
 # ln -s ~/django_projects/phytosanitary-env/lib/python2.6/site-packages/django/contrib/admin/media/ ~/django_projects/phytosanitary-env/phytosanitary/static/admin
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -118,7 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    # 'django.contrib.sites', # don't need this as using one site only
+    'django.contrib.sites', # don't need this as using one site only
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.comments',
