@@ -1,7 +1,7 @@
 # To install all these run the following from terminal: pip install -r REQUIREMENTS.txt
 Django==1.3.1
 # wsgiref==0.1.2
-# MySQL-python (ERRORS DEPLOYING IN JOYENT SHARED)
+# MySQL-python
 # flup
 # psycopg2
 
@@ -16,7 +16,11 @@ markdown
 
 django-tagging
 
+# requirements for pil on RHEL/CentOS:
+# - yum -y install gcc
+# - yum install python26-devel
 PIL
+
 # Fabric (won't successfully install in shared accelerator?)
 
 # django-registration 0.8:

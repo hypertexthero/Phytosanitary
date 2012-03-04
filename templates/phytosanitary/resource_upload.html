@@ -7,11 +7,21 @@
 {% block globalnav %}
 {% endblock %}
 
+{% block sidebar %}
+    <p><strong>NOTE:</strong> Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically on phytosanitary.info if approved.</p>
+    <p>Required fields are <strong>bold</strong>.</p>
+{% endblock %}
+
 {% block content %}
 <h1 class="first">Upload a Resource</h1>
 
-    <form action="" method="post">
+{# file upload example http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example #}
+{# https://docs.djangoproject.com/en/dev/ref/forms/api/#binding-uploaded-files-to-a-form #}
+    <form action="" method="post" enctype="multipart/form-data"> 
         {% csrf_token %}
+            {% if form.errors %}
+            <p class="warning">Please fix the errors marked in red below</p>
+            {% endif %}
         {{ form.as_p }}    
         
         {# <p><input type="hidden" name="author_name" id="id_author_name" value="{{ user.username }}" /></p> #}
@@ -23,12 +33,7 @@
         {# <option value="{{ user.id }}" selected>{{ user.username }}</option> #}
         {# </select></p> #}
         
-        <p><input class="editbig" type="submit" value="Submit" /> <a href="/thanks/">after submitting...</a></p>
+        <p><input class="editbig submit" type="submit" value="Submit" /> <a href="/thanks/">after submitting...</a></p>
     </form>
 {% endblock %}
 
-{% block sidebar %}
-    
-    <p><strong>NOTE:</strong> Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically on phytosanitary.info if approved.</p>
-    
-{% endblock %}

@@ -4,28 +4,23 @@ Hacking [django-coltrane](http://www.gyford.com/phil/writing/2010/01/14/django.p
 
 ## Todo
 
-1. Resource publication [moderation](https://github.com/dominno/django-moderation#readme) - <del>permissions Groups for contributors, moderators, secretariat staff</del> _done_
-    - Non-secretariat users who register can only submit resources for approval by a moderator or chief administrator, not publish directly to the site.
-        - <del>[Users who register through front-end of site need to be automatically assigned to 'contributors' group](http://stackoverflow.com/questions/8949303/how-to-assign-a-user-to-a-group-at-signup-using-django-userena)</del> Done.
-        - *Contributors can add/save a resource with [For Review](http://collingrady.wordpress.com/2008/07/24/useful-form-tricks-in-django/) status only*
-    - [Email](http://stackoverflow.com/questions/2349483/django-models-signals-and-email-sending-delay) [notification](https://github.com/jtauber/django-notification/) [to](https://docs.djangoproject.com/en/dev/topics/email/) moderators/staff when new resources are submitted
+1. Implement ability to [upload multiple files](http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models) per resource
 2. Set up and document deployment to production server
-3. Implement ability to [upload multiple files](http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models) per resource
-4. Currently selected tag should be highlighted in Browse Tags menu
-5. Markdown WYSIWYG with WMD
-6. Set up 'other' text field for phytosanitary resource type
-7. Set up authentication on existing user database backend
-8. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
-9. [Set up fixtures](fixtures) for Categories, Tags and Sitename to be automatically added to the database upon installation. Also update tagging
-10. Change banner design and colors
-11. Syndication feeds
-12. <del>Search</del>. Done, but debug the error when using named url in search.html
+3. [Email](http://stackoverflow.com/questions/2349483/django-models-signals-and-email-sending-delay) [notification](https://github.com/jtauber/django-notification/) [to](https://docs.djangoproject.com/en/dev/topics/email/) moderators/staff when new resources are submitted
+4. Markdown WYSIWYG with WMD
+5. Set up 'other' text field for phytosanitary resource type
+6. Set up authentication on existing user database backend
+7. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
+8. [Set up fixtures](fixtures) for Categories, Tags and Sitename to be automatically added to the database upon installation. Also update tagging
+9. Change banner design and colors
 
 
 ### Future
 
-- Custom application page pulling data from an external source using something like the [infochimps apis](http://www.infochimps.com/datasets/plant-pest-risk-analyses-pra-documents#overview_tab) (thanks B.B.King of *x sysadmin)
+- Syndication feeds
 - I18N, including right-to-left scripts such as Arabic
+- Custom application page pulling data from an external source using something like the [infochimps apis](http://www.infochimps.com/datasets/plant-pest-risk-analyses-pra-documents#overview_tab) (thanks B.B.King of *x sysadmin)
+- Currently selected tag should be highlighted in Browse Tags menu
 
 ### Upcoming advantages of the new django-powered website
 

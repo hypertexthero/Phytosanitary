@@ -21,7 +21,7 @@
     
     {{ object.body_html|safe }}
     
-    {% if object.file %}        
+    {% if object.document %}        
 
         <h2>Files</h2>
     
@@ -32,7 +32,7 @@
                 {# - http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models #}
         
         <ul>
-            <li><a href="/uploads/{{ object.file }}">{{ object.filename }}</a> 
+            <li><a href="/uploads/{{ object.document }}">{{ object.filename }}</a> 
         </ul>
 
     {% endif %}

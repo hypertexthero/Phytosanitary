@@ -15,32 +15,137 @@ def category_detail(request, slug):
     )
 
 
-from django.views.generic.create_update import create_object
-from django.contrib.auth.decorators import login_required # for @login_required decorator
-from django.core.urlresolvers import reverse
-from models import Resource
-from models import ResourceForm
+# http://stackoverflow.com/questions/907858/how-to-let-djangos-generic-view-use-a-form-with-initial-values
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from models import Resource, ResourceForm, Contributor
+from django import forms
 
-# see also this alternative: http://djangosnippets.org/snippets/966/
+def handle_uploaded_file(f):
+    destination = open('some/file/name.txt', 'wb+')
+    for chunk in f.chunks():
+        destination.write(chunk)
+    destination.close()
+
+import tempfile
+import shutil
+
+# FILE_UPLOAD_DIR = '/home/imran/uploads'
+# def handle_uploaded_file(source):
+#     fd, filepath = tempfile.mkstemp(prefix=source.name, dir=MEDIA_ROOT)
+#     with open(filepath, 'wb') as dest:
+#         shutil.copyfileobj(source, dest)
+#     return filepath
+
 @login_required
 def resource_upload(request):
-    """ Form for contributors to upload resources. These should have 'For Review' status. """
-    # user = Resource.objects.filter(owner__username__exact=username)
-    # user = request.user
-    # author = Resource.objects.get(pk=user)
-    author = request.user
-    # author_id = author
-    return create_object(request,
-        # model=Resource,
-        form_class=ResourceForm,
-        # form_class=ResourceForm, # Needed to specify form_class instead of model so that the custom date widget for dropdown menu is displayed: https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-create-update-create-object
-        extra_context={'User': 'user', 'Author': 'author'}, # needed to capitalize 'User' for this to work so it would call the function!
-        template_name='phytosanitary/resource_upload.html',
-        # post_save_redirect=reverse("notes_list")
-        # post_save_redirect="/notes/archive/%(id)s/" # todo: add object.get_absolute_url() to models.py
-        post_save_redirect="/thanks/"
-    )     
+    if request.method == 'POST':
+        # Get data from form
+        # including any files - https://docs.djangoproject.com/en/1.3/topics/http/file-uploads/
+        form = ResourceForm(request.POST, request.FILES, initial={'author': request.user})
+        
+        # title = object.title
+        user = request.user
+        author_id = user.id
+        # slug = "%s" % (self.title)
+        # document = request.FILES['document']
+        
+        # If the form is valid, create a new object and redirect to thanks page.
+        if form.is_valid(): 
+            # http://www.mail-archive.com/django-users@googlegroups.com/msg80485.html
+            # > However a much better way is not to have the user_id field in the form
+            # >> at all, and set the correct value on the object on save.
+            newObject = form.save(commit=False)
+            newObject.author_id = author_id
+            newObject.save()
+            form.save_m2m() # needed since using commit=False
+            # return HttpResponseRedirect(newObject.get_absolute_url())
+
+            return HttpResponseRedirect('/thanks/')
+
+    else:
+        # Fill in the field with the current user by default
+        # Eureka!! http://stackoverflow.com/questions/907858/how-to-let-djangos-generic-view-use-a-form-with-initial-values
+        form = ResourceForm(initial={'author': request.user})
+    
+    # Render our template
+    return render_to_response('phytosanitary/resource_upload.html',
+        {'form': form},
+        context_instance=RequestContext(request))
+
+
+# from django.views.generic.create_update import create_object
+# # from django.contrib.auth.decorators import login_required # for @login_required decorator
+# from django.core.urlresolvers import reverse
+# from models import Resource, ResourceForm, Contributor
+# from django.contrib.auth.models import User
+# # from context_processors import form_user_default
+# 
+# # see also this alternative: http://djangosnippets.org/snippets/966/
+# # http://www.b-list.org/weblog/2008/nov/09/dynamic-forms/
+# 
+# # @login_required
+# def resource_upload(request):
+#     """ Form for contributors to upload resources. These should have 'For Review' status. """
+#     # user = Resource.objects.filter(owner__username__exact=username)
+#     # user = request.user
+#     # author = Resource.objects.get(pk=user)
+#     author = request.user
+#     # author_id = author
+#     return create_object(request,
+#         # model=Resource,
+#         form_class=ResourceForm,
+#         # form_class=ResourceForm, # Needed to specify form_class instead of model so that the custom date widget for dropdown menu is displayed: https://docs.djangoproject.com/en/dev/ref/generic-views/#django-views-generic-create-update-create-object
+#         extra_context={'User': 'user', 'author': request.user, 'author_id': request.user.id }, # needed to capitalize 'User' for this to work so it would call the function!
+#         login_required=True,
+#         template_name='phytosanitary/resource_upload.html',
+#         # post_save_redirect=reverse("notes_list")
+#         # post_save_redirect="/notes/archive/%(id)s/" # todo: add object.get_absolute_url() to models.py
+#         post_save_redirect="/thanks/"
+#         # context_processors= ************************ try this: put context processor here ******************************* - 
+#         # context_processors=[form_user_default]
+#     )     
  
+
+# 8888888888888888888888888
+#     try this - put the user variable in a queryset in urls.py, then use the user variable in the view
+# 8888888888888888888888888
+# http://www.b-list.org/weblog/2006/nov/16/django-tips-get-most-out-generic-views/
+# https://docs.djangoproject.com/en/1.3/topics/generic-views/#complex-filtering-with-wrapper-functions
+
+
+# from django.views.generic.list_detail import object_list
+# from myproject.myapp.models import TodoList, TodoItem
+# 
+# def user_lists(request, username):
+#     todo_lists = TodoList.objects.filter(owner__username__exact=username)
+#     open_items = TodoItem.objects.filter(todolist__owner__username__exact=username)
+#     open_item_count = open_items.count()
+#     priority_items = open_items.filter(priority__exact='high')
+#     return object_list(request, queryset=todo_lists,
+#                        extra_context={'open_item_count': open_item_count,
+#                                       'priority_items': priority_items})
+# And now the open_items and priority_items variables will be available, with the correct values, in the template.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # =todo - only display fields that have values entered in resource_detail.html:

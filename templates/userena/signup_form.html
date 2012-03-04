@@ -18,7 +18,7 @@
             <h2>Registration Process</h2>
             
             <ol>
-                <li>Complete the form on this page (all fields are required).</li> 
+                <li>Complete the form on this page <strong>(all fields are required)</strong>.</li> 
                 <li>Click on the confirmation link in the email you receive to validate your account and access the resources upload area.</li> 
             </ol>
                             <p>Note that uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and only appear publically on the site if approved.</p>
@@ -28,6 +28,9 @@
 {% block content %}
 <form action="" method="post">
   {% csrf_token %}
+  {% if form.errors %}
+  <p class="warning note">Please fix the errors marked in red below</p>
+  {% endif %}
   <fieldset>
     <legend>Register</legend>
     {% for field in form %}
@@ -46,7 +49,7 @@
     {% endfor %}
   </fieldset>
   <br class="clearboth" />
-  <input type="submit" value="{% trans "Register" %}" />
+  <input type="submit" class="submit" value="{% trans "Register" %}" />
 </form>
 {% endblock %}
 

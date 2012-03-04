@@ -6,6 +6,7 @@ from django.db import models
 from markdown import markdown
 from tagging.fields import TagField, Tag
 import tagging
+from django.template.defaultfilters import slugify
 
 import os.path
 
@@ -29,12 +30,13 @@ class Contributor(UserenaBaseProfile):
 
 # add users who register using front-end form to the 'contributors' group automatically
 # http://stackoverflow.com/a/8949526/412329
-# @receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
-# def user_post_save(sender, instance, created, **kwargs):
-#     """ This method is executed whenever an user object is saved - automatically adding users who register using the front-end form to the 'contributors' group                                  
-#     """
-#     if created:
-#         instance.groups.add(Group.objects.get(name='contributors'))
+# =todo: try this alternative: http://sontek.net/extending-the-django-user-model
+@receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
+def user_post_save(sender, instance, created, **kwargs):
+    """ This method is executed whenever an user object is saved - automatically adding users who register using the front-end form to the 'contributors' group                                  
+    """
+    if created:
+        instance.groups.add(Group.objects.get(name='contributors'))
 
 class Category(models.Model):
     """ Categories are the site sections i.e. the global navigation """
@@ -89,19 +91,19 @@ class Resource(models.Model):
     )
 
     # Core fields.
-    title = models.CharField(max_length=250)
+    title = models.CharField(blank=False, max_length=250)
     # excerpt = models.TextField(blank=True)
-    body = models.TextField(help_text='Use Markdown format', verbose_name='Description')
+    body = models.TextField(blank=False, help_text='Use Markdown format', verbose_name='Description')
     pub_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Publication Date', help_text='(will only be published when approved by an administrator)')
-    org_title = models.CharField(max_length=250, help_text='', verbose_name='Organization', blank=True)
+    org_title = models.CharField(blank=True, max_length=250, help_text='', verbose_name='Organization')
     # http://stackoverflow.com/a/1190866/412329
-    file = models.FileField(max_length=250, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', blank=True, upload_to='%Y/%m/%d/') 
+    document = models.FileField(help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/') 
     # OLD - do not usefile = models.FileField('Upload', upload_to='files/%Y/%m%d%H%M%S/')
     url = models.URLField(blank=True, help_text="A link to something elsewhere.", verbose_name='URL')
     contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1, verbose_name='Type of Contact')
     contact_email = models.EmailField(blank=True, verbose_name='Email of Contact')
     contact_address = models.TextField(blank=True, verbose_name='Address of Contact')
-    agreement = models.BooleanField(verbose_name='I agree to have these Phytosanitary Technical Resources published in public')
+    agreement = models.BooleanField(blank=False, verbose_name='Agreed to have these Phytosanitary Technical Resources published in public')
 
     # Fields to store generated HTML.
     # excerpt_html = models.TextField(editable=False, blank=True)
@@ -133,6 +135,8 @@ class Resource(models.Model):
         self.body_html = markdown(self.body)
         # if self.excerpt:
         #     self.excerpt_html = markdown(self.excerpt)
+        if not self.slug:
+            self.slug = slugify(self.title)
         super(Resource, self).save(force_insert, force_update)
     
     @models.permalink
@@ -144,25 +148,31 @@ class Resource(models.Model):
 
     # Display filename in templates - http://stackoverflow.com/a/2683834/412329
     def filename(self):
-        return os.path.basename(self.file.name)
+        return os.path.basename(self.document.name)
 
 # tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
 tagging.register(Resource, tag_descriptor_attr='etags')
 
 
-from django.forms import ModelForm
-class ResourceForm(ModelForm):
+from django import forms
+from django.forms import ModelForm, Textarea
+# from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
+class ResourceForm(forms.ModelForm):
+    agreement = forms.BooleanField(required=True, label='I agree to have these Phytosanitary Technical Resources published in public')
+    # http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
+    document = forms.FileField(label='Select a file to upload',help_text='max. 10 megabytes', required=False)
+    # description = forms.Textarea(widget=forms.Textarea)
+    # http://stackoverflow.com/a/2734790/412329
+    # categories = forms.MultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, label="Categories", required=True)
+    
+    required_css_class = 'required'
     class Meta:
-        model = Resource
-        exclude = ('status','enable_comments', 'pub_date', 'featured', 'tags', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'file')
-        # prepopulated_fields = {"slug": ("title",)}
-                
-# def save(self, request, obj, form, change):
-#     if not change:
-#         obj.author = request.user
-#     obj.save()
-
+        model = Resource # model has a user field
+        fields = ('title', 'body', 'categories', 'document', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'agreement',)
+        widgets = {
+                    'body': Textarea(attrs={'cols': 80, 'rows': 25})
+                }
 
 
 

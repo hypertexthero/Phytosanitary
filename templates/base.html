@@ -29,24 +29,26 @@
                             Hello, 
                                 {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                                 {# {% if user.username == profile.user.username %} #}
-                                    <a href="{% url userena_profile_detail user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">
+                                    
                                         {% if user.first_name and user.last_name %}
-                                            {{ user.first_name }} {{ user.last_name }}
+                                            {{ user.first_name }} {{ user.last_name }}!
                                             {% else %}
-                                            {{ user.username }}
+                                            {{ user.username }}:
                                         {% endif %}
-                                        
-                                        
-                                        
-                                        </a>!
+                                          <a href="{% url userena_profile_edit user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">Edit profile</a>
                                 {# {% endif %} #}
                             
                             {# <a href="{% url userena_signout %}?next={% firstof request.path '/' %}">Log out</a> #}
-                            <a href="{% url userena_signout %}">Log out</a>
+
                         
                             {% if user.is_staff %}
-                                <strong><a class="edit" href="/admin/">Admin</a></strong>
+                                <strong><a class="edit" href="/admin/">Access admin area</a></strong>
+                                {% else %}
+                                    {% if user.is_authenticated and user.username == user.username %}
+                                    <a class="editbig" href="/upload/">Upload a resource</a>
+                                    {% endif %}
                             {% endif %}
+                            <a href="{% url userena_signout %}">Log out</a>
                         </p>
                 {% else %}
                     {# http://stackoverflow.com/a/1711592/412329 #}

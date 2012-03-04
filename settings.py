@@ -42,7 +42,7 @@ USE_L10N = True
 MEDIA_ROOT = os.path.join(DIRNAME, 'uploads')
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
 
-# ln -s ~/django_projects/phytosanitary-env/lib/python2.6/site-packages/django/contrib/admin/media/ ~/django_projects/phytosanitary-env/phytosanitary/static/admin
+# ln -s ~/django_projects/phytosanitary-env/lib/python2.6/site-packages/django/contrib/admin/media/ ~/django_projects/phytosanitary-env/phytosanitary-project/static/admin
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
@@ -109,6 +109,7 @@ LOGOUT_URL = '/accounts/signout/'
 USERENA_ACTIVATION_DAYS = 7
 USERENA_MUGSHOT_PATH = 'user/photos/%Y/%m/'
 USERENA_WITHOUT_USERNAMES = False
+# USERENA_DISABLE_PROFILE_LIST = True
 
 ROOT_URLCONF = 'phytosanitary-project.urls'
 
