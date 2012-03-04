@@ -2,7 +2,7 @@
 Description: Phytosanitary Resources website main stylesheet for screen and projection
 File: phytosanitary.css
 Author: Simon Griffee
-Last update: Monday, 20 February 2012 at 16:51:34
+Last update: Sunday, 04 March 2012 at 21:07:52
 */
 
 body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:17px 7px; background:#fff; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/ /*url(/static/img/website-bar-3.0.gif) repeat-x*/
@@ -206,4 +206,4 @@ table .edit {padding:0 0.5em;}
 .clearfloatsinside {overflow:auto; width:100%;}
 .clearboth {clear:both;}
 .block {display:block;}
-.note {background:#ffc;}
+.note, .warning {background:#ffc;}
