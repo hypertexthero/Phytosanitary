@@ -17,8 +17,7 @@ urlpatterns = patterns('',
     # http://stackoverflow.com/questions/1296629/django-template-tag-how-to-send-next-page-in-url-auth-logout
     # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     
-    # home
-    url(r'^', include('phytosanitary.urls.resources')),    
+   
     # search
     url(r'^search/', 'phytosanitary.views.search', name="resources_search"),
 
@@ -35,6 +34,9 @@ urlpatterns = patterns('',
 
     # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
     url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
+    
+    # home
+    url(r'^', include('phytosanitary.urls.resources')),
 )
 
 # http://docs.djangoproject.com/en/dev/howto/static-files/#serving-static-files-in-development

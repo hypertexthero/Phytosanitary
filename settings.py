@@ -117,7 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites', # don't need this as using one site only
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.comments',
@@ -132,8 +132,22 @@ INSTALLED_APPS = (
     'userena',
     'guardian',
     'easy_thumbnails',
+
+# https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/gunicorn/
+# ssh sgriffee@EXLQAIPPC1.ext.fao.org
+# cd django_projects/ippc
+# . bin/activate
+# cd ippc
+# python manage.py run_gunicorn
+# or
+# gunicorn_django -b localhost:9000
+
+# restart: 
+# kill -HUP phytosanitary-project
+
     'gunicorn',
-    # 'south',
+    
+    # 'south', # not using south for now
 )
 
 # A sample logging configuration. The only tangible logging
