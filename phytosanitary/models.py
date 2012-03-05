@@ -97,7 +97,7 @@ class Resource(models.Model):
     pub_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Publication Date', help_text='(will only be published when approved by an administrator)')
     org_title = models.CharField(blank=True, max_length=250, help_text='', verbose_name='Organization')
     # http://stackoverflow.com/a/1190866/412329
-    document = models.FileField(help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/') 
+    document = models.FileField(blank=True, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/') 
     # OLD - do not usefile = models.FileField('Upload', upload_to='files/%Y/%m%d%H%M%S/')
     url = models.URLField(blank=True, help_text="A link to something elsewhere.", verbose_name='URL')
     contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1, verbose_name='Type of Contact')
