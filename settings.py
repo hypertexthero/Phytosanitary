@@ -100,16 +100,9 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 AUTH_PROFILE_MODULE = 'phytosanitary.Contributor'
 ANONYMOUS_USER_ID = '-1'
-LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
-LOGIN_URL = '/accounts/signin/'
-LOGOUT_URL = '/accounts/signout/'
-USERENA_ACTIVATION_DAYS = 7
-USERENA_MUGSHOT_PATH = 'user/photos/%Y/%m/'
-USERENA_WITHOUT_USERNAMES = False
-# USERENA_DISABLE_PROFILE_LIST = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ROOT_URLCONF = 'phytosanitary-project.urls'
 
@@ -138,12 +131,13 @@ INSTALLED_APPS = (
 # cd django_projects/ippc
 # . bin/activate
 # cd ippc
-# python manage.py run_gunicorn
+# python manage.py run_gunicorn localhost:9000
 # or
 # gunicorn_django -b localhost:9000
 
 # restart: 
-# kill -HUP phytosanitary-project
+# ps aux | grep gunicorn
+# kill 38202
 
     'gunicorn',
     
