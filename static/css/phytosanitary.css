@@ -152,7 +152,7 @@ fieldset {border:1px solid #ccc;}
 
 
 input, textarea {padding:0.5em;}
-#content input, #content textarea {width:130%;}
+#content input, #content textarea {width:100%;}
 fieldset {border:1px solid #ddd; padding:0.5em 0.5em;}
 fieldset + fieldset {border-top:none;}
 fieldset input {width:98%; padding:0.5em;}
