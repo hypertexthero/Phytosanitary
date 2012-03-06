@@ -17,6 +17,26 @@
   </fieldset>
   <input type="submit" class="submit" value="{% trans "Save changes" %}" />
 </form>
+
+{# <form action="" enctype="multipart/form-data" method="post"> #}
+{#   {% csrf_token %} #}
+{#   <fieldset> #}
+{#     <legend>Edit Profile</legend> #}
+{#     <p><label for="id_first_name">First name:</label> <input id="id_first_name" type="text" name="first_name" value="{{user.first_name}}" maxlength="30" /></p> #}
+{#     <p><label for="id_last_name">Last name:</label> <input id="id_last_name" type="text" name="last_name" value="{{user.last_name}}" maxlength="30" /></p> #}
+{#     <p><label for="id_mugshot">Picture:</label> <input type="file" name="mugshot" id="id_mugshot" /> <span class="helptext">A personal image displayed in your profile.</span></p> #}
+{#     <p><label for="id_privacy">Privacy:</label>  #}
+{#         <select name="privacy" id="id_privacy"> #}
+{#         <option value="open">Open - All users can view your profile</option> #}
+{#         <option value="registered" selected="selected">Registered - registered users can view your profile</option> #}
+{#         <option value="closed">Closed - Only you can view your profile</option> #}
+{#     </select>  #}
+{#     <span class="helptext">Designates who can view your profile.</span> #}
+{#     </p> #}
+{#   </fieldset> #}
+{#   <input type="submit" class="submit" value="Save changes" /> #}
+{# </form> #}
+
 {% endblock %}
 
 {% block sidebar %}

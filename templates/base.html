@@ -31,9 +31,9 @@
                                 {# {% if user.username == profile.user.username %} #}
                                     
                                         {% if user.first_name and user.last_name %}
-                                            {{ user.first_name }} {{ user.last_name }}!
+                                            <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
                                             {% else %}
-                                            {{ user.username }}:
+                                            <strong>{{ user.username }}!</strong>
                                         {% endif %}
                                           <a href="{% url userena_profile_edit user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">Edit profile</a>
                                 {# {% endif %} #}
@@ -45,7 +45,7 @@
                                 <strong><a class="edit" href="/admin/">Access admin area</a></strong>
                                 {% else %}
                                     {% if user.is_authenticated and user.username == user.username %}
-                                    <a class="editbig" href="/upload/">Upload a resource</a>
+                                    <a class="edit" href="/upload/">Upload resource</a>
                                     {% endif %}
                             {% endif %}
                             <a href="{% url userena_signout %}">Log out</a>

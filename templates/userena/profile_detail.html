@@ -11,7 +11,7 @@
 <h1 class="first"><span class="normal">Profile:</span> {% if profile.user.get_full_name %}{{ profile.user.get_full_name }}{% endif %} ({{ profile.user.username }})</h1>
 
   <div id="details">
-    <img src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
+    <img src="{{ profile.get_mugshot_url }}" alt="{% trans "Your picture" %}" />
     {# <p><strong>{% trans "Username" %}</strong><br /> {{ profile.user.username }}</p> #}
     {% if profile.user.get_full_name %}
     <p><strong>{% trans "Name" %}</strong><br /> {{ profile.user.get_full_name }}</p>
