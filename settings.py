@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'userena',
     'guardian',
     'easy_thumbnails',
-    'simplemathcaptcha',
+    # 'simplemathcaptcha',
     
 # https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/gunicorn/
 # ssh sgriffee@EXLQAIPPC1.ext.fao.org
