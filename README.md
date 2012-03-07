@@ -14,6 +14,8 @@ Hacking [django-coltrane](http://www.gyford.com/phil/writing/2010/01/14/django.p
 8. [Set up fixtures](fixtures) for Categories, Tags and Sitename to be automatically added to the database upon installation. Also update tagging
 9. Change banner design and colors
 10. Document application deployment to production server and update workflow
+11. Add photo field with thumbnail display in detail view.
+12. Make homepage introduction text editable with Markdown and WMD preview
 
 
 ### Future
