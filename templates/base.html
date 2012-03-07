@@ -136,7 +136,7 @@
                 {% get_latest_content tagging.tag 50 as latest_tags %}
                 <ul>
                 {% for tag in latest_tags %}
-                    <li class="titlecase">
+                    <li>
                         <a href="/tags/{{ tag.name }}/">{{ tag.name }}</a>
                     </li>
                 {% endfor %}
