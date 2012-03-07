@@ -4,15 +4,16 @@ Hacking [django-coltrane](http://www.gyford.com/phil/writing/2010/01/14/django.p
 
 ## Todo
 
-1. Implement ability to [upload multiple files](http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models) per resource
-2. Set up and document deployment to production server
-3. [Email](http://stackoverflow.com/questions/2349483/django-models-signals-and-email-sending-delay) [notification](https://github.com/jtauber/django-notification/) [to](https://docs.djangoproject.com/en/dev/topics/email/) moderators/staff when new resources are submitted
-4. Markdown WYSIWYG with WMD
-5. Set up 'other' text field for phytosanitary resource type
-6. Set up authentication on existing user database backend
-7. Implement Internal/External Projects Database with Google map or point to existing Typo3 implementation
+1. Add ability to [upload multiple files](http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models) per resource
+2. Add simple captcha in form of random question/answers?
+3. [Email](http://stackoverflow.com/questions/2349483/django-models-signals-and-email-sending-delay) [notification](https://github.com/jtauber/django-notification/) [to](https://docs.djangoproject.com/en/dev/topics/email/) moderators/staff and contributor who uploaded resource when new resources are submitted
+4. Set up 'other' text field for phytosanitary resource type
+5. Markdown WYSIWYG with WMD for resource descriptions
+6. Set up authentication using www.ippc.int existing user database backend.
+7. <del>Implement Internal/External Projects Database with Google map or</del> point to existing Typo3 implementation
 8. [Set up fixtures](fixtures) for Categories, Tags and Sitename to be automatically added to the database upon installation. Also update tagging
 9. Change banner design and colors
+10. Document application deployment to production server and update workflow
 
 
 ### Future
