@@ -162,14 +162,14 @@
                         {#     - http://stackoverflow.com/questions/4888708/user-permissions-for-django-module #}
                         {#     -  #}
                     <p>
+                        Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically here if approved.</p>
+                    <p>
                         {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                         {% if user.is_authenticated and user.username == user.username %}
-                        <a class="editbig" href="/upload/">Upload a resource</a><br /><br />
+                        <a class="editbig" href="/upload/">Upload resource</a>
                         {% else  %}
                             To contribute materials please <a href="{% url userena_signin %}">log in</a> or <a href="{% url userena_signup %}">register</a>.
                         {% endif %}
-                        
-                            Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically here if approved.
                     </p>
 
                 

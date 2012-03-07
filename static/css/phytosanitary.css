@@ -181,11 +181,11 @@ div.editingtoolbar {background:#fc6; margin:1em 0; padding:1em 0;}
 div.editingtoolbar ul {}
 div.editingtoolbar li {display:inline;}
 */
-div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0;}
+div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0; text-decoration:none;}
 .edit, .editbig {background:#fc6; padding:0.5em;}
 .editbig:hover {cursor:pointer;}
 a.edit, a.editbig {text-decoration:none;}
-.editbig {font-weight:bold; border:double; font-size:1.2em;}
+.editbig {font-weight:bold; border:none; font-size:1.2em;}
 table .edit {padding:0 0.5em;}
 /*div#nav .edit {padding:0;}*/
 

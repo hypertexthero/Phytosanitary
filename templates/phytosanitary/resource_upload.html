@@ -20,7 +20,7 @@
     <form action="" method="post" enctype="multipart/form-data"> 
         {% csrf_token %}
             {% if form.errors %}
-            <p class="warning">Please fix the errors marked in <span style="color:#c00;">red</span> below</p>
+            <p class="warning">Please fix the errors marked in <span style="color:#c00;">red</span> below. If you selected a file, please select it again.</p>
             {% endif %}
         {{ form.as_p }}    
         
