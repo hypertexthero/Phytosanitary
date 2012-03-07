@@ -11,7 +11,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Simon Griffee', 'simon@hypertexthero.com'),
+    ('First Last', 'email@address.com'),
 )
 
 MANAGERS = ADMINS

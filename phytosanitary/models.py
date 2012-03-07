@@ -113,6 +113,7 @@ class Resource(models.Model):
     author = models.ForeignKey(User)
     enable_comments = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
+    # is_homepage = models.BooleanField(default=False)
     slug = models.SlugField(unique_for_date='pub_date')
     status = models.IntegerField(choices=STATUS_CHOICES, default=FOR_REVIEW_STATUS)
 

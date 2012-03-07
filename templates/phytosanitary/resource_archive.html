@@ -9,6 +9,13 @@
 {% block editingtoolbar %}{{ block.super }}{% endblock %}
 
 {# <p>This is a list of the latest {{ latest.count }} resources published in the blog.</p> #}
+{% for resource in latest %}
+{% if resource.title == "Homepage" %}
+    {# <h1 class="first">{{ resource.title }}</h1> #}
+    {{ resource.body_html|safe }}
+{% endif %}
+{% endfor %}
+
 <h1 class="first">About Phytosanitary.info</h1>
 
 <p>Welcome to the IPPC Phytosanitary Resources homepage, where you can find resources contributed by the world’s plant protection community including <a href="dbtools/">databases &amp; tools</a>, <a href="advocacy/">advocacy</a> and <a href="training/">training materials</a>, a <a href="media/">media library</a> and <a href="misc/">more</a>.</p>
