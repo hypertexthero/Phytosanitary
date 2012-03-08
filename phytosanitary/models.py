@@ -91,7 +91,7 @@ class Resource(models.Model):
     )
 
     # Core fields.
-    title = models.CharField(blank=False, max_length=250)
+    title = models.CharField(unique_for_date='pub_date', blank=False, max_length=250)
     # excerpt = models.TextField(blank=True)
     body = models.TextField(blank=False, help_text='Use Markdown format', verbose_name='Description')
     pub_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Publication Date', help_text='(will only be published when approved by an administrator)')

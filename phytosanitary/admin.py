@@ -10,6 +10,7 @@ admin.site.register(Category, CategoryAdmin)
 
 class ResourceAdmin(admin.ModelAdmin):
     exclude = ('enable_comments',)
+    save_on_top = True
     list_display = ('title', 'pub_date', 'author')
     prepopulated_fields = { 'slug': ['title'] }
     

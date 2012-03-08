@@ -7,7 +7,7 @@ register = template.Library()
 # templates/phytosanitary/includes/homeintro.html
 from project.phytosanitary.models import Resource
 def homeintro(context): # need 'context' in here otherwise get 'list index out of range' error
-    resource = Resource.objects.filter(title__exact='Homepage')
+    resource = Resource.objects.filter(title__exact='Homepage')[:1]
     # http://stackoverflow.com/a/4338108/412329 - passing the user variable into the context
     user = context['request'].user
     return {'resource': resource, 'user': user}
