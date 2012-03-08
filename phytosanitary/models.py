@@ -31,7 +31,7 @@ class Contributor(UserenaBaseProfile):
 # add users who register using front-end form to the 'contributors' group automatically
 # http://stackoverflow.com/a/8949526/412329
 # =todo: try this alternative: http://sontek.net/extending-the-django-user-model
-@receiver(post_save, sender=User, dispatch_uid='phytosanitary-project.phytosanitary.models.user_post_save_handler')
+@receiver(post_save, sender=User, dispatch_uid='project.phytosanitary.models.user_post_save_handler')
 def user_post_save(sender, instance, created, **kwargs):
     """ This method is executed whenever an user object is saved - automatically adding users who register using the front-end form to the 'contributors' group                                  
     """
@@ -153,7 +153,11 @@ class Resource(models.Model):
 
 # tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
-tagging.register(Resource, tag_descriptor_attr='etags')
+# With bugfix workaround - http://stackoverflow.com/questions/6295104/django-tagging-already-registered-exception
+try:
+    tagging.register(Resource, tag_descriptor_attr='etags')
+except tagging.AlreadyRegistered:
+    pass
 
 
 from django import forms

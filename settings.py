@@ -42,7 +42,7 @@ USE_L10N = True
 MEDIA_ROOT = os.path.join(DIRNAME, 'uploads')
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
 
-# ln -s ~/django_projects/phytosanitary-env/lib/python2.6/site-packages/django/contrib/admin/media/ ~/django_projects/phytosanitary-env/phytosanitary-project/static/admin
+# ln -s ~/django_projects/phytosanitary-env/lib/python2.6/site-packages/django/contrib/admin/media/ ~/django_projects/phytosanitary-env/project/static/admin
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
@@ -104,7 +104,7 @@ AUTH_PROFILE_MODULE = 'phytosanitary.Contributor'
 ANONYMOUS_USER_ID = '-1'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ROOT_URLCONF = 'phytosanitary-project.urls'
+ROOT_URLCONF = 'project.urls'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -127,18 +127,18 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     # 'simplemathcaptcha',
     
-# https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/gunicorn/
+# http://gunicorn.org/run.html#gunicorn-django
 # ssh sgriffee@EXLQAIPPC1.ext.fao.org
-# cd django_projects/ippc
-# . bin/activate
-# cd ippc
-# python manage.py run_gunicorn localhost:9000
-# or
-# gunicorn_django -b localhost:9000
+# cd /opt/django_projects/phytosanitary-env && . bin/activate && cd project
+# gunicorn_django --bind localhost:8000 --pid /tmp/django-gunicorn-phytosanitary.pid --daemon
+# or, using shell script to set a pid for monit:
+# init.sh start|stop|restart
 
-# restart: 
+# command to reload gunicorn: 
+# kill -HUP `cat /tmp/django-gunicorn-phytosanitary.pid`
+
+# command to see what gunicorn processes are running
 # ps aux | grep gunicorn
-# kill 38202
 
     'gunicorn',
     

@@ -62,7 +62,7 @@ class SignupFormExtra(SignupForm):
 # import datetime
 # from models import Resource
 # from widgets import SplitSelectDateTimeWidget
-# # from phytosanitary-project import settings
+# # from project import settings
 # import settings
 # 
 # # Using ModelForm here to override the model's default text input widget and have a drop down menu with selectable date and time. Also needed to specify form_class=NoteForm in the create_object and update_object generic views functions in views.py

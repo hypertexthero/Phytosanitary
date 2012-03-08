@@ -1,0 +1,13 @@
+{# http://www.djangrrl.com/post/custom-template-tags-in-django/ #}
+
+    {# <h4 class="quiet">Last Updated Note:</h4> #}
+    {# {% for resource in resources %} #}
+    {#     {% if user.is_authenticated %}<p class="floatright"><a class="edit" href="{% url notes_update note.id %}">edit</a> <a class="warning" href="{% url notes_delete note.id %}">delete</a></span></p>{% endif %} #}
+    {# {% endfor %} #}
+    
+    {% for resource in resource %}
+        {{ resource.body_html|safe }}
+        {% if user.is_staff %} 
+            <a class="edit" href="/admin/phytosanitary/resource/{{ resource.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+        {% endif %}
+    {% endfor %}

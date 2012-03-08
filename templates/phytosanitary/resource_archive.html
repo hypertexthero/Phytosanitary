@@ -9,12 +9,18 @@
 {% block editingtoolbar %}{{ block.super }}{% endblock %}
 
 {# <p>This is a list of the latest {{ latest.count }} resources published in the blog.</p> #}
-{% for resource in latest %}
-{% if resource.title == "Homepage" %}
-    {# <h1 class="first">{{ resource.title }}</h1> #}
-    {{ resource.body_html|safe }}
-{% endif %}
-{% endfor %}
+{# {% for resource in latest %} #}
+{# {% if resource.title == "Homepage" %} #}
+{#     {{ resource.body_html|safe }} #}
+{#     {% if user.is_staff %}  #}
+{#         <a class="edit" href="/admin/phytosanitary/resource/{{ resource.id }}">edit</a> #}
+{#     {% endif %} #}
+{# {% endif %} #}
+{# {% endfor %} #}
+
+{# =todo: #}
+{% load phytosanitary_tags %}
+{% homeintro %}
 
 {# <h1 class="first">About Phytosanitary.info</h1> #}
 {#  #}

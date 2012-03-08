@@ -1,5 +1,19 @@
 from django.db.models import get_model
 from django import template
+register = template.Library()
+
+# homepage introduction
+# templates/phytosanitary/resource_archive.html
+# templates/phytosanitary/includes/homeintro.html
+from project.phytosanitary.models import Resource
+def homeintro(context): # need 'context' in here otherwise get 'list index out of range' error
+    resource = Resource.objects.filter(title__exact='Homepage')
+    # http://stackoverflow.com/a/4338108/412329 - passing the user variable into the context
+    user = context['request'].user
+    return {'resource': resource, 'user': user}
+
+register.inclusion_tag('phytosanitary/includes/homeintro.html', takes_context=True)(homeintro) # needed to add 'takes_context=True' argument so that the user variable would get passed into the context
+
 
 def do_latest_content(parser, token):
     bits = token.split_contents()
@@ -26,5 +40,5 @@ class LatestContentNode(template.Node):
         context[self.varname] = manager.all()[:self.num]
         return ''
 
-register = template.Library()
+
 register.tag('get_latest_content', do_latest_content)
