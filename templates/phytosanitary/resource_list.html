@@ -65,6 +65,11 @@
            {# <td class="typetd">{{ resource.tag }}</td> #}
            <td><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
                
+               {% if resource.ippc_resource %}
+                   <span class="small quiet ippc-resource">provided by <span class="small">IPPC</span>{# <a href="http://www.ippc.int"></a> #}</span>
+               {% endif %}
+               
+               
                {% if user.is_staff %} 
                    <a class="edit" href="/admin/phytosanitary/resource/{{ object.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
                {% endif %}

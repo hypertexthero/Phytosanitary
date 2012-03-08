@@ -23,12 +23,26 @@ class ResourceAdmin(admin.ModelAdmin):
 admin.site.register(Resource, ResourceAdmin)
 
 
-# class ContributorAdmin(admin.ModelAdmin):
-#     pass
-#     
-# admin.site.register(Contributor, ContributorAdmin)
 
-# class LinkAdmin(admin.ModelAdmin):
+# Alternative integration of Markedit (currently doing it with override in tempaltes/admin/base.html)
+# from markedit.admin import MarkEditAdmin
+# class ResourceAdmin(MarkEditAdmin):
+#     exclude = ('enable_comments',)
+#     save_on_top = True
+#     list_display = ('title', 'pub_date', 'author')
 #     prepopulated_fields = { 'slug': ['title'] }
+# 
+#     class MarkEdit:
+#         fields = ['body', ]
+#         options = {
+#             'preview': 'below',
+#             # 'toolbar': { 'backgroundMode' : 'light' }
+#         }
 #     
-# admin.site.register(Link, LinkAdmin)
+#     # http://www.b-list.org/weblog/2008/dec/24/admin/
+#     def save_model(self, request, obj, form, change):
+#         if not change:
+#             obj.author = request.user
+#         obj.save()
+# 
+# admin.site.register(Resource, ResourceAdmin)

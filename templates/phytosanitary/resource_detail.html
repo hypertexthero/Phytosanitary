@@ -76,6 +76,10 @@
         </dd>
         {% endif %}
         
+        {% if object.ippc_resource %}
+        <p><span class="small quiet ippc-resource">Provided by IPPC{# <a href="http://www.ippc.int"></a> #}</span></p>
+        
+        {% endif %}
         
         {% if object.pub_date %}
         <dt>Published Date</dt>

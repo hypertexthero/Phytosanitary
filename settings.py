@@ -125,6 +125,11 @@ INSTALLED_APPS = (
     'userena',
     'guardian',
     'easy_thumbnails',
+    # 'markedit',
+
+# *************************
+    # 'multiuploader',
+    # 'sorl.thumbnail',
     # 'simplemathcaptcha',
     
 # http://gunicorn.org/run.html#gunicorn-django

@@ -43,11 +43,19 @@
                 {% for resource in latest %}
                 <tr>
                     {# <td class="typetd">{{ resource.tag }}</td> #}
-                    <td><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
+                    <td>
                         
+                        <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
+                        
+                        {% if resource.ippc_resource %}
+                            <span class="small quiet ippc-resource">provided by <span class="small">IPPC</span>{# <a href="http://www.ippc.int"></a> #}</span>
+                        {% endif %}
+
+
                         {% if user.is_staff %} 
                             <a class="edit" href="/admin/phytosanitary/resource/{{ resource.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
                         {% endif %}
+                        
                         
                         </td>
                     <td class="datetd">{{ resource.pub_date|date:"Y-m-j" }}</td>

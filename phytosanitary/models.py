@@ -98,12 +98,17 @@ class Resource(models.Model):
     org_title = models.CharField(blank=True, max_length=250, help_text='', verbose_name='Organization')
     # http://stackoverflow.com/a/1190866/412329
     document = models.FileField(blank=True, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/') 
+    
+    # *************************
+    # items = MultiuploaderImage.objects.all()
+    
     # OLD - do not usefile = models.FileField('Upload', upload_to='files/%Y/%m%d%H%M%S/')
     url = models.URLField(blank=True, help_text="A link to something elsewhere.", verbose_name='URL')
     contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1, verbose_name='Type of Contact')
     contact_email = models.EmailField(blank=True, verbose_name='Email of Contact')
     contact_address = models.TextField(blank=True, verbose_name='Address of Contact')
     agreement = models.BooleanField(blank=False, verbose_name='Agreed to have these Phytosanitary Technical Resources published in public')
+    ippc_resource = models.BooleanField(default=False, verbose_name='Resource provided by the IPPC')
 
     # Fields to store generated HTML.
     # excerpt_html = models.TextField(editable=False, blank=True)
@@ -174,7 +179,7 @@ class ResourceForm(forms.ModelForm):
     required_css_class = 'required'
     class Meta:
         model = Resource # model has a user field
-        fields = ('title', 'body', 'categories', 'document', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'agreement',)
+        fields = ('title', 'body', 'categories', 'document', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'agreement')
         widgets = {
                     'body': Textarea(attrs={'cols': 80, 'rows': 25})
                 }

@@ -1,6 +1,96 @@
 [
     {
         "pk": 1, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 1, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 2, 
+            "mugshot": "user/photos/743712de94.png", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 3, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 4, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 5, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 6, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 7, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 8, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 9, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "phytosanitary.contributor", 
+        "fields": {
+            "user": 10, 
+            "mugshot": "", 
+            "privacy": "registered"
+        }
+    }, 
+    {
+        "pk": 1, 
         "model": "phytosanitary.category", 
         "fields": {
             "description": "In this section you can find Databases & Tools resources. The databases that are available or soon to be available include:\r\n\r\n[Capacity Development Projects Database](http://projects.phytosanitary.info) that attempts to catalogue phytosanitary projects and interventions in a geographical searchable format complete with a map feature. Contact Points are encouraged to review the data for their countries and update the database regularly.[Log in here](http://projects.phytosanitary.info/index.php?id=1110970&L=0) with your IPP Portal account to share phytosanitary capacity development projects in your region/country.\r\n\r\n[Capacity Development Activities database](http://activities.phytosanitary.info) will enable for you to find past, current and future phytosanitary capacity development events. This tool will inlude national, regional and global events (e.g. symposia, meetings, etc.) and activities (training courses, workshops etc.) that CPs wish to highligh. It is intended to be complementary to the [IPP events calendar](https://www.ippc.int/index.php?id=1110636&L=0) (e.g. symposia, meetings, etc.) and activities (training courses, workshops etc.) that CPs wish to highlight\r\n\r\n[Phytosanitary Capacity Development Consultant Roster](http://roster.phytosanitary.info) that will provide access to phytosanitary expertise in a variety of fields in a searchable database format. This tool will be available post CPM.\r\n\r\n\r\n", 
@@ -9,32 +99,51 @@
             "description_html": "<p>In this section you can find Databases &amp; Tools resources. The databases that are available or soon to be available include:</p>\n<p><a href=\"http://projects.phytosanitary.info\">Capacity Development Projects Database</a> that attempts to catalogue phytosanitary projects and interventions in a geographical searchable format complete with a map feature. Contact Points are encouraged to review the data for their countries and update the database regularly.<a href=\"http://projects.phytosanitary.info/index.php?id=1110970&amp;L=0\">Log in here</a> with your IPP Portal account to share phytosanitary capacity development projects in your region/country.</p>\n<p><a href=\"http://activities.phytosanitary.info\">Capacity Development Activities database</a> will enable for you to find past, current and future phytosanitary capacity development events. This tool will inlude national, regional and global events (e.g. symposia, meetings, etc.) and activities (training courses, workshops etc.) that CPs wish to highligh. It is intended to be complementary to the <a href=\"https://www.ippc.int/index.php?id=1110636&amp;L=0\">IPP events calendar</a> (e.g. symposia, meetings, etc.) and activities (training courses, workshops etc.) that CPs wish to highlight</p>\n<p><a href=\"http://roster.phytosanitary.info\">Phytosanitary Capacity Development Consultant Roster</a> that will provide access to phytosanitary expertise in a variety of fields in a searchable database format. This tool will be available post CPM.</p>", 
             "title": "Databases & Tools"
         }
-    },
-     
+    }, 
     {
-        "pk": 2,
-         "model": "phytosanitary.Category",
-         "fields": 
-        {
-            "description": "Advocacy _description._",
-             "order": 1,
-             "slug": "advocacy",
-             "title": "Advocacy"
+        "pk": 2, 
+        "model": "phytosanitary.category", 
+        "fields": {
+            "description": "Advocacy _description._", 
+            "order": 1, 
+            "slug": "advocacy", 
+            "description_html": "", 
+            "title": "Advocacy"
         }
-    },
-     
+    }, 
     {
-        "pk": 3,
-         "model": "phytosanitary.Category",
-         "fields": 
-        {
-            "description": "Media Library _description._",
-             "order": 2,
-             "slug": "media",
-             "title": "Media Library"
+        "pk": 3, 
+        "model": "phytosanitary.category", 
+        "fields": {
+            "description": "Media Library _description._", 
+            "order": 2, 
+            "slug": "media", 
+            "description_html": "", 
+            "title": "Media Library"
         }
-    },
-     
+    }, 
+    {
+        "pk": 4, 
+        "model": "phytosanitary.category", 
+        "fields": {
+            "description": "Training Materials _description._", 
+            "order": 3, 
+            "slug": "training", 
+            "description_html": "", 
+            "title": "Training Materials"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "phytosanitary.category", 
+        "fields": {
+            "description": "Miscellaneous _description._", 
+            "order": 4, 
+            "slug": "misc", 
+            "description_html": "", 
+            "title": "Miscellaneous"
+        }
+    }, 
     {
         "pk": 4, 
         "model": "phytosanitary.resource", 
@@ -61,17 +170,86 @@
             "slug": "homepage", 
             "tags": ""
         }
-    },
-     
+    }, 
     {
-        "pk": 5,
-         "model": "phytosanitary.Category",
-         "fields": 
-        {
-            "description": "Miscellaneous _description._",
-             "order": 4,
-             "slug": "misc",
-             "title": "Miscellaneous"
+        "pk": 3, 
+        "model": "phytosanitary.resource", 
+        "fields": {
+            "body": "asdfsdfasdf", 
+            "status": 2, 
+            "ippc_resource": false, 
+            "title": "asdf", 
+            "org_title": "", 
+            "contact_type": "", 
+            "categories": [
+                1
+            ], 
+            "agreement": true, 
+            "body_html": "<p>asdfsdfasdf</p>", 
+            "url": "", 
+            "contact_address": "", 
+            "contact_email": "", 
+            "author": 2, 
+            "enable_comments": false, 
+            "featured": false, 
+            "document": "", 
+            "pub_date": "2012-03-08 14:52:51", 
+            "slug": "asdf", 
+            "tags": ""
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "phytosanitary.resource", 
+        "fields": {
+            "body": "Some markdown!\r\n\r\n- list\r\n- item", 
+            "status": 1, 
+            "ippc_resource": true, 
+            "title": "Resource Title", 
+            "org_title": "IPPC", 
+            "contact_type": "", 
+            "categories": [
+                1
+            ], 
+            "agreement": false, 
+            "body_html": "<p>Some markdown!</p>\n<ul>\n<li>list</li>\n<li>item</li>\n</ul>", 
+            "url": "", 
+            "contact_address": "", 
+            "contact_email": "", 
+            "author": 1, 
+            "enable_comments": false, 
+            "featured": false, 
+            "document": "", 
+            "pub_date": "2012-03-08 14:33:21", 
+            "slug": "resource-title", 
+            "tags": ""
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "phytosanitary.resource", 
+        "fields": {
+            "body": "asdfdsf", 
+            "status": 2, 
+            "ippc_resource": false, 
+            "title": "dsf", 
+            "org_title": "", 
+            "contact_type": "", 
+            "categories": [
+                1
+            ], 
+            "agreement": true, 
+            "body_html": "<p>asdfdsf</p>", 
+            "url": "", 
+            "contact_address": "", 
+            "contact_email": "", 
+            "author": 1, 
+            "enable_comments": false, 
+            "featured": false, 
+            "document": "", 
+            "pub_date": "2012-03-08 14:33:17", 
+            "slug": "dsf", 
+            "tags": ""
         }
     }
 ]
