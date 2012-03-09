@@ -22,8 +22,19 @@
     {{ object.body_html|safe }}
     
     {% if object.document %}        
-
         <h2>Files</h2>
+        {# todo:  #}
+        {#      #}
+        {#     - implement ability to add more than one file per resource submission  #}
+        {#     - file icon or text based on file extension #}
+                {# - http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models #}
+        <ul>
+            <li><a href="/uploads/{{ object.document }}">{{ object.filename }}</a> 
+        </ul>
+    {% endif %}
+    
+    {% if photos %}
+        <h2>Photos</h2>
     
         {# todo:  #}
         {#      #}
@@ -31,10 +42,21 @@
         {#     - file icon or text based on file extension #}
                 {# - http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models #}
         
-        <ul>
-            <li><a href="/uploads/{{ object.document }}">{{ object.filename }}</a> 
+        <ul class="thumbs">
+            {% load thumbnail %}
+            {% for photo in photos %}
+            {# {{ photos }} #}
+                <li><a href="/uploads/{{ photo.image }}">
+                        <img src="{% thumbnail photo.image 100x50 %}" />
+                        {{ photo.title }} - {{ photo.caption }}
+                        </a>
+                    
+                    
+                    
+                    </li>                
+            {% endfor %}
         </ul>
-
+        <br class="clearboth" />
     {% endif %}
     
 

@@ -165,6 +165,35 @@ except tagging.AlreadyRegistered:
     pass
 
 
+
+class Photo(models.Model):
+    resource = models.ForeignKey(Resource)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="photos/%Y/%m/%d/")
+    caption = models.CharField(max_length=250, blank=True)
+    
+    class Meta:
+        ordering = ['title']
+
+    def __unicode__(self):
+        return self.title
+    
+    # @models.permalink
+    # def get_absolute_url(self):
+    #     return ('phytosanitary_resource_detail', None, {'object_id': self.id})
+
+# 
+# class File(models.Model):
+#     resource = models.ForeignKey(Resource)
+#     title = models.CharField(max_length=100)
+#     document = models.FileField(blank=True, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/')
+# 
+#     # class Meta:
+#     #     ordering = ['title']
+# 
+#     def __unicode__(self):
+#         return self.title
+
 from django import forms
 from django.forms import ModelForm, Textarea
 # from django.forms.fields import DateField, ChoiceField, MultipleChoiceField

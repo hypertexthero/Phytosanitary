@@ -20,7 +20,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from models import Resource, ResourceForm, Contributor
+from models import Resource, ResourceForm, Contributor, Photo
 from django import forms
 
 def handle_uploaded_file(f):
@@ -74,6 +74,67 @@ def resource_upload(request):
     return render_to_response('phytosanitary/resource_upload.html',
         {'form': form},
         context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
+
+
+
+from django.views.generic.date_based import object_detail
+from django.core.urlresolvers import reverse
+import datetime
+import time
+from django.db.models.fields import DateTimeField
+# def get_photos(): 
+#    return Photo.objects.all()
+
+
+from django.views.generic import date_based 
+# from yourproj.yourapp.models import Thing1 
+# from yourproj.yourotherapp.models import Thing2 
+def phytosanitary_resource_detail(request, year, month, day, slug): 
+    q1 = Resource.objects.all() 
+    q2 = Photo.objects.all() 
+    params = { 
+        'queryset': q1, 
+        'date_field': 'pub_date', 
+        'year': year, 
+        'month': month, 
+        'day': day, 
+        'slug': slug, 
+        'extra_context': { 
+            'photos': q2 
+        } 
+    } 
+    return date_based.object_detail(request, **params)
+
+# def phytosanitary_resource_detail(request, year, month, day, slug):
+#     """View resource detail"""
+# 
+#     # photos=Photo.objects.all()
+# 
+#     return object_detail(request,
+#         queryset=Resource.objects.all(),
+#         # photos=Photo.objects.all(),
+#         year='year',
+#         month='month',
+#         day='day',
+#         slug='slug',
+#         slug_field='slug',
+#         date_field='pub_date',
+#         template_name='phytosanitary/resource_detail.html',
+#         template_object_name='object', # so I can write {{ note.title }} in templates/notes/detail.html (otherwise I would need to write {{ object.title }})   
+#         # extra_context= { 'photos': photos },
+#     )
+
+
+
+
 
 
 # from django.views.generic.create_update import create_object
@@ -182,8 +243,8 @@ from django.shortcuts import render_to_response
 from django.db.models import Q
 
 from django.core.urlresolvers import reverse
-from django.views.generic.list_detail import object_detail
-from django.views.generic.date_based import archive_index
+# from django.views.generic.list_detail import object_detail
+# from django.views.generic.date_based import archive_index
 
 def search(request):
     """ Search form for body_html and titles so far """

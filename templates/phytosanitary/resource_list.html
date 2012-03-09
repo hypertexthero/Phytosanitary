@@ -48,6 +48,11 @@
     <h1 class="first">{{ category.title }}</h1>
     {{ category.description_html|safe }}
     
+    {% if user.is_staff %} 
+        <a class="edit" href="/admin/phytosanitary/category/{{ category.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
+    {% endif %}
+    
+    
     <div class="dashbox">
             <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
                 {# <caption>My Latest Changes</caption> #}
