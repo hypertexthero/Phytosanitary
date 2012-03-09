@@ -168,9 +168,9 @@ except tagging.AlreadyRegistered:
 
 class Photo(models.Model):
     resource = models.ForeignKey(Resource)
-    title = models.CharField(blank=True, max_length=100)
-    image = models.ImageField(blank=True, upload_to="photos/%Y/%m/%d/")
-    caption = models.CharField(max_length=250, blank=True)
+    title = models.CharField(blank=True, null=True, max_length=100)
+    image = models.ImageField(blank=True, null=True, upload_to="photos/%Y/%m/%d/")
+    caption = models.CharField(blank=True, null=True, max_length=250)
     
     class Meta:
         ordering = ['title']
@@ -220,7 +220,7 @@ class PhotoForm(forms.ModelForm):
     # caption = forms.CharField(max_length=250)
     class Meta:
         model = Photo
-        # fields = ('title', 'image', 'caption')
+        fields = ('title', 'caption', 'image')
         exclude = ('resource',)
 
 
