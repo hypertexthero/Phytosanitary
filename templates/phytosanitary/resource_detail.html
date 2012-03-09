@@ -44,7 +44,7 @@
         
         <ul class="thumbs">
             {% load thumbnail %}
-            {% for photo in photos %}
+            {% for photo in object.photo_set.all %}
             {# {{ photos }} #}
                 <li><a href="/uploads/{{ photo.image }}">
                         <img src="{% thumbnail photo.image 100x50 %}" />

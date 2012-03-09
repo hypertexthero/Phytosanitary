@@ -22,7 +22,42 @@
             {% if form.errors %}
             <p class="warning">Please fix the errors marked in <span style="color:#c00;">red</span> below. If you selected a file, please select it again.</p>
             {% endif %}
-        {{ form.as_p }}    
+
+{# {% for field in photo_forms %} #}
+{#     <p> #}
+{#         {{field.label_tag}} #}
+{#         <br />{{field}} {{field.errors}} #}
+{#     </p> #}
+{# {% endfor %} #}
+
+{# {{ formset.management_form }} #}
+    {% for field in photo_formset %}
+        {{ form.id }}
+        <p>
+            {{field.label_tag}} {{field}} {{field.errors}}{{ form.title }}
+            {% if formset.can_delete %}{{ form.DELETE }}{% endif %}
+        </p>
+    {% endfor %}
+        
+        {# {% for field in fs %} #}
+        {#     <p> #}
+        {#     {{field.label_tag}} #}
+        {#     <br />{{field}} {{field.errors}} #}
+        {#  #}
+        {#     {% if photo_form.pk %} #}
+        {#         <br />Delete?{{field.DELETE}} #}
+        {#     {% endif %} #}
+        {#     </p> #}
+        {# {% endfor %} #}
+
+        
+            {# {% for photo in photo_form  %} #}
+            {#     <input id="id_title" type="text" name="title" value="{{ form.photo.title.value|default:'' }}" maxlength="255" tabindex="1" placeholder="Title…" /> #}
+            {# {% endfor %} #}
+
+        {# {{ resource_form.as_p }}     #}
+        {{ resource_form }}    
+
         
         {# <p><input type="hidden" name="author_name" id="id_author_name" value="{{ user.username }}" /></p> #}
         {# <p><input type="hidden" name="author_id" id="id_author" value="{{ user.id }}" /></p> #}

@@ -168,8 +168,8 @@ except tagging.AlreadyRegistered:
 
 class Photo(models.Model):
     resource = models.ForeignKey(Resource)
-    title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="photos/%Y/%m/%d/")
+    title = models.CharField(blank=True, max_length=100)
+    image = models.ImageField(blank=True, upload_to="photos/%Y/%m/%d/")
     caption = models.CharField(max_length=250, blank=True)
     
     class Meta:
@@ -213,6 +213,15 @@ class ResourceForm(forms.ModelForm):
                     'body': Textarea(attrs={'cols': 80, 'rows': 25})
                 }
 
+class PhotoForm(forms.ModelForm):
+    # resource = forms.ForeignKey(Resource)
+    # title = forms.CharField(max_length=100)
+    # image = forms.ImageField()
+    # caption = forms.CharField(max_length=250)
+    class Meta:
+        model = Photo
+        # fields = ('title', 'image', 'caption')
+        exclude = ('resource',)
 
 
 # FOR FUTURE USE:
