@@ -164,7 +164,7 @@ input, textarea {padding:0.5em;}
 fieldset {border:1px solid #ddd; padding:0.5em 0.5em;}
 fieldset + fieldset {border-top:none;}
 fieldset input {width:98%; padding:0.5em;}
-fieldset textarea {padding:0.5em; overflow:auto; width:98%; min-height:60em; font-size:75%; font-family:"DroidSansMonoRegular", courier, monospace; line-height:1.4em;} 
+fieldset textarea {padding:0.5em; overflow:auto; width:98%; min-height:60em; line-height:1.4em;} 
 textarea#notes-html {background:#eee !important;}
 label {display:block; font-weight:normal;}
 div.notescontainer {border:1px solid #ccc; padding:0 1em 1em; width:100%;}
