@@ -2,8 +2,11 @@
 settings_local.py
 settings_local_production.py
 
-# no deployment docs until they are ready
+# no deployment docs until ready
 deployment.md
+
+# no fixtures for now
+initial_data.json
 
 # No shell scripts or conf files?
 conf/
