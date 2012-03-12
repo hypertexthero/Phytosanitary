@@ -19,15 +19,15 @@ class DocumentInline(admin.StackedInline):
 
 # http://stackoverflow.com/a/911915/412329
 class DifferentlySizedTextarea(forms.Textarea):
-  def __init__(self, *args, **kwargs):
-    attrs = kwargs.setdefault('attrs', {})
-    attrs.setdefault('cols', 80)
-    attrs.setdefault('rows', 40)
-    super(DifferentlySizedTextarea, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        attrs = kwargs.setdefault('attrs', {})
+        attrs.setdefault('cols', 80)
+        attrs.setdefault('rows', 40)
+        super(DifferentlySizedTextarea, self).__init__(*args, **kwargs)
 
 class ResourceAdmin(admin.ModelAdmin):
     formfield_overrides = { models.TextField: {'widget': DifferentlySizedTextarea}}
-    exclude = ('enable_comments',)
+    exclude = ('enable_comments', 'author',)
     save_on_top = True
     list_display = ('title', 'pub_date', 'author')
     list_filter = ('status', 'pub_date', 'author')

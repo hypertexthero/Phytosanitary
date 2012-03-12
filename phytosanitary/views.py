@@ -106,7 +106,6 @@ def phytosanitary_resource_detail(request, year, month, day, slug):
     } 
     return date_based.object_detail(request, **params)
 
-
 # search.html
 # from django.http import HttpResponse 
 # from django.template import loader, Context

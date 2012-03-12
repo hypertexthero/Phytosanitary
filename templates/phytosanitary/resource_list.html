@@ -68,9 +68,10 @@
     {% for object in object_list %}
        <tr>
            {# <td class="typetd">{{ resource.tag }}</td> #}
-           <td><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+           <td>
+               <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
                
-               {% if resource.ippc_resource %}
+               {% if object.ippc_resource %}
                    <span class="small quiet ippc-resource">provided by <span class="small">IPPC</span>{# <a href="http://www.ippc.int"></a> #}</span>
                {% endif %}
                

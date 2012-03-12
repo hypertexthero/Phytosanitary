@@ -57,8 +57,9 @@
             {% for photo in object.photo_set.all %}
             {# {{ photos }} #}
                 <li>
-                    <a href="/uploads/{{ photo.image }}"><img src="{% thumbnail photo.image 150x150 %}" /><br />
-                    {{ photo.caption }}</a>                    
+                    <a href="/uploads/{{ photo.image }}"><img src="{% thumbnail photo.image 150x150 %}" /></a>
+                    
+                    {{ photo.caption }}                    
                 </li>                
             {% endfor %}
         </ul>

@@ -15,6 +15,7 @@ markdown
 # Pygments
 
 django-tagging
+# django-taggit
 
 # requirements for pil on RHEL/CentOS:
 # - yum -y install gcc
