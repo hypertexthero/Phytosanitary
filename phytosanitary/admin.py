@@ -1,5 +1,5 @@
 from django.contrib import admin
-from phytosanitary.models import Category, Resource, Contributor, Photo
+from phytosanitary.models import Category, Resource, Contributor, Document, Photo
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'description')
@@ -14,6 +14,9 @@ from django.forms import ModelForm, Textarea
 class PhotoInline(admin.StackedInline):
     model = Photo
 
+class DocumentInline(admin.StackedInline):
+    model = Document
+
 # http://stackoverflow.com/a/911915/412329
 class DifferentlySizedTextarea(forms.Textarea):
   def __init__(self, *args, **kwargs):
@@ -27,8 +30,9 @@ class ResourceAdmin(admin.ModelAdmin):
     exclude = ('enable_comments',)
     save_on_top = True
     list_display = ('title', 'pub_date', 'author')
+    list_filter = ('status', 'pub_date', 'author')
     prepopulated_fields = { 'slug': ['title'] }
-    inlines = [PhotoInline]
+    inlines = [PhotoInline, DocumentInline]
         
     # http://www.b-list.org/weblog/2008/dec/24/admin/
     def save_model(self, request, obj, form, change):
@@ -38,6 +42,7 @@ class ResourceAdmin(admin.ModelAdmin):
 
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(Photo)
+admin.site.register(Document)
 
 
 

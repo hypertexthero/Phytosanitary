@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans with user.username as username %}Dear {{ username }},{% endblocktrans %}
+
+{% blocktrans with site.name as site %}A new resource titled {{ resource.title }} was uploaded for your review at {{ site }}.{% endblocktrans %}
+
+{% trans "Sincerely" %},
+{{ site.name }}
+{% endautoescape %}

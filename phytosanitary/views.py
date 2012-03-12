@@ -20,7 +20,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from models import Resource, ResourceForm, Contributor, Photo, PhotoForm
+from models import Resource, ResourceForm, Contributor, Document, DocumentForm, Photo, PhotoForm
 from django import forms
 
 # def handle_uploaded_file(f):
@@ -48,24 +48,32 @@ def resource_upload(request):
         # object_id = Resource.objects.all()
         
         resourceform = ResourceForm(request.POST, request.FILES, instance=Resource())
-        photoformset = [PhotoForm(request.POST, request.FILES, prefix=str(x), instance=Photo()) for x in range(0,3)]
+        photoform = [PhotoForm(request.POST, request.FILES, prefix=str(x), instance=Photo()) for x in range(0,10)]
+        documentform = [DocumentForm(request.POST, request.FILES, prefix=str(x), instance=Document()) for x in range(0,10)]
         
         user = request.user
         author_id = user.id
         
-        if resourceform.is_valid() and all([cf.is_valid() for cf in photoformset]):
+        if resourceform.is_valid() and all([pf.is_valid() for pf in photoform]) and all([df.is_valid() for df in documentform]):
             new_resource = resourceform.save(commit=False)
             new_resource.author_id = author_id
             resourceform.save()
-            for cf in photoformset:
-                new_photo = cf.save(commit=False)
+            for pf in photoform:
+                new_photo = pf.save(commit=False)
                 new_photo.resource = new_resource
-                cf.save()
+                pf.save()
+            for df in documentform:
+                new_document = df.save(commit=False)
+                new_document.resource = new_resource
+                df.save()
             return HttpResponseRedirect('/thanks/')
     else:
+        # resourceform = ResourceForm()
+        # photoform = [PhotoForm(prefix=str(x)) for x in range(0,3)]
         resourceform = ResourceForm(instance=Resource())
-        photoformset = [PhotoForm(prefix=str(x), instance=Photo()) for x in range(0,3)]
-    return render_to_response('phytosanitary/resource_upload.html', {'resource_form': resourceform, 'photo_formset': photoformset},
+        photoform = [PhotoForm(prefix=str(x), instance=Photo()) for x in range(0,10)]
+        documentform = [DocumentForm(prefix=str(x), instance=Document()) for x in range(0,10)]
+    return render_to_response('phytosanitary/resource_upload.html', {'resource_form': resourceform, 'photo_form': photoform, 'document_form': documentform},
         context_instance=RequestContext(request))
 
 
@@ -83,7 +91,8 @@ from django.views.generic import date_based
 # from yourproj.yourotherapp.models import Thing2 
 def phytosanitary_resource_detail(request, year, month, day, slug): 
     q1 = Resource.objects.all() 
-    q2 = Photo.objects.all() 
+    q2 = Photo.objects.all()
+    q3 = Document.objects.all() 
     params = { 
         'queryset': q1, 
         'date_field': 'pub_date', 
@@ -92,7 +101,7 @@ def phytosanitary_resource_detail(request, year, month, day, slug):
         'day': day, 
         'slug': slug, 
         'extra_context': { 
-            'photos': q2
+            'photos': q2, 'documents': q3
         } 
     } 
     return date_based.object_detail(request, **params)

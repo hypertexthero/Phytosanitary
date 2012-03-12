@@ -17,6 +17,8 @@ Hacking [django-coltrane](http://www.gyford.com/phil/writing/2010/01/14/django.p
 11. Add photo field with thumbnail display in detail view.
 12. Make homepage introduction text editable with Markdown and WMD preview - write a template tag for this
 13. Design favicon for www.phytosanitary.info
+14. Resources marked 'For Review' are still visible on direct URL and search - fix this.
+15. Replace django-tagging with django-taggit
 
 
 ### Future

@@ -27,6 +27,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    # mardown help
+    url(r'^markdown/$', direct_to_template, {'template': 'markdown_help.html'}),
+
     # contributor upload form
     url(r'^upload/$', 'phytosanitary.views.resource_upload', name='resource_upload'),
     # url(r'^upload/$', 'django.views.generic.create_update.create_object', kwargs={'context_processors':form_user_default}),

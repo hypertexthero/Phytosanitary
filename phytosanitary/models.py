@@ -42,7 +42,7 @@ class Category(models.Model):
     """ Categories are the site sections i.e. the global navigation """
     title = models.CharField(max_length=250, help_text='Maximum 250 characters.')
     slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title. Must be unique.")
-    description = models.TextField(help_text='Use Markdown format')
+    description = models.TextField(help_text='Use <a href="/markdown/" onclick="window.open(this.href, this.target); return false;">Markdown format</a>')
     description_html = models.TextField(editable=False, blank=True)
     order = models.IntegerField()
     
@@ -93,11 +93,9 @@ class Resource(models.Model):
     # Core fields.
     title = models.CharField(unique_for_date='pub_date', blank=False, max_length=250)
     # excerpt = models.TextField(blank=True)
-    body = models.TextField(blank=False, help_text='Use Markdown format', verbose_name='Description')
+    body = models.TextField(blank=False, help_text='Use <a href="/markdown/" onclick="window.open(this.href, this.target); return false;">Markdown format</a>', verbose_name='Description')
     pub_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Publication Date', help_text='(will only be published when approved by an administrator)')
     org_title = models.CharField(blank=True, max_length=250, help_text='', verbose_name='Organization')
-    # http://stackoverflow.com/a/1190866/412329
-    document = models.FileField(blank=True, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/') 
     
     # *************************
     # items = MultiuploaderImage.objects.all()
@@ -156,6 +154,7 @@ class Resource(models.Model):
     def filename(self):
         return os.path.basename(self.document.name)
 
+
 # tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
 # With bugfix workaround - http://stackoverflow.com/questions/6295104/django-tagging-already-registered-exception
@@ -165,34 +164,65 @@ except tagging.AlreadyRegistered:
     pass
 
 
+class Document(models.Model):
+    resource = models.ForeignKey(Resource) # , related_name='photos'
+    # keep = models.BooleanField(default=True, editable=False)
+    # remove = models.BooleanField(default=False)
+    # title = models.CharField(blank=True, null=True, max_length=100)
+    # http://stackoverflow.com/a/1190866/412329
+    document = models.FileField(blank=True, help_text='10 MB maximum file size.', verbose_name='Upload a file', upload_to='files/%Y/%m/%d/')
+    # caption = models.CharField(blank=True, max_length=250)
 
-class Photo(models.Model):
-    resource = models.ForeignKey(Resource)
-    title = models.CharField(blank=True, null=True, max_length=100)
-    image = models.ImageField(blank=True, null=True, upload_to="photos/%Y/%m/%d/")
-    caption = models.CharField(blank=True, null=True, max_length=250)
-    
-    class Meta:
-        ordering = ['title']
+    # Eureka!! http://scottbarnham.com/blog/2008/02/24/imagefield-and-edit_inline-revisited/   
+    def save(self):
+        if not self.id and not self.document:
+            return
+        # if self.remove:
+        #     self.delete()
+        else:
+            super(Document, self).save()
+
+    # class Meta:
+        # ordering = ['']
 
     def __unicode__(self):
-        return self.title
+        return self.document.name
+
+    # http://stackoverflow.com/questions/2683621/django-filefield-return-filename-only-in-template
+    def filename(self):
+           return os.path.basename(self.document.name)
+
+    # @models.permalink
+    # def get_absolute_url(self):
+    #     return ('phytosanitary_resource_detail', None, {'object_id': self.id})
+
+class Photo(models.Model):
+    resource = models.ForeignKey(Resource) # , related_name='photos'
+    # keep = models.BooleanField(default=True, editable=False)
+    # remove = models.BooleanField(default=False)
+    # title = models.CharField(blank=True, null=True, max_length=100)
+    image = models.ImageField(blank=True, upload_to="photos/%Y/%m/%d/") 
+    caption = models.CharField(blank=True, max_length=250)
+
+    # Eureka!! http://scottbarnham.com/blog/2008/02/24/imagefield-and-edit_inline-revisited/   
+    def save(self):
+        if not self.id and not self.image:
+            return
+        # if self.remove:
+        #     self.delete()
+        else:
+            super(Photo, self).save()
+            
+    # class Meta:
+        # ordering = ['']
+
+    def __unicode__(self):
+        return self.image.name
     
     # @models.permalink
     # def get_absolute_url(self):
     #     return ('phytosanitary_resource_detail', None, {'object_id': self.id})
 
-# 
-# class File(models.Model):
-#     resource = models.ForeignKey(Resource)
-#     title = models.CharField(max_length=100)
-#     document = models.FileField(blank=True, help_text='Files can be 10Mb maximum. You can upload files such as photos, documents and presentations.', verbose_name='Upload a file', upload_to='%Y/%m/%d/')
-# 
-#     # class Meta:
-#     #     ordering = ['title']
-# 
-#     def __unicode__(self):
-#         return self.title
 
 from django import forms
 from django.forms import ModelForm, Textarea
@@ -200,7 +230,7 @@ from django.forms import ModelForm, Textarea
 class ResourceForm(forms.ModelForm):
     agreement = forms.BooleanField(required=True, label='I agree to have these Phytosanitary Technical Resources published in public')
     # http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
-    document = forms.FileField(label='Select a file to upload',help_text='max. 10 megabytes', required=False)
+    # document = forms.FileField(label='Select a file to upload',help_text='max. 10 megabytes', required=False)
     # description = forms.Textarea(widget=forms.Textarea)
     # http://stackoverflow.com/a/2734790/412329
     # categories = forms.MultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, label="Categories", required=True)
@@ -208,7 +238,7 @@ class ResourceForm(forms.ModelForm):
     required_css_class = 'required'
     class Meta:
         model = Resource # model has a user field
-        fields = ('title', 'body', 'categories', 'document', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'agreement')
+        fields = ('title', 'body', 'categories', 'org_title', 'url', 'contact_type', 'contact_email', 'contact_address', 'agreement')
         widgets = {
                     'body': Textarea(attrs={'cols': 80, 'rows': 25})
                 }
@@ -220,9 +250,18 @@ class PhotoForm(forms.ModelForm):
     # caption = forms.CharField(max_length=250)
     class Meta:
         model = Photo
-        fields = ('title', 'caption', 'image')
+        fields = ('image', 'caption',)
         exclude = ('resource',)
 
+class DocumentForm(forms.ModelForm):
+    # resource = forms.ForeignKey(Resource)
+    # title = forms.CharField(max_length=100)
+    # image = forms.ImageField()
+    # caption = forms.CharField(max_length=250)
+    class Meta:
+        model = Document
+        fields = ('document',)
+        exclude = ('resource',)
 
 # FOR FUTURE USE:
 

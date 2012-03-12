@@ -55,18 +55,34 @@
         </fieldset> 
 
         <fieldset>
-            
-            <legend>Photos</legend>
+            <legend class="normal">Documents</legend>
             {# {{ photo_formset.as_p }}    #}
-            <table>
-                {% for field in photo_formset %}
-                    {{ form.id }}
-                    {{ field.label_tag }} {{ field }} {{ field.errors }} {{ form.title }}
+            <table class="toggleanything">
+                {# {{ photo_formset }} #}
+                {% for field in document_form %}
+                {# {% if field.data.image %} #}
+                {{ field }} {{ field.errors }}
+                {# {% endif %} #}
                 {% if formset.can_delete %}{{ form.DELETE }}{% endif %}
-            
                 {% endfor %}
             </table>
         </fieldset>
+
+        <fieldset>            
+            <legend class="normal">Photos</legend>
+            {# {{ photo_formset.as_p }}    #}
+            <table class="toggleanything">
+{# {{ photo_formset }} #}
+                {% for field in photo_form %}
+                    {# {% if field.data.image %} #}
+                    {{ field }} {{ field.errors }}
+                    {# {% endif %} #}
+                {% if formset.can_delete %}{{ form.DELETE }}{% endif %}
+                {% endfor %}
+            </table>
+        </fieldset>
+        
+
 
         
         {# <p><input type="hidden" name="author_name" id="id_author_name" value="{{ user.username }}" /></p> #}

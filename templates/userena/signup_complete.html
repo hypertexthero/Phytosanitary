@@ -16,7 +16,7 @@
 {# <p>{% trans "Thank you for signing up with us!" %}</p> #}
 
 {% if userena_activation_required %}
-<p>{% blocktrans %}An e-mail with an activation link has been sent to your email address.{% endblocktrans %} Please click on that link within {{ userena_activation_days }} days to activate your account. You will then be able to log in at <a href="/accounts/signin/">phytosanitary.info</a> and upload resources.</p> 
+<p>{% blocktrans %}An e-mail with an activation link has been sent to your email address.{% endblocktrans %} Please click on that link within {{ userena_activation_days }} days to activate your account. You will then be able to sign in at <a href="/accounts/signin/">phytosanitary.info</a> and upload resources.</p> 
 <p>Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically on phytosanitary.info if approved.</p>
 {% else  %}
 <p>{% blocktrans %}You can now use the supplied credentials to signin.{% endblocktrans %}</p>
