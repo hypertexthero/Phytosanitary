@@ -1,23 +1,5 @@
 [
     {
-        "pk": 26, 
-        "model": "contenttypes.contenttype", 
-        "fields": {
-            "model": "tag", 
-            "name": "Tag", 
-            "app_label": "taggit"
-        }
-    }, 
-    {
-        "pk": 27, 
-        "model": "contenttypes.contenttype", 
-        "fields": {
-            "model": "taggeditem", 
-            "name": "Tagged Item", 
-            "app_label": "taggit"
-        }
-    }, 
-    {
         "pk": 15, 
         "model": "contenttypes.contenttype", 
         "fields": {
