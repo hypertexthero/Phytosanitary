@@ -21,7 +21,7 @@
     
     {{ object.body_html|safe }}
     
-    {% if documents %}        
+    {% if object.document_set.count %}        
         <h2>Files</h2>
         {# todo:  #}
         {#      #}
@@ -36,21 +36,19 @@
          <ul>
                 {# https://docs.djangoproject.com/en/dev/topics/db/queries/#related-objects #}
                 {% for document in object.document_set.all %}
-                    <li><a href="/uploads/{{ document.document }}">{{ document.filename }}</a> <i class="small quiet">{{ document.document.file.size|filesizeformat }}</i></li>                
+                        <li><a href="/uploads/{{ document.document }}">{{ document.filename }}</a> <i class="small quiet">{{ document.document.file.size|filesizeformat }}</i></li>                
                 {% endfor %}
             </ul>
             <br class="clearboth" />
     {% endif %}
     
-    {% if photos %}
+    {% if object.photo_set.count %}
         <h2>Photos</h2>
-    
         {# todo:  #}
         {#      #}
         {#     - implement ability to add more than one file per resource submission  #}
         {#     - file icon or text based on file extension #}
                 {# - http://stackoverflow.com/questions/4343413/how-to-upload-multiple-file-in-django-admin-models #}
-        
         <ul class="thumbs">
             {% load thumbnail %}
             {# https://docs.djangoproject.com/en/dev/topics/db/queries/#related-objects #}
