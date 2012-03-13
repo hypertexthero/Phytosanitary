@@ -23,7 +23,7 @@ ul.globalnav li a:hover {color:#111 !important; background:#F1F7EB url(/static/i
 
 ul.globalnav li a.home-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;} /* highlight homepage tab - see first li of ul class="globalnav" in base.html */
 
-p.breadcrumbs {background:#663366; color:#fff; margin:0; padding:0.5em; clear:both;}
+p.breadcrumbs {background:#663366; color:#fff; margin:0; padding:0.5em; clear:both; text-align:left;}
 p.breadcrumbs a {color:#cff !important; text-decoration:none; font-weight:normal !important;}
 
 div#content {width:64%; float:left; clear:none; margin:0; padding:0; text-align:left;}
