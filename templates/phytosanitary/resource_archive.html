@@ -59,7 +59,7 @@
                         {% load thumbnail %}
                            {# https://docs.djangoproject.com/en/dev/topics/db/queries/#related-objects #}
                            {% for photo in resource.photo_set.all %}                       
-                                       <img src="{% thumbnail photo.image 20x20 %}" />
+                                       <img src="{% thumbnail photo.image 15x15 %}" />
                            {% endfor %}
                            
                         </td>

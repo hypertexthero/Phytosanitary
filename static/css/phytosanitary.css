@@ -2,7 +2,7 @@
 Description: Phytosanitary Resources website main stylesheet for screen and projection
 File: phytosanitary.css
 Author: Simon Griffee
-Last update: Sunday, 04 March 2012 at 21:07:52
+Last update: Tuesday, 13 March 2012 at 15:41:59
 */
 
 body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:17px 7px; background:#fff; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/ /*url(/static/img/website-bar-3.0.gif) repeat-x*/
@@ -12,7 +12,7 @@ body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; pad
 div#header {/*overflow:auto;*/ width:100%;} /* clear the floats inside the header - http://www.quirksmode.org/css/clearing.html */
 
 div.logo {float:left;}
-div#nav {float:right; width:30%; text-align:right;}
+div#nav {float:right; width:50%; text-align:right;}
 div#nav p {margin:0;}
 /*div#nav form {padding-bottom:2em;}*/
 
@@ -30,6 +30,10 @@ div#content {width:64%; float:left; clear:none; margin:0; padding:0; text-align:
 div.contentbox {background:#fff; margin:0; padding:0 1.25em 1em 1em; border:1px solid #eee; border-top:none;}
 #sidebar {width:36%; float:left; text-align:left; background:#F1F7EB;} /*background:#F1F7EB;*/
 .sidebarbox {padding:0 1.25em 1em;}
+
+body#upload div#content {width:100%;}
+body#upload div#sidebar {display:none;}
+
 div.docs {border-bottom:1px solid #eee;}
 div.pageinfo {border-bottom:1px solid #eee;}
 #footer div.floatright {width:auto;}
@@ -91,18 +95,15 @@ a#LogoResources {font-size:2em; color:#000;}
 img.ippclogoglyph {padding:0 0 0 9px;}
 */
 .btn {background:#063; color:#cff !important;}
-form#search button.btn, form#searchfooter button.btn {font-size:1em; padding:0.25em 0.5em; margin:0; background:#063;}
-form#search input, form#searchfooter input {border-left:1px solid #063; border-top:1px solid #063; border-bottom:1px solid #ddd; border-right:1px solid #ddd; padding:1px 0.25em 0.25em;}
 .btn:hover, .btn:focus {border-color:#cff !important; color:#fff !important;}
 li.loginbutton a {text-transform:uppercase !important; font-size:1em !important; letter-spacing:0.1em; padding:0.5em 0.75em; font-weight:normal !important; background:#369;}
 li.loginbutton a:hover {background:#063 !important; color:#fff !important;}
-
-.treeview li {color:#063; font-weight:bold;}
 
 table.tablesorter .header {background-image: url(/static/img/tablesorter-resources-bg.gif) !important;}
 table.tablesorter .headerSortUp {background-image: url(/static/img/tablesorter-desc.gif) !important;}
 table.tablesorter .headerSortDown {background-image: url(/static/img/tablesorter-asc.gif) !important;}
 table, td {border-color:#eee;}
+td img {vertical-align:bottom;}
 
 #footer {margin-top:1em !important; padding-top:0;}
 #footer a {text-decoration:none; font-weight:normal;}
@@ -151,22 +152,27 @@ p.pagenav span { padding:1px 3px;  margin:0; font-weight:normal; border: none; b
 
 form {margin:1em 0;}
 #header form {margin-bottom:0;}
-legend {font-weight:bold; font-size:2em;}
+legend {font-weight:normal; text-transform:uppercase; font-size:1.7em; letter-spacing:0.1em;}
 /*label {display:block;}*/
 input.text {width:20em;}
 input.submit {width:auto;}
 div#commentform p label {display:block;}
-fieldset {border:1px solid #ccc;}
 
-
-input, textarea {padding:0.5em;}
-#content input, #content textarea {width:100%;}
-fieldset {border:1px solid #ddd; padding:0.5em 0.5em;}
+input, textarea, select {padding:1em; font-size:1.1em;}
+form#search_form input {padding:0.25em !important;}
+select#id_categories {min-height:10em;}
+#content input, #content textarea {width:96%;}
+fieldset {border:1px solid #ddd; padding:1em;}
 fieldset + fieldset {border-top:none;}
-fieldset input {width:98%; padding:0.5em;}
-fieldset textarea {padding:0.5em; overflow:auto; width:98%; min-height:60em; line-height:1.4em;} 
+/*fieldset input {width:98%; padding:1em;}*/
+fieldset textarea {overflow:auto; min-height:30em; line-height:1.4em;} 
+textarea#id_contact_address {min-height:7em;}
+input#id_agreement {padding:2em;}
+div#content fieldset p {max-width:100%;}
 textarea#notes-html {background:#eee !important;}
 label {display:block; font-weight:normal;}
+#content label {font-size:1.2em;}
+
 div.notescontainer {border:1px solid #ccc; padding:0 1em 1em; width:100%;}
 div.noteswritebox {float:left; width:47%; margin-right:1em;}
 div.notespreviewbox {float:left; width:47%;}

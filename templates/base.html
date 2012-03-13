@@ -59,7 +59,7 @@
                     
                     <a class="edit" href="{% url userena_signin %}">Sign in</a> or <a href="{% url userena_signup %}">Sign up</a>
                 {% endif %}
-                <form method="get" action="/search/"> 
+                <form method="get" action="/search/" id="search_form"> 
                         {# <label for="id_q">Search:</label>  #}
                         <input type="text" name="q" id="id_q" size="30" /> 
                         <input type="submit" value="Search" />

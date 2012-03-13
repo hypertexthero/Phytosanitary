@@ -6,7 +6,7 @@ settings_local_production.py
 deployment.md
 
 # no fixtures for now
-initial_data.json
+*.json
 
 # No shell scripts or conf files?
 conf/
