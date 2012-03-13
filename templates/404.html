@@ -1,1 +1,12 @@
-404 - Not found
+{% extends 'base.html' %}
+{% block bodyid %}notfound{% endblock %}
+{% block headtitle %}404 Not Found - {% endblock %}
+
+{% block breadcrumbs %}
+    &rarr; Search: {{ query }}
+{% endblock %}
+
+{% block content %}
+<h1 class="first">404 - Not found</h1>    
+<p>We could not find the page you were looking for. Try above or going to the <a href="/">homepage</a>.</p> 
+{% endblock %}

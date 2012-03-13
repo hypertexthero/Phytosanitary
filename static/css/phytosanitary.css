@@ -5,10 +5,10 @@ Author: Simon Griffee
 Last update: Tuesday, 13 March 2012 at 15:41:59
 */
 
-body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:17px 7px; background:#fff; color:#000; margin-bottom:10em;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/ /*url(/static/img/website-bar-3.0.gif) repeat-x*/
+body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:17px 7px; background:#fff url(/static/img/body-bg-resources.jpg) repeat-x; color:#000; margin-bottom:10em; text-align:center;}  /*url(/static/img/body-bg-resources.gif) repeat 0 0*/ /*url(/static/img/website-bar-3.0.gif) repeat-x*/
 
 /* =Layout ------- */
-#container {/*max-width:98% !important; width:98% !important;*/ /*width:970px;*/}
+#container {max-width:1200px; margin:0 auto;}
 div#header {/*overflow:auto;*/ width:100%;} /* clear the floats inside the header - http://www.quirksmode.org/css/clearing.html */
 
 div.logo {float:left;}
@@ -16,7 +16,7 @@ div#nav {float:right; width:50%; text-align:right;}
 div#nav p {margin:0;}
 /*div#nav form {padding-bottom:2em;}*/
 
-ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both;}
+ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both; text-align:left;}
 ul.globalnav li {display:inline; padding:0; margin:0;}
 ul.globalnav li a {background:none; font-weight:bold; text-decoration:none; padding:1.2em 1em;}
 ul.globalnav li a:hover {color:#111 !important; background:#F1F7EB url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important;}
