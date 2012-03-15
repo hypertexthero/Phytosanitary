@@ -54,7 +54,7 @@ ul.thumbs li a {display:block; /*height:100px;*/ border:none; text-decoration:no
 
 /* =Headings ------- */
 h1,h2,h3,h4,h5,h6 {color:#000; margin:1em 0 0.5em; font-weight:normal;}
-h1 {font-size:2em; margin-top:0; padding-top:1em;}
+h1 {font-size:2em; margin-top:0; padding-top:0.75em;}
 /*h1.first {margin-top:0; padding-top:1em;}*/
 h1#logo {float:left; text-transform:uppercase; letter-spacing:1px; font-weight:normal; margin:0; line-height:0.25em; font-size:2em;}
 h1#logo a {text-decoration:none; color:#306;}
