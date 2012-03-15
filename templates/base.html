@@ -185,12 +185,28 @@
     <div id="footer">
         <p>
         {% block footer %}
-        {# {% include "includes/search_form.html" %} #}
+        
+            <!-- =FOOTER  ========================================================================================= -->
 
-        {# Django version: {{ django_version }} #}
-        {# {% load tags %} #}
-        {# {% get_current_time "%Y-%m-%d %I:%M %p" as the_time %} #}
-        {# <p>The time is {{ the_time }}.</p> #}        
+            	<div class="floatleft">
+                    {# <p><a href="/">Home</a></p> #}
+                    <form method="get" action="/search/" id="search_form_footer"> 
+                        {# <label for="id_q">Search:</label>  #}
+                        <input type="text" name="q" id="id_q" size="30" /> 
+                        <input type="submit" value="Search" />
+                    </form>
+            	</div> <!-- end floatleft -->
+
+            	<div class="floatright">
+            		<p class="fao">The Phytosanitary Resources website <br />is hosted &amp; provided <br />by the <a href="https://www.ippc.int" title="Go to the IPPC website."><acronym title="International Plant Protection Convention">IPPC</acronym></a>.</p>
+            		<a class="imglink" href="https://www.ippc.int" title="Go to the IPPC website."><img class="ippclogoglyph" src="/static/img/ippc-logo-glyph-web.gif" width="101" height="53" alt="International Plant Protection Convention Logo" /></a>
+            	</div> <!-- end floatright -->
+
+                <br class="clearboth" />
+            </div> <!-- end footer -->
+            
+        
+        
         {% endblock %}
 
         </p>

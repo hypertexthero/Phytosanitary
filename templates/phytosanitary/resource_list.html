@@ -52,6 +52,7 @@
         <a class="edit" href="/admin/phytosanitary/category/{{ category.id }}">edit</a>{# TODO: this URL is hackish - make it better #}
     {% endif %}
     
+{% if object_list %}
     
     <div class="dashbox">
             <table class="tablesorter {sortlist: [[1,1]]}" border="1" cellspacing="0" cellpadding="1"> 
@@ -94,4 +95,7 @@
     </tbody>
     </table>
     </div>
+
+{% endif %}
+
 {% endblock %}

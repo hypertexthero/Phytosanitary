@@ -36,7 +36,6 @@ body#upload div#sidebar {display:none;}
 
 div.docs {border-bottom:1px solid #eee;}
 div.pageinfo {border-bottom:1px solid #eee;}
-#footer div.floatright {width:auto;}
 
 /*div#map_canvas {width:100% !important;}*/
 
@@ -56,8 +55,8 @@ ul.thumbs li a {display:block; /*height:100px;*/ border:none; text-decoration:no
 
 /* =Headings ------- */
 h1,h2,h3,h4,h5,h6 {color:#000; margin:1em 0 0.5em;}
-h1 {font-size:2em;}
-h1.first {margin-top:0; padding-top:1em;}
+h1 {font-size:2em; margin-top:0; padding-top:1em;}
+/*h1.first {margin-top:0; padding-top:1em;}*/
 h2 {font-size:1.7em;}
 h3 {font-size:1.5em;}
 h4 {font-size:1.3em;}
@@ -105,8 +104,12 @@ table.tablesorter .headerSortDown {background-image: url(/static/img/tablesorter
 table, td {border-color:#eee;}
 td img {vertical-align:bottom;}
 
-#footer {margin-top:1em !important; padding-top:0;}
-#footer a {text-decoration:none; font-weight:normal;}
+#footer {margin-top:1em !important; padding-top:0; clear:both; text-align:left;}
+#footer a {font-weight:normal;}
+#footer div.floatright {width:auto; text-align:right;}
+p.fao {float:left; text-align:right; font-size:0.9em; padding-top:0.25em;}
+img.faologo {padding:0 0 0 9px;}
+img.faologo, img.ippclogoglyph {float:left; margin:0.75em 0 2em 0;}
 
 
 li.selected {list-style-type:circle;}
@@ -159,7 +162,7 @@ input.submit {width:auto;}
 div#commentform p label {display:block;}
 
 input, textarea, select {padding:1em; font-size:1.1em;}
-form#search_form input {padding:0.25em !important;}
+form#search_form input, form#login_form input, form#search_form_footer input {padding:0.25em !important;}
 select#id_categories {min-height:10em;}
 #content input, #content textarea {width:96%;}
 fieldset {border:1px solid #ddd; padding:1em;}
