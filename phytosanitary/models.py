@@ -103,7 +103,7 @@ class Resource(models.Model):
     url = models.URLField(blank=True, help_text="A link to something elsewhere.", verbose_name='URL')
     contact_type = models.CharField(blank=True, max_length=1, choices=CONTACT_TYPE_CHOICES, default=1, verbose_name='Type of Contact')
     contact_email = models.EmailField(blank=True, verbose_name='Email of Contact')
-    contact_address = models.TextField(blank=True, verbose_name='Address of Contact')
+    contact_address = models.TextField(blank=True, verbose_name='Author/Editor name and address')
     agreement = models.BooleanField(blank=False, verbose_name='Agreed to have these Phytosanitary Technical Resources published in public')
     ippc_resource = models.BooleanField(default=False, verbose_name='Resource provided by the IPPC')
 

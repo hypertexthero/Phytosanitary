@@ -5,7 +5,7 @@ Author: Simon Griffee
 Last update: Tuesday, 13 March 2012 at 15:41:59
 */
 
-body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:4px 7px; background:#fff url(/static/img/body-bg-resources.jpg) repeat-x; color:#000; margin-bottom:10em; text-align:center;}
+body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:0.25em 7px; background:#fff url(/static/img/body-bg-resources.jpg) repeat-x; color:#000; margin-bottom:10em; text-align:center;}
 
 /* =Layout ------- */
 #container {max-width:1200px; margin:0 auto;}
