@@ -20,9 +20,10 @@
 <body id="{% block bodyid %}{% endblock %}">
 <div id="container">
     <div id="header">
-        <div class="logo">
-            <a class="imglink" href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage."><img src="/static/img/LogoPhytosanitaryResources.gif" alt="Phytosanitary Resources" border="0" /></a>
-		</div> {# / .logo #}
+
+            {# <a class="imglink" href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage."><img src="/static/img/LogoPhytosanitaryResources.gif" alt="Phytosanitary Resources" border="0" /></a> #}
+            <h1 id="logo"><a href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage.">Phytosanitary Resources</a></h1>
+
         <div id="nav">
             {% block nav %}
                 {% if user.is_authenticated %}
@@ -44,7 +45,19 @@
 
                         
                             {% if user.is_staff %}
-                                <strong><a class="edit" href="/admin/">Access admin area</a></strong>
+                            
+                                <a class="edit" href="/admin/">Access admin area</a>
+                                
+                                
+                                {% block editingtoolbar %}
+
+                                    <a class="edit" href="/admin/phytosanitary/resource/add/">Add resource</a>{# TODO: this URL is hackish - make it better #}
+                                    {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}                        
+
+                                {% endblock %}
+                                
+                                
+                                
                                 {% else %}
                                     {% if user.is_authenticated and user.username == user.username %}
                                     <a class="edit" href="/upload/">Upload resource</a>
@@ -93,6 +106,7 @@
     </p>
     
     <div id="content">
+
         <div class="contentbox">
 
 
@@ -106,14 +120,6 @@
             {% block content %}
 
                 
-                {% block editingtoolbar %}
-                {% if user.is_staff %}
-                <div class="editingtoolbar floatright">
-                    <a href="/admin/phytosanitary/resource/add/">Admin add resource</a>{# TODO: this URL is hackish - make it better #}
-                    {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}                        
-                </div>
-                {% endif %}
-                {% endblock %}
 
             
             {% endblock %}

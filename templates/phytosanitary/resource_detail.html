@@ -4,18 +4,16 @@
 
 {% block breadcrumbs %} &rarr; <a href="/{{ object.pub_date|date:"Y" }}/">{{ object.pub_date|date:"Y" }}</a> &rarr; <a href="/{{ object.pub_date|date:"Y" }}/{{ object.pub_date|date:"b" }}/">{{ object.pub_date|date:"F" }}</a> &rarr; <a href="/{{ object.pub_date|date:"Y" }}/{{ object.pub_date|date:"b" }}/{{ object.pub_date|date:"d" }}">{{ object.pub_date|date:"d" }}</a> &rarr; {{ object.title }}{% endblock %}
 
-{% block content %}
-    
+{% block content %}    
+
+    <h1 class="first">{{ object.title }}</h1>
     
     {% if user.is_staff %} 
-    <div class="editingtoolbar floatright">
-        <a href="/admin/phytosanitary/resource/{{ object.id }}">Edit this resource</a>{# TODO: this URL is hackish - make it better #}
+    <div class="floatright">
+        <a class="edit" href="/admin/phytosanitary/resource/{{ object.id }}">Edit this resource</a>{# TODO: this URL is hackish - make it better #}
         {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}
     </div>
     {% endif %}
-    
-
-    <h1 class="first">{{ object.title }}</h1>
     
     <p><i>Published {# By {{ user.first_name }} {{ user.last_name }} on  #}{{ object.pub_date|date:"l, d F Y" }}</i></p>
     
