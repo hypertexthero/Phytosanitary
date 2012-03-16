@@ -10,7 +10,6 @@
 
 <h1 class="first"><span class="normal">Profile:</span> {% if profile.user.get_full_name %}{{ profile.user.get_full_name }}{% endif %} ({{ profile.user.username }})</h1>
 
-  <div id="details">
     <img src="{{ profile.get_mugshot_url }}" alt="{% trans "Your picture" %}" />
     {# <p><strong>{% trans "Username" %}</strong><br /> {{ profile.user.username }}</p> #}
     {% if profile.user.get_full_name %}
@@ -31,12 +30,10 @@
     {% if profile.about_me %}
     <p><strong>{% trans "About me" %}</strong><br />{{ profile.about_me }}</p>
     {% endif %}
-  </div>
-</div>
+
 {% endblock %}
 
 {% block sidebar %}
-    <div class="white-box">
 
       {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
       {% if user.username == profile.user.username %}

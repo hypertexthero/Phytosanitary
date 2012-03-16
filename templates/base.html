@@ -31,40 +31,25 @@
         <div id="nav">
             {% block nav %}
                 {% if user.is_authenticated %}
-                        {# Hello, {{ user.first_name }} {{ user.last_name }}! <a href="{% url django.contrib.auth.views.logout %}?next={% firstof request.path '/notes/' %}">Sign out</a> or <strong><a class="edit" href="{% url notes_create %}">add a note</a></strong> #}
                         <p>
                             Hello, 
                                 {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
-                                {# {% if user.username == profile.user.username %} #}
-                                    
                                         {% if user.first_name and user.last_name %}
                                             <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
                                             {% else %}
                                             <strong>{{ user.username }}!</strong>
                                         {% endif %}
                                           <a href="{% url userena_profile_edit user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">Edit profile</a>
-                                {# {% endif %} #}
-                            
-                            {# <a href="{% url userena_signout %}?next={% firstof request.path '/' %}">Sign out</a> #}
 
                         
                             {% if user.is_staff %}
-                            
-                                <a class="edit" href="/admin/">Access admin area</a>
-                                
-                                
-                                {% block editingtoolbar %}
+                                <a class="edit" href="/admin/">Access admin area</a> 
+                                <a class="edit" href="/admin/phytosanitary/resource/add/">Add resource</a>{# TODO: this URL is hackish - make it better #}
 
-                                    <a class="edit" href="/admin/phytosanitary/resource/add/">Add resource</a>{# TODO: this URL is hackish - make it better #}
-                                    {# <a class="warning" href="{% url notes_delete note.id %}">delete</a> #}                        
-
-                                {% endblock %}
-                                
-                                
-                                
                                 {% else %}
+
                                     {% if user.is_authenticated and user.username == user.username %}
-                                    <a class="edit" href="/upload/">Upload resource</a>
+                                        <a class="edit" href="/upload/">Upload resource</a>
                                     {% endif %}
                             {% endif %}
                             <a href="{% url userena_signout %}">Sign out</a>
@@ -73,7 +58,6 @@
                     {# http://stackoverflow.com/a/1711592/412329 #}
                     {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
                     {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Sign in</a> #}
-                    
                     <a class="edit" href="{% url userena_signin %}">Sign in</a> or <a href="{% url userena_signup %}">Sign up</a>
                 {% endif %}
                 <form method="get" action="/search/" id="search_form"> 
