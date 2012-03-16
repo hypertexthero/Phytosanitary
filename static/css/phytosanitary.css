@@ -11,7 +11,7 @@ body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; pad
 #container {max-width:1200px; margin:0 auto;}
 div#header {/*overflow:auto;*/ width:100%;} /* clear the floats inside the header - http://www.quirksmode.org/css/clearing.html */
 
-div#nav {float:right; width:50%; text-align:right;}
+div#nav {float:right; width:50%; text-align:right; padding-top:12px;}
 /*div#nav form {padding-bottom:2em;}*/
 
 ul.globalnav {list-style:none outside; padding:1em 0 !important; margin:0 !important; clear:both; text-align:left;}
@@ -19,18 +19,25 @@ ul.globalnav li {display:inline; padding:0; margin:0;}
 ul.globalnav li a {background:none; text-decoration:none; padding:1.2em 1em;}
 ul.globalnav li a:hover {color:#111 !important; background:#F1F7EB url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important;}
 
-ul.globalnav li a.home-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important;} /* highlight homepage tab - see first li of ul class="globalnav" in base.html */
+ul.globalnav li a.home-nav {background:transparent url(/static/img/globalnav-current-resources.gif) no-repeat 50% bottom !important; color:#000 !important; font-weight:bold;} /* highlight homepage tab - see first li of ul class="globalnav" in base.html */
 
-p.breadcrumbs {background:#663366; color:#fff; margin:0; padding:0.5em; clear:both; text-align:left;}
+p.breadcrumbs {background:#663366; color:#fff; margin:0; padding:0.5em; clear:both; text-align:left; border-bottom:1px solid #ddd;}
 p.breadcrumbs a {color:#cff !important; text-decoration:none; font-weight:normal !important;}
 
-div#content {width:64%; float:left; clear:none; margin:0; padding:0; text-align:left;}
-div.contentbox {background:#fff; margin:0; padding:0 1.25em 1em 1em; border:1px solid #eee; border-top:none;}
-#sidebar {width:36%; float:left; text-align:left; background:#F1F7EB;} /*background:#F1F7EB;*/
-.sidebarbox {padding:0 1.25em 1em;}
+div#content {width:64%; float:left; clear:none; margin:0 0 2em; padding:0; text-align:left;}
+div.contentbox {background:#fff; margin:0; padding:0 1.25em 1em 1em;} /*border:1px solid #eee; border-top:none;*/
+#sidebar {width:36%; float:left; text-align:left; background:#F1F7EB; margin-bottom:1.5em;} /*background:#F1F7EB;*/
+.sidebarbox {padding:0 1.25em;}
 
 body#upload div#content {width:100%;}
 body#upload div#sidebar {display:none;}
+
+#footer {border-top:double #eee; color:#333; clear:both; text-align:left;}
+#footer a {font-weight:normal;}
+#footer div.floatright {width:auto; text-align:right;}
+p.fao {float:left; text-align:right; font-size:0.9em; padding-top:0.25em;}
+img.faologo {padding:0 0 0 9px;}
+img.faologo, img.ippclogoglyph {float:left; margin:0.75em 0 2em 0;}
 
 div.docs {border-bottom:1px solid #eee;}
 div.pageinfo {border-bottom:1px solid #eee;}
@@ -56,7 +63,7 @@ ul.thumbs li a {display:block; /*height:100px;*/ border:none; text-decoration:no
 h1,h2,h3,h4,h5,h6 {color:#000; margin:1em 0 0.5em; font-weight:normal;}
 h1 {font-size:2em; margin-top:0; padding-top:0.75em;}
 /*h1.first {margin-top:0; padding-top:1em;}*/
-h1#logo {float:left; text-transform:uppercase; letter-spacing:0.1em; font-weight:normal; margin:0; line-height:0.25em; font-size:2em;}
+h1#logo {float:left; text-transform:uppercase; letter-spacing:0.1em; font-weight:normal; margin:0; font-size:2em; padding:1.5em 0 0;}
 h1#logo a {text-decoration:none; color:#306;}
 h2 {font-size:1.7em;}
 h3 {font-size:1.5em;}
@@ -108,14 +115,6 @@ table.tablesorter .headerSortUp {background-image: url(/static/img/tablesorter-d
 table.tablesorter .headerSortDown {background-image: url(/static/img/tablesorter-asc.gif) !important;}
 table, td {border-color:#eee;}
 td img {vertical-align:bottom;}
-
-#footer {margin-top:1em !important; padding-top:0; clear:both; text-align:left;}
-#footer a {font-weight:normal;}
-#footer div.floatright {width:auto; text-align:right;}
-p.fao {float:left; text-align:right; font-size:0.9em; padding-top:0.25em;}
-img.faologo {padding:0 0 0 9px;}
-img.faologo, img.ippclogoglyph {float:left; margin:0.75em 0 2em 0;}
-
 
 li.selected {list-style-type:circle;}
 li.selected a {font-weight:normal !important; color:#333 !important;}
@@ -280,3 +279,40 @@ table .edit {padding:0 0.5em;}
 .block {display:block;}
 .note, .warning {background:#ffc;}
 /*.ippc-resource {}*/
+
+
+/* =responsive structure ---------------------- */
+
+/** {outline:1px solid #c00;}*/
+
+@media (max-width: 970px) {
+/*    #container {width:auto;}*/
+}
+@media (max-width: 800px) {
+/*    #container {width:auto;}*/
+
+}
+@media (max-width: 650px) {
+    #container {width:auto;}
+    #content {width:100% !important; float:none;}
+    #sidebar {float:none; width:100% !important;}
+    #nav {text-align:left !important; float:none !important;}
+    h1#logo {padding:1em 0 !important;}
+    ul.globalnav li a {background-image:none !important;}
+}
+/*@media (max-width: 450px) {
+    #container {width:auto;}
+    #content {width:100% !important; float:none;}
+    #sidebar {float:none; width:100% !important;}
+    #nav {text-align:left !important; float:none !important;}
+    h1#logo {padding:1em 0 !important;}
+    ul.globalnav li a.home-nav {background:none !important;}
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    #container {width:auto;}
+    #content {width:100% !important; float:none;}
+    #sidebar {float:none; width:100% !important;}
+    #nav {text-align:left !important; float:none !important;}
+    h1#logo {padding:1em 0 !important;}
+    ul.globalnav li a.home-nav {background:none !important;}
+}*/

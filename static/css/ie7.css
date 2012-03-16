@@ -1,0 +1,11 @@
+/*
+Description: Phytosanitary Resources website Internet Explorer 7 stylesheet for working around the abominable browser's bugs
+File: ie7.css
+Author: Simon Griffee
+Last update: Friday, 16 March 2012 at 10:55:06
+*/
+
+h1#logo {float:left; text-transform:uppercase; letter-spacing:0.1em; font-weight:normal; margin:0; font-size:2em; padding:1.5em 0 0;}
+h1#logo a {text-decoration:none; color:#306;}
+a.imglink {border:none;}
+
