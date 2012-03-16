@@ -9,3 +9,4 @@ h1#logo {float:left; text-transform:uppercase; letter-spacing:0.1em; font-weight
 h1#logo a {text-decoration:none; color:#306;}
 a.imglink {border:none;}
 
+.imgleft, .imgright {padding-top:0.25em;}
