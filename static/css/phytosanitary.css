@@ -94,7 +94,6 @@ ul.languages a {font-weight:normal !important;}
 ul.languages a:hover, ul.accessibility a:hover {color:#000 !important;}
 body #header {background:transparent;}
 
-
 div.latestupdates, div.pageinfo, body div.sectionnav {border-color:#999 !important;}
 div.latestupdates, div.pageinfo, div.docs, div.sectionnav {background:none !important; border:none !important;}
 div.docs, div.pageinfo {background:#F5F6EC !important;} /*F5F6EC*/
@@ -193,16 +192,9 @@ div#notes-button-bar {background:#fff;}
 .required label {font-weight:bold;}
 input.submit {width:auto !important;}
 
-/*ul#box-nav {float:right;}*/
-
-
 /* =Editing toolbar ----------------- */
 
 div.editingtoolbar {background:#fc6; margin:1em 0; padding:1em 0;}
-/*div.editingtoolbar form, div.editingtoolbar select {margin:0 !important; padding:0 !important; vertical-align:middle;}
-div.editingtoolbar ul {}
-div.editingtoolbar li {display:inline;}
-*/
 div.editingtoolbar a {font-weight:bold !important; padding:1em; margin:0; text-decoration:none;}
 .edit, .editbig {background:#fc6; padding:0.5em;}
 .editbig:hover {cursor:pointer;}
@@ -286,36 +278,11 @@ table .edit {padding:0 0.5em;}
 
 /* =responsive structure ---------------------- */
 
-/** {outline:1px solid #c00;}*/
-
-@media (max-width: 970px) {
-/*    #container {width:auto;}*/
-}
-@media (max-width: 800px) {
-/*    #container {width:auto;}*/
-
-}
 @media (max-width: 650px) {
     #container {width:auto;}
     #content {width:100% !important; float:none;}
     #sidebar {float:none; width:100% !important;}
     #nav {text-align:left !important; float:none !important;}
     h1#logo {padding:1em 0 !important;}
-    ul.globalnav li a {background-image:none !important;}
-}
-/*@media (max-width: 450px) {
-    #container {width:auto;}
-    #content {width:100% !important; float:none;}
-    #sidebar {float:none; width:100% !important;}
-    #nav {text-align:left !important; float:none !important;}
-    h1#logo {padding:1em 0 !important;}
-    ul.globalnav li a.home-nav {background:none !important;}
-}
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    #container {width:auto;}
-    #content {width:100% !important; float:none;}
-    #sidebar {float:none; width:100% !important;}
-    #nav {text-align:left !important; float:none !important;}
-    h1#logo {padding:1em 0 !important;}
-    ul.globalnav li a.home-nav {background:none !important;}
-}*/
+    ul.globalnav li a {padding:0.5em !important; line-height:auto !important; background-image:none !important;}
+    }
