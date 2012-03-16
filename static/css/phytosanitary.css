@@ -287,4 +287,5 @@ table .edit {padding:0 0.5em;}
     #nav {text-align:left !important; float:none !important;}
     h1#logo {padding:1em 0 !important;}
     ul.globalnav li a {padding:0.5em !important; line-height:auto !important; background-image:none !important;}
+    #nav .edit {padding:0 !important;}
     }
