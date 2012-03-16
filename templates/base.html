@@ -158,7 +158,7 @@
                         {#     - http://stackoverflow.com/questions/4888708/user-permissions-for-django-module #}
                         {#     -  #}
                     <p>
-                        Uploaded resources will be reviewed by the <em>Expert Working Group on Capacity Development</em> and appear publically here if approved.</p>
+                        Uploaded resources will be reviewed and noted by the relevant subsidiary body(ies) and appear publically in this page.</p>
                     <p>
                         {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                         {% if user.is_authenticated and user.username == user.username %}
@@ -189,6 +189,8 @@
                         <input type="text" name="q" id="id_q" size="30" /> 
                         <input type="submit" value="Search" />
                     </form>
+                    
+                    <p class="small quiet">Disclaimer: Published phytosanitary technical resources included in the phytosanitary.info website are not endorsed/adopted/agreed by the <abbr title="Commission on Phytosanitary Measures">CPM</abbr>.</p>
             	</div> <!-- end floatleft -->
 
             	<div class="floatright">

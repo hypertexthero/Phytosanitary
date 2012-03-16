@@ -11,8 +11,8 @@
 {% block nav %}
 <form id="login_form" action="" method="post">
   {% csrf_token %}
-  <fieldset>
-    <legend>{% trans "Sign in" %}</legend>
+  {# <fieldset> #}
+  {#   <legend>{% trans "Sign in" %}</legend> #}
     {{ form.non_field_errors }}
     {% for field in form %}
     {{ field.errors }}
@@ -28,7 +28,7 @@
     </p>
     {% endif %}
     {% endfor %}
-  </fieldset>
+  {# </fieldset> #}
   <input type="submit" value="{% trans "Signin" %}" />
   <p class="forgot-password"><a href="{% url userena_password_reset %}" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a></p>
 </form>
