@@ -31,7 +31,7 @@
         <div id="nav">
             {% block nav %}
                 {% if user.is_authenticated %}
-                        <p>
+                        {# <p> #}
                             Hello, 
                                 {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                                         {% if user.first_name and user.last_name %}
@@ -53,7 +53,7 @@
                                     {% endif %}
                             {% endif %}
                             <a href="{% url userena_signout %}">Sign out</a>
-                        </p>
+                        {# </p> #}
                 {% else %}
                     {# http://stackoverflow.com/a/1711592/412329 #}
                     {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}

@@ -44,6 +44,8 @@ div.pageinfo {border-bottom:1px solid #eee;}
 
 /*div#map_canvas {width:100% !important;}*/
 
+p img {vertical-align:middle;}
+
 p, li, dd {font-size:1em; line-height:1.6em;}
 blockquote {padding-left:1em; border-left:1px solid #ccc;}
 dd {margin-bottom:1em; margin-left:0;}
