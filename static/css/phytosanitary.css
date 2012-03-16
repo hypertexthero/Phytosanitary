@@ -45,11 +45,16 @@ div.pageinfo {border-bottom:1px solid #eee;}
 /*div#map_canvas {width:100% !important;}*/
 
 p, li, dd {font-size:1em; line-height:1.6em;}
+blockquote {padding-left:1em; border-left:1px solid #ccc;}
 dd {margin-bottom:1em; margin-left:0;}
 dd p {margin-top:0;}
 div#content p, div#content li, div#content dd {max-width:46em;}
 body#home div#content p {max-width:100% !important;}
 dt {font-weight:bold;} 
+
+/* =lists */
+ul, ol {line-height:1.6em;}
+div#content ul, div#content ol {list-style-position:outside; margin-left:0; padding-left:1.5em;}
 
 /* =thumbnails -------- */
 
@@ -88,11 +93,6 @@ a:active {color:#f90; border:none; text-decoration:none !important;}
 /*div.featured {padding:0 1em; width:30%; float:right; border:solid #eee 1px; border-top:0;}*/
 div.aside {width:20%; float:right; padding:0 0 3em 3em; text-align:left;}
 div.aside img {margin-bottom:1em;}
-
-ul.languages a, ul.accessibility a {color:#063; font-weight:normal !important;}
-ul.languages a {font-weight:normal !important;}
-ul.languages a:hover, ul.accessibility a:hover {color:#000 !important;}
-body #header {background:transparent;}
 
 div.latestupdates, div.pageinfo, body div.sectionnav {border-color:#999 !important;}
 div.latestupdates, div.pageinfo, div.docs, div.sectionnav {background:none !important; border:none !important;}
@@ -267,8 +267,8 @@ table .edit {padding:0 0.5em;}
 .textalignright {text-align:right;}
 .floatleft {float:left;}
 .floatright {float:right;}
-.imgleft {float:left; padding:0 1em 1em 0;}
-.imgright {float:right; padding:0 0 1em 1em;}
+.imgleft {float:left; padding:0 1.5em 1em 0;}
+.imgright {float:right; padding:0 0 1.5em 1em;}
 .clearfloatsinside {overflow:auto; width:100%;}
 .clearboth {clear:both;}
 .block {display:block;}
