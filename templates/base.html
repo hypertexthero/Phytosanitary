@@ -8,206 +8,157 @@
     <meta name="robots" content="none" /> <!-- Don't forget to switch robots to "all" for production! -->
 
     <title>{% block title %}{% endblock %}Phytosanitary Resources</title>
-    
+
     <link rel="stylesheet" href="/static/css/phytosanitary.css" type="text/css" media="screen" title="default" charset="utf-8" />
 
     <!--[if IE 7]>
-    <link rel="stylesheet" href="/static/css/ie7.css" type="text/css">
-    <![endif]-->
-    
-    <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/global.js"></script>
-    
-    {% block extrahead %}{% endblock %}
-</head>
+        <link rel="stylesheet" href="/static/css/ie7.css" type="text/css">
+        <![endif]-->
 
-<body id="{% block bodyid %}{% endblock %}">
-<div id="container">
-    <div id="header">
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/global.js"></script>
 
-            {# <a class="imglink" href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage."><img src="/static/img/LogoPhytosanitaryResources.gif" alt="Phytosanitary Resources" border="0" /></a> #}
-            <h1 id="logo"><a href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage.">Phytosanitary Resources</a></h1>
+        {% block extrahead %}{% endblock %}
+    </head>
 
-        <div id="nav">
-            {% block nav %}
-                {% if user.is_authenticated %}
-                        {# <p> #}
-                            Hello, 
-                                {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
-                                        {% if user.first_name and user.last_name %}
-                                            <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
-                                            {% else %}
-                                            <strong>{{ user.username }}!</strong>
-                                        {% endif %}
-                                          <a href="{% url userena_profile_edit user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">Edit profile</a>
-
-                        
-                            {% if user.is_staff %}
-                                <a class="edit" href="/admin/">Access admin area</a> 
-                                <a class="edit" href="/admin/phytosanitary/resource/add/">Add resource</a>{# TODO: this URL is hackish - make it better #}
-
-                                {% else %}
-
-                                    {% if user.is_authenticated and user.username == user.username %}
-                                        <a class="edit" href="/upload/">Upload resource</a>
-                                    {% endif %}
-                            {% endif %}
-                            <a href="{% url userena_signout %}">Sign out</a>
-                        {# </p> #}
-                {% else %}
-                    {# http://stackoverflow.com/a/1711592/412329 #}
-                    {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
-                    {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Sign in</a> #}
-                    <a class="edit" href="{% url userena_signin %}">Sign in</a> or <a href="{% url userena_signup %}">Sign up</a>
-                {% endif %}
-                <form method="get" action="/search/" id="search_form"> 
-                        {# <label for="id_q">Search:</label>  #}
-                        <input type="text" name="q" id="id_q" size="30" /> 
-                        <input type="submit" value="Search" />
-                </form>
-            {% endblock %}
-            
-                
-                
-            </div> {# / #nav #}
-            
-            {# Categories of content, or 'sections' of the site - the table of contents of a book #}
-            {% block globalnav %}
-            {% load phytosanitary_tags %}
-            {% get_latest_content phytosanitary.category 5 as latest_categories %}
-            <ul class="globalnav">
-                <li>
-                    <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url phytosanitary_resource_archive_index %}">Home</a>
-                </li>
-                {% for category in latest_categories %}
-                <li>
-                    <a class="{{ category.slug }}-nav" href="{{ category.get_absolute_url }}">{{ category.title }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% endblock %}
-
-    </div> {# / #header #}
-    
-    <p class="breadcrumbs">
-        <strong><a class="logo" title="Homepage." href="{% url phytosanitary_resource_archive_index %}">Phytosanitary.info</a></strong> {% block breadcrumbs %}{% endblock %}
-    </p>
-    
-    <div id="content">
-
-        <div class="contentbox">
-
-
-                
-
-
-            
-            {% block whatis %} {# resource_archive, etc #}
-            {% endblock %}
-
-            {% block content %}
-
-                
-
-            
-            {% endblock %}
-        </div>
-    </div> {# / #content #}
-    
-    <div id="sidebar">
-        <div class="sidebarbox">
-            
-            {% block sidebar %}
-            
-
-            
-            <div class="docs">
-                <h2>Browse</h2>
-
-                <p>Browse resources using the categories above (think of categories as the table of contents) or the tags below (think of tags as the keyword index):</p>
-
-                {# Tags, or 'keywords' - the index of a book #}
-                {# =todo: we should display all tags here regardless of whether they are the 'latest' or not. change this. #}
-                {% load phytosanitary_tags %}
-                {% get_latest_content tagging.tag 50 as latest_tags %}
-                <ul>
-                {% for tag in latest_tags %}
-                    <li>
-                        <a href="/tags/{{ tag.name }}/">{{ tag.name }}</a>
-                    </li>
-                {% endfor %}
-                </ul>
-
-                {# {% load phytosanitary_tags %} #}
-                {#         <h2>Latest Published Resources</h2> #}
-                {#         <ul> #}
-                {#             {% get_latest_content phytosanitary.resource 5 as latest_resources %} #}
-                {#             {% for resource in latest_resources %} #}
-                {#             <li> #}
-                {#                 <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>, posted {{ resource.pub_date|timesince }} ago. #}
-                {#             </li> #}
-                {#             {% endfor %} #}
-                {#         </ul> #}
-            
-
-                
-                    <h2>Contribute</h2>
-
-                        {# TODO:  #}
-                        {#     - http://bradmontgomery.blogspot.com/2009/04/restricting-access-by-group-in-django.html #}
-                        {#     - http://stackoverflow.com/questions/4888708/user-permissions-for-django-module #}
-                        {#     -  #}
-                    <p>
-                        Uploaded resources will be reviewed and noted by the relevant subsidiary body(ies) and appear publically in this page.</p>
-                    <p>
+    <body id="{% block bodyid %}{% endblock %}">
+        <div id="container">
+            <div id="header">
+                <h1 id="logo"><a href="{% url phytosanitary_resource_archive_index %}" title="Go to the Phytosanitary Resources homepage.">Phytosanitary Resources</a></h1>
+                <div id="nav">
+                    {% block nav %}
+                    {% if user.is_authenticated %}
+                    {# <p> #}
+                        Hello, 
                         {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
-                        {% if user.is_authenticated and user.username == user.username %}
-                        <a class="editbig" href="/upload/">Upload resource</a>
-                        {% else  %}
-                            To contribute materials please <a href="{% url userena_signin %}">sign in</a> or <a href="{% url userena_signup %}">sign up</a>.
+                        {% if user.first_name and user.last_name %}
+                            <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
+                        {% else %}
+                            <strong>{{ user.username }}!</strong>
                         {% endif %}
-                    </p>
+                            
+                        <a href="{% url userena_profile_edit user.username %}" title="{% trans "View and edit your profile, change your password or email." %}">Edit profile</a>
 
-                
-                        
-                    </div> <!-- end docs -->
-            
-            {% endblock %}
-        </div>
-    </div> {# / #sidebar #}
-    
-    <div id="footer">
-        <p>
-        {% block footer %}
-        
-            <!-- =FOOTER  ========================================================================================= -->
+                        {% if user.is_staff %}
+                        <a class="edit" href="/admin/">Access admin area</a> 
+                        <a class="edit" href="/admin/phytosanitary/resource/add/">Add resource</a>{# TODO: this URL is hackish - make it better #}
 
-            	<div class="floatleft">
-                    {# <p><a href="/">Home</a></p> #}
-                    <form method="get" action="/search/" id="search_form_footer"> 
-                        {# <label for="id_q">Search:</label>  #}
-                        <input type="text" name="q" id="id_q" size="30" /> 
-                        <input type="submit" value="Search" />
-                    </form>
-                    
-                    <p class="small quiet">Disclaimer: Published phytosanitary technical resources included in the phytosanitary.info website are not endorsed/adopted/agreed by the <abbr title="Commission on Phytosanitary Measures">CPM</abbr>.</p>
-            	</div> <!-- end floatleft -->
+                        {% else %}
 
-            	<div class="floatright">
-            		<p class="fao">The Phytosanitary Resources website <br />is hosted &amp; provided <br />by the <a href="https://www.ippc.int" title="Go to the IPPC website."><acronym title="International Plant Protection Convention">IPPC</acronym></a>.</p>
-            		<a style="border:0;" class="imglink" href="https://www.ippc.int" title="Go to the IPPC website."><img style="border:0;" class="ippclogoglyph" src="/static/img/ippc-logo-glyph-web.gif" width="101" height="53" alt="International Plant Protection Convention Logo" /></a>
-            	</div> <!-- end floatright -->
+                        {% if user.is_authenticated and user.username == user.username %}
+                        <a class="edit" href="/upload/">Upload resource</a>
+                        {% endif %}
+                        {% endif %}
+                        <a href="{% url userena_signout %}">Sign out</a>
+                        {# </p> #}
+                        {% else %}
+                        {# http://stackoverflow.com/a/1711592/412329 #}
+                        {# Alternative redirect technique?: http://stackoverflow.com/a/476720/412329 #}
+                        {# <a href="{% url django.contrib.auth.views.login %}?next={% firstof request.path '/' %}">Sign in</a> #}
+                        <a class="edit" href="{% url userena_signin %}">Sign in</a> or <a href="{% url userena_signup %}">Sign up</a>
+                        {% endif %}
+                        <form method="get" action="/search/" id="search_form"> 
+                            {# <label for="id_q">Search:</label>  #}
+                            <input type="text" name="q" id="id_q" size="30" /> 
+                            <input type="submit" value="Search" />
+                        </form>
+                        {% endblock %}
+                    </div> {# / #nav #}
 
-                <br class="clearboth" />
-            </div> <!-- end footer -->
-            
-        
-        
-        {% endblock %}
+                    {# Categories of content, or 'sections' of the site - the table of contents of a book #}
+                    {% block globalnav %}
+                    {% load phytosanitary_tags %}
+                    {% get_latest_content phytosanitary.category 5 as latest_categories %}
+                    <ul class="globalnav">
+                        <li>
+                            <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url phytosanitary_resource_archive_index %}">Home</a>
+                        </li>
+                        {% for category in latest_categories %}
+                        <li>
+                            <a class="{{ category.slug }}-nav" href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endblock %}
 
-        </p>
-    </div> {# / #footer #}
-    {% block extrafoot %}{% endblock %}
-</div> {# / #container #}
-</body>
-</html>
+                </div> {# / #header #}
+
+                <p class="breadcrumbs">
+                    <strong><a class="logo" title="Homepage." href="{% url phytosanitary_resource_archive_index %}">Phytosanitary.info</a></strong> {% block breadcrumbs %}{% endblock %}
+                </p>
+
+                <div id="content">
+                    <div class="contentbox">
+                        {% block content %}
+                        {% endblock %}
+                    </div> {# / .contentbox #}
+                </div> {# / #content #}
+
+                <div id="sidebar">
+                    <div class="sidebarbox">
+                        {% block sidebar %}
+
+                            <div class="docs">
+                                <h2>Browse</h2>
+
+                                <p>Browse resources using the categories above (think of categories as the table of contents) or the tags below (think of tags as the keyword index):</p>
+
+                                {# Tags, or 'keywords' - the index of a book #}
+                                {# =todo: we should display all tags here regardless of whether they are the 'latest' or not. change this. #}
+                                {% load phytosanitary_tags %}
+                                {% get_latest_content tagging.tag 50 as latest_tags %}
+                                <ul>
+                                    {% for tag in latest_tags %}
+                                    <li>
+                                        <a href="/tags/{{ tag.name }}/">{{ tag.name }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+
+                                <h2>Contribute</h2>
+
+                                <p>Uploaded resources will be reviewed and noted by the relevant subsidiary body(ies) and appear publically in this site.</p>
+                                <p>
+                                    {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+                                    {% if user.is_authenticated and user.username == user.username %}
+                                        <a class="editbig" href="/upload/">Upload resource</a>
+                                    {% else  %}
+                                        To contribute materials please <a href="{% url userena_signin %}">sign in</a> or <a href="{% url userena_signup %}">sign up</a>.
+                                    {% endif %}
+                                </p>
+                            </div> <!-- end docs -->
+
+                        {% endblock %}
+                    </div> {# /.sidebarbox #}
+                </div> {# / #sidebar #}
+
+                <div id="footer">
+
+                        {% block footer %}
+
+                            <!-- =FOOTER  ========================================================================================= -->
+
+                            <div class="floatleft">
+                                <form method="get" action="/search/" id="search_form_footer"> 
+                                    <input type="text" name="q" id="id_q" size="30" /> 
+                                    <input type="submit" value="Search" />
+                                </form>
+
+                                <p class="small quiet">Disclaimer: Published phytosanitary technical resources included in the phytosanitary.info website are not endorsed/adopted/agreed by the <abbr title="Commission on Phytosanitary Measures">CPM</abbr>.</p>
+                            </div> {# end .floatleft #}
+
+                            <div class="floatright">
+                                <p class="fao">The Phytosanitary Resources website <br />is hosted &amp; provided <br />by the <a href="https://www.ippc.int" title="Go to the IPPC website."><acronym title="International Plant Protection Convention">IPPC</acronym></a>.</p>
+                                <a style="border:0;" class="imglink" href="https://www.ippc.int" title="Go to the IPPC website."><img style="border:0;" class="ippclogoglyph" src="/static/img/ippc-logo-glyph-web.gif" width="101" height="53" alt="International Plant Protection Convention Logo" /></a>
+                            </div> {# end .floatright #}
+
+                            <br class="clearboth" />
+
+                        {% endblock %}
+
+                </div> {# / #footer #}
+            {% block extrafoot %}{% endblock %}
+        </div> {# / #container #}
+    </body>
+    </html>
