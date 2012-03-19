@@ -35,8 +35,10 @@ urlpatterns = patterns('',
     # url(r'^upload/$', 'django.views.generic.create_update.create_object', kwargs={'context_processors':form_user_default}),
     url(r'^thanks/$', direct_to_template, {'template': 'phytosanitary/resource_upload_thanks.html'}),
 
-    # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
-    url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
+    # # archive by year
+    # url(r'^(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', resource_info_dict, 'phytosanitary_resource_archive_year'),
+    # # section/cateogry/globalnav - moving the category slug url here from contrane/urls/categories.py
+    # url(r'^(?P<slug>[-\w]+)/$', 'phytosanitary.views.category_detail', {}, 'phytosanitary_category_detail'),
     
     # home
     url(r'^', include('phytosanitary.urls.resources')),

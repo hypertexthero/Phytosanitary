@@ -4,13 +4,9 @@
 
 {% block breadcrumbs %} &rarr; Year Archives: {{ year }}{% endblock %}
 
-{% block whatis %}
- <h1 class="first"><span class="normal">Year Archive for</span> {{ year }}</h1>
-{# <p>This is a list of months in {{ year }} in which resources were published in the blog.</p> #}
-{% endblock %}
-
-
 {% block content %}
+ <h1><span class="normal">Year Archive for</span> {{ year }}</h1>
+<p>This is a list of months in {{ year }} in which resources were published.</p>
 
     <ul>
     {% for month in date_list %}
