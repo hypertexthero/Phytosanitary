@@ -72,9 +72,9 @@
                             <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url phytosanitary_resource_archive_index %}">Home</a>
                         </li>
                         {# HACK to point dbtools to god-forsaken Typo3 install until we integrate everything under Django #}
-                        <li>
-                            <a class="dbtools-nav" href="http://projects.phytosanitary.info/">Databases &amp; Tools</a>
-                        </li>
+                        {# <li> #}
+                        {#     <a class="dbtools-nav" href="http://projects.phytosanitary.info/">Databases &amp; Tools</a> #}
+                        {# </li> #}
                         
                         {% for category in latest_categories %}
                         <li>

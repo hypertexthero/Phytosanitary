@@ -67,7 +67,6 @@ class Category(models.Model):
     def get_absolute_url(self):
         return ('phytosanitary_category_detail', (), { 'slug': self.slug })
 
-
 class LiveResourceManager(models.Manager):
     """ Live and For Review resource status """
     def get_query_set(self):
@@ -152,6 +151,7 @@ class Resource(models.Model):
     # Display filename in templates - http://stackoverflow.com/a/2683834/412329
     def filename(self):
         return os.path.basename(self.document.name)
+
 
 # tagging users django-tagging
 # See http://blog.sveri.de/index.php?/archives/139-django-tagging.html
