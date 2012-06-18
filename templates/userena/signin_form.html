@@ -19,7 +19,7 @@
     {% comment %} Displaying checkboxes differently {% endcomment %}
     {% if field.name == 'remember_me' %}
     <p class="checkbox">
-    <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+    <label class="quiet" for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
     </p>
     {% else %}
     <p>
@@ -29,8 +29,8 @@
     {% endif %}
     {% endfor %}
   {# </fieldset> #}
-  <input type="submit" value="{% trans "Signin" %}" />
-  <p> {% trans "Don't have an account?" %} <a href="{% url userena_signup %}">{% trans "Sign up" %}</a></p>
+  <input type="submit" class="editbig submit" value="{% trans "Signin" %}" title="Sign in!" />
+  <p class="quiet"> {% trans "Don't have an account?" %} <a href="{% url userena_signup %}">{% trans "Sign up" %}!</a></p>
   <p class="forgot-password"><a href="{% url userena_password_reset %}" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a> 
     
     </p>
