@@ -34,5 +34,6 @@ django-userena
 
 # docutils
 # sorl-thumbnail
+easy_thumbnails
 gunicorn
 South

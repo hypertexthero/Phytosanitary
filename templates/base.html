@@ -108,20 +108,84 @@
 
                                 {# Tags, or 'keywords' - the index of a book #}
                                 {# =todo: we should display all tags here regardless of whether they are the 'latest' or not. change this. #}
-                                {% load phytosanitary_tags %}
-                                {% get_latest_content tagging.tag 50 as latest_tags %}
+            
+                                {# HARDCODING TAGS for NOW AS PER CAPACITY DEVELOPMENT REQUEST for FIXED ORDER #}
+
+                                {# {% load phytosanitary_tags %} #}
+                                {# {% get_latest_content tagging.tag 50 as latest_tags %} #}
+                                {# <ul> #}
+                                    {# {% for tag in latest_tags %} #}
+                                    {# <li> #}
+                                        {# <a href="/tags/{{ tag.name }}/">{{ tag.name }}</a> #}
+                                    {# </li> #}
+                                    {# {% endfor %} #}
+                                {# </ul> #}
+
                                 <ul>
-                                    {% for tag in latest_tags %}
+                                    
                                     <li>
-                                        <a href="/tags/{{ tag.name }}/">{{ tag.name }}</a>
+                                        <a href="/tags/Advocacy/">Advocacy</a>
                                     </li>
-                                    {% endfor %}
+                                    
+                                    <li>
+                                        <a href="/tags/Databases/">Databases</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/E-learning/">E-learning</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Explanatory /">Explanatory </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Factsheet/">Factsheet</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Guide/">Guide</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Manual/">Manual</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/PRA/">PRA</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Photo/">Photo</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Project/">Project</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/StandardOperatingProcedures/">StandardOperatingProcedures</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Tools/">Tools</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Video/">Video</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/tags/Other/">Other</a>
+                                    </li>
+                                    
                                 </ul>
+
 
 
                                 <h2>Contribute</h2>
 
-                                <p>Uploaded resources will be reviewed and noted by the relevant subsidiary body(ies) and appear publically in this site.</p>
+                                <p>Uploaded resources will be reviewed by the relevant subsidiary body(ies) and appear publically in this site.</p>
                                 <p>
                                     {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
                                     {% if user.is_authenticated and user.username == user.username %}
