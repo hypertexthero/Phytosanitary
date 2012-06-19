@@ -33,7 +33,7 @@
     </div>
     {% endif %}
     
-    <p><i>Published {# By {{ user.first_name }} {{ user.last_name }} on  #}{{ object.pub_date|date:"l, d F Y" }}</i></p>
+    <p><i>Posted {# By {{ user.first_name }} {{ user.last_name }} on  #}{{ object.pub_date|date:"l, d F Y" }}</i></p>
     
     {{ object.body_html|safe }}
     
@@ -125,7 +125,7 @@
         {% endif %}
         
         {% if object.pub_date %}
-        <dt>Published Date</dt>
+        <dt>Creation Date</dt>
         <dd>{{ object.pub_date|date:"F j, Y" }}</dd>
         {% endif %}
         
