@@ -25,6 +25,10 @@ class DocumentInline(admin.StackedInline):
 #         attrs.setdefault('rows', 30)
 #         super(DifferentlySizedTextarea, self).__init__(*args, **kwargs)
 
+def make_published(modeladmin, request, queryset):
+    queryset.update(status=1)
+make_published.short_description = "Publish selected resources (Live Status)"
+
 class ResourceAdmin(admin.ModelAdmin):
     # formfield_overrides = { models.TextField: {'widget': DifferentlySizedTextarea}}
     exclude = ('enable_comments', 'author',)
@@ -33,6 +37,7 @@ class ResourceAdmin(admin.ModelAdmin):
     list_filter = ('status', 'pub_date', 'author')
     prepopulated_fields = { 'slug': ['title'] }
     inlines = [PhotoInline, DocumentInline]
+    actions = [make_published]
         
     # http://www.b-list.org/weblog/2008/dec/24/admin/
     def save_model(self, request, obj, form, change):
