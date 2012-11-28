@@ -13,6 +13,7 @@ def category_detail(request, slug):
     return object_list(
         request, 
         queryset=category.live_resource_set(),  
+        paginate_by=1,
         # template_name='phytosanitary/resource_list.html', 
         extra_context={
         'category': category

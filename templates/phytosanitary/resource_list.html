@@ -90,6 +90,14 @@
        {% endfor %}
     </tbody>
     </table>
+    
+    
+    {% load pagination_tags %}
+     {% autopaginate object_list 2 %}
+     {% paginate %}
+    
+    
+    
     </div>
 
 {% endif %}
