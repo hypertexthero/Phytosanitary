@@ -29,6 +29,10 @@ def make_published(modeladmin, request, queryset):
     queryset.update(status=1)
 make_published.short_description = "Publish selected resources (Live Status)"
 
+def make_draft(modeladmin, request, queryset):
+    queryset.update(status=2)
+make_draft.short_description = "Mark selected resources as draft (For Review Status)"
+
 class ResourceAdmin(admin.ModelAdmin):
     # formfield_overrides = { models.TextField: {'widget': DifferentlySizedTextarea}}
     exclude = ('enable_comments', 'author',)

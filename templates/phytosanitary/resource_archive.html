@@ -61,6 +61,9 @@
                 {% endfor %}
              </tbody>
              </table>
+             {% load pagination_tags %}
+             {% autopaginate latest 2 %}
+             {% paginate %}
              </div>   
 
 {% endblock %}

@@ -2,7 +2,7 @@
 Description: Phytosanitary Resources website main stylesheet for screen and projection
 File: phytosanitary.css
 Author: Simon Griffee
-Last update: Friday, 16 March 2012 at 11:14:56
+Last update: Wednesday, 28 November 2012
 */
 
 body {font-size:75%; color:#000; font-family:verdana, helvetica, sans-serif; padding:0.25em 7px; background:#fff url(/static/img/body-bg-resources.jpg) repeat-x; color:#000; margin-bottom:10em; text-align:center;}
@@ -41,6 +41,8 @@ img.faologo, img.ippclogoglyph {float:left; margin:0.75em 0 2em 0;}
 
 div.docs {border-bottom:1px solid #eee;}
 div.pageinfo {border-bottom:1px solid #eee;}
+
+div.pagination a {padding:1em;}
 
 /*div#map_canvas {width:100% !important;}*/
 
@@ -116,6 +118,7 @@ table.tablesorter .headerSortUp {background-image: url(/static/img/tablesorter-d
 table.tablesorter .headerSortDown {background-image: url(/static/img/tablesorter-asc.gif) !important;}
 table, td {border-color:#eee;}
 td img {vertical-align:bottom;}
+.datetd {width:7em;}
 
 li.selected {list-style-type:circle;}
 li.selected a {font-weight:normal !important; color:#333 !important;}

@@ -12,8 +12,8 @@ def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
     return object_list(
         request, 
-        queryset=category.live_resource_set(),  
-        paginate_by=1,
+        queryset=category.live_resource_set(),
+        paginate_by=2,
         # template_name='phytosanitary/resource_list.html', 
         extra_context={
         'category': category

@@ -9,6 +9,7 @@ from phytosanitary.views import phytosanitary_resource_detail
 resource_info_dict = {
     'queryset': Resource.live.all(),
     'date_field': 'pub_date',
+    # 'paginate_by': 20,
     # 'extra_context' : {"photo_list" : get_photos }
 }
 

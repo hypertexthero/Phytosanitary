@@ -57,7 +57,7 @@
                     <tr>
                         {# <th>Tags</th> #}
                         <th>Title <span class="small normal quiet">click titles to go to the resource</span></th>
-                        <th>Date <span class="small normal"><acronym title="ISO Date Format: YEAR-MONTH-DAY">Y-M-D</acronym></span></th>    
+                        <th class="datetd">Date <span class="small normal"><acronym title="ISO Date Format: YEAR-MONTH-DAY">Y-M-D</acronym></span></th>    
                     </tr>
                 </thead>
                 <tbody>
@@ -85,17 +85,57 @@
                
                
                </td>
-           <td class="datetd">{{ resource.pub_date|date:"Y-m-j" }}</td>
+           <td class="datetd">{{ object.pub_date|date:"Y-m-j" }}</td>
        </tr>
        {% endfor %}
     </tbody>
     </table>
+    {# {% load pagination_tags %} #}
+    {# {% autopaginate object_list %} #}
+    {# {% paginate %} #}
     
+    {# {% if is_paginated %} #}
+    {#     <div class="pagination"> #}
+    {#       <p> #}
+    {#         <span class="page-links"> #}
+    {#             {% if page_obj.has_previous %} #}
+    {#                 <a href="/{{ category.slug }}?page={{ page_obj.previous_page_number }}">&larr; previous</a> #}
+    {#             {% endif %} #}
+    {#             <span class="page-current"> #}
+    {#                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} #}
+    {#             </span> #}
+    {#             {% if page_obj.has_next %} #}
+    {#                 <a href="/{{ category.slug }}?page={{ page_obj.next_page_number }}">next &rarr;</a> #}
+    {#             {% endif %} #}
+    {#         </span> #}
+    {#       </p> #}
+    {#     </div> #}
+    {# {% endif %} #}
     
-    {% load pagination_tags %}
-     {% autopaginate object_list 2 %}
-     {% paginate %}
-    
+        {# {% for object in object_list %} #}
+        {#   {{ objects|length }} #}
+        {# {% endfor %} #}
+
+            {% if is_paginated %}
+                <div class="pagination">
+                  <p>
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/{{ category.slug }}?page={{ page_obj.previous_page_number }}">&larr; previous</a>
+                        {% endif %}
+                        <span class="page-current">
+                            {# Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} #}
+
+                            {# http://stackoverflow.com/a/1689788 #}
+                            {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} Resources
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/{{ category.slug }}?page={{ page_obj.next_page_number }}">next &rarr;</a>
+                        {% endif %}
+                    </span>
+                  </h4>
+                </div>
+            {% endif %}
     
     
     </div>
