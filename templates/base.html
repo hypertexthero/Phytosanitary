@@ -82,7 +82,7 @@
                     {# Categories of content, or 'sections' of the site - the table of contents of a book #}
                     {% block globalnav %}
                     {% load phytosanitary_tags %}
-                    {% get_latest_content phytosanitary.category 5 as latest_categories %}
+                    {% get_latest_content phytosanitary.category 20 as latest_categories %}
                     <ul class="globalnav">
                         <li>
                             <a class="{% ifequal request.path "/" %}home-nav{% endifequal %}" href="{% url phytosanitary_resource_archive_index %}">Home</a>
@@ -149,10 +149,6 @@
                                     
                                     <li>
                                         <a href="/tags/E-learning/">E-learning</a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="/tags/Explanatory/">Explanatory</a>
                                     </li>
                                     
                                     <li>
